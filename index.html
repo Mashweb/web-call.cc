@@ -20,14 +20,16 @@
   <body>
 
     <div id="content">
-<!-- NOTE: index.html is generated from index_.html -->
-
-      <div id="term"></div>
+      Try one of:
+      <ul style="margin:0;">
+        <li>(load "simple_seq_webapp.scm")</li>
+        <li>(load "calculator.scm")</li>
+      </ul>
+      <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
 
     </div>
-<div id="testarea" style="background-color:lightgrey; padding:20px; margin: 30px 0 30px 0;">
+<div id="testarea" style="border:solid; background-color:lightgrey; padding:20px; margin: 30px 15px 15px 15px; float:left; height:100px; width:425px;">
   Test Area 1: Simple Sequentially Programmed Web App
-  <div>
     <button id="button1" style="height:60px; width:100px;">Button #1</button>
     <button id="button2" style="height:60px; width:100px;">Button #2</button>
     <div id="div1" style="float:left; height:30px; width:80px; background-color:yellow; padding:15px;">
@@ -36,9 +38,8 @@
     <div id="div2" style="float:left; height:30px; width:80px; background-color:pink; padding:15px;">
       Div #2
     </div>
-  </div>
 </div>
-<div id="testarea2" style="height:auto; overflow:auto; width:200px; background-color:lightgrey; padding:20px; margin: 30px 0 30px 0;">
+<div id="testarea2" style="border:solid; background-color:lightgrey; padding:20px; margin: 30px 15px 15px 15px; float:left; height:auto; min-height:100px; width:200px;">
   Test Area 2: Calculator Web App, Programmed Sequentially<br />
 </div>
 
