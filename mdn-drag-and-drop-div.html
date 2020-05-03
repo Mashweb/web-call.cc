@@ -9,78 +9,100 @@
       var fragment;
       function dragstart_handler(ev) {
         console.log("Entering dragstart_handler");
-	// Add the target element's id to the data transfer object
+        // Add the target element's id to the data transfer object
         console.log("dragstart_handler: ev.target.id => " + ev.target.id);
-	ev.dataTransfer.setData("text/plain", ev.target.id);
+        ev.dataTransfer.setData("text/plain", ev.target.id);
       }
       function dragover_handler(ev) {
-        console.log("Entering dragover_handler");
-        console.group("dragover");
+        //console.log("Entering dragover_handler");
+        //console.group("dragover");
+        //console.dir(ev);
+        //console.groupEnd();
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+      }
+      function drop_handler_for_body(ev) {
+        console.log("Entering drop_handler_for_body");
+        console.group("drop");
         console.dir(ev);
         console.groupEnd();
-	ev.preventDefault();
-	ev.dataTransfer.dropEffect = "move";
+        ev.preventDefault();
+        // Get the id of the target and add the moved element to the target's DOM
+        const data = ev.dataTransfer.getData("text/plain");
+        console.log("typeof data => " + typeof data);
+        console.log("data.length => " + data.length);
+        console.log("data => " + data);
+        console.log("ev.target.id => " + ev.target.id);
+        ev.target.appendChild(document.getElementById(data));
       }
       function drop_handler(ev) {
         console.log("Entering drop_handler");
         console.group("drop");
         console.dir(ev);
         console.groupEnd();
-	ev.preventDefault();
-	// Get the id of the target and add the moved element to the target's DOM
-	const data = ev.dataTransfer.getData("text/plain");
+        ev.preventDefault();
+        // Get the id of the target and add the moved element to the target's DOM
+        const data = ev.dataTransfer.getData("text/plain");
         console.log("typeof data => " + typeof data);
         console.log("data.length => " + data.length);
         console.log("data => " + data);
         console.log("ev.target.id => " + ev.target.id);
-	ev.target.appendChild(document.getElementById(data));
+        ev.target.appendChild(document.getElementById(data));
       }
       window.addEventListener('DOMContentLoaded', () => {
-	// Get the element by id
-	const element = document.getElementById("div");
-	// Add the ondragstart event listener
-	element.addEventListener("dragstart", dragstart_handler);
-	//Element.prototype.ondragover = dragover_handler;
+        // Get the element by id
+        const element = document.getElementById("p1");
+        // Add the ondragstart event listener
+        element.addEventListener("dragstart", dragstart_handler);
+        //Element.prototype.ondragover = dragover_handler; // Nice try! This won't work.
         document.body.ondragover = dragover_handler;
-        document.body.ondrop = drop_handler;
+        document.body.ondrop = drop_handler_for_body;
       });
     </script>
   </head>
   <body>
     <h2>Example ondragover and drop event handlers from MDN, modified</h2>
-This drag-and-drop example uses the same event handlers as shown in
-<a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#The_basics">
-the MDN web docs section "HTML Drag and Drop API&mdash;The Basics"</a>,
-except that the handlers are attached to the document body.
-It shows how to:
+    This drag-and-drop example uses the same event handlers as shown in
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#The_basics">
+    the MDN web docs section "HTML Drag and Drop API&mdash;The Basics"</a>,
+    except that the <em>ondragover</em> and <em>ondrop</em> handlers are attached to the document body
+    instead of being attached to descendent elements.
+    (See also <a href="https://mzl.la/2Wljwu8">Drag Operations</a>.)
+    It shows how to:
     <ol>
       <li>
-	define a draggable element by putting a <em>draggable</em> attribute in the element's HTML
+        define a draggable element by putting a <em>draggable</em> attribute in the element's HTML
         tag and attaching a <em>dragstart</em> handler to it;
       </li>
       <li>
-	define a drag data item, which the example uses to identify the dragged element;
+        define a drag data item, which the example uses to identify the dragged element;
       </li>
       <li>
-	define the drag effect as a <em>move</em> operation; and
+        define the drag effect as a <em>move</em> operation; and
       </li>
       <li>
-	define a drop zone the whole web page by attaching an <em>ondrop</em> handler and
+        define a drop zone to be the whole web page by attaching an <em>ondrop</em> handler and
         an <em>ondragover</em> handler to the <em>document body</em>.
       </li>
     </ol>
-    Some extra elements have been added to experiment with the <em>ondragstart</em> and
-    <em>ondragover</em> properties.
-    <div id="div" draggable="true">This DIV element has a <em>draggable</em> attrubte.</div>
-    <p id="p1" draggable="true">This P element has a <em>draggable</em> attribute, but
-      is not connected to a <em>dragstart</em> event handler.</p>
+    Some extra elements have been added to experiment with the <em>ondragstart</em>,
+    <em>ondragover</em>, and <em>ondrop</em> properties.
+    <div id="div">This DIV element has no <em>draggable</em> attribute.
+      The web browser gives no indication that it can be dragged.</div>
+    <p id="p1" draggable="true" ondragstart="dragstart_handler(event)">
+      This P element has a <em>draggable</em> attribute and a <em>dragstart</em> handler.</div>
+    <p id="p2" draggable="true">This P element has a <em>draggable</em> attribute, but
+      no drag effect is defined for it because it has no <em>dragstart</em> handler.</p>
     <p ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-      Drop Zone (with attached <em>ondrop</em> and <em>ondragover</em> handlers)</p>
-    <p ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
-      Drop Zone (with an attached <em>ondrop</em> handler but no <em>ondragover</em> handler)</p>
+      This P element has <em>ondrop</em> and <em>ondragover</em> handlers.
+      Two <em>ondrop</em> handlers are called when an element is dropped on it:
+      first, the one specific to it, then the one for the whole body.</p>
+    <p ondrop="drop_handler(event)">
+      This P element has an <em>ondrop</em> handler. It has no <em>ondragover</em> handler.
+      Elements can nevertheless still be dropped on it because the whole body is a drop zone.</p>
     <div>
-      DIV 0, DIV 1, and DIV 2 are draggable, but since their <em>ondragstart</em> property is
-      not set they cannot be dragged.
+      DIV 0, DIV 1, and DIV 2 are <em>draggable</em>, but since their <em>ondragstart</em> property
+      is not set no drag effect is defined.
       <div id="div0" draggable="true">DIV 0</div>
       <div id="div1" draggable="true">DIV 1</div>
       <div id="div2" draggable="true">DIV 2</div>
