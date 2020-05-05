@@ -5,24 +5,17 @@
     <style>
       div, p { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
     </style>
-    <!--
-      This is not the way to import finder.
-      <script type="module>
-	import finder from '@medv/finder'
-
-	document.addEventListener('click', event => {
-	  const selector = finder(event.target)
-	  console.log(selector)  
-	})
-      </script>
-    -->
+    <script src="js/optimal-select.js"></script>
     <script>
       var fragment;
       function dragstart_handler(ev) {
         console.log("Entering dragstart_handler");
         // Add the target element's id to the data transfer object.
-        console.log("dragstart_handler: ev.target.id => " + ev.target.id);
-        ev.dataTransfer.setData("text/plain", ev.target.id);
+        //console.log("dragstart_handler: ev.target.id => " + ev.target.id);
+        ev.target.selector = OptimalSelect.select(ev.target);
+        console.log("dragstart_handler: ev.target.selector => " + ev.target.selector);
+        
+        ev.dataTransfer.setData("text/plain", ev.target.selector);
       }
       function dragover_handler(ev) {
         //console.log("Entering dragover_handler");
@@ -38,13 +31,15 @@
         console.dir(ev);
         console.groupEnd();
         ev.preventDefault();
-        // Get the id of the target and add the moved element to the target's DOM.
+        // Get the selector of the target and add the moved element to the target's DOM.
         const data = ev.dataTransfer.getData("text/plain");
         console.log("typeof data => " + typeof data);
         console.log("data.length => " + data.length);
         console.log("data => " + data);
-        console.log("ev.target.id => " + ev.target.id);
-        ev.target.appendChild(document.getElementById(data));
+        console.group("dropped element");
+        console.dir(document.querySelectorAll(data)[0]);
+        console.groupEnd();
+        ev.target.appendChild(document.querySelectorAll(data)[0]);
       }
       function drop_handler(ev) {
         console.log("Entering drop_handler");
