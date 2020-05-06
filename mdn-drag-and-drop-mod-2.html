@@ -3,7 +3,7 @@
   <head>
     <title>Example ondragover and drop event handlers from MDN, completely generalized</title>
     <style>
-      div, p { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
+      div, p.outlined { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
     </style>
     <script src="js/optimal-select.js"></script>
     <script>
@@ -56,6 +56,21 @@
         console.log("ev.target.id => " + ev.target.id);
         ev.target.appendChild(document.getElementById(data));
       }
+      function saveTheDOM() {
+        var treeWalker, serialised;
+	treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, {
+	    acceptNode: function (node) {
+		return NodeFilter.FILTER_ACCEPT;
+	    }
+	}, false);
+
+	console.log("TreeWalker");
+	do {
+	    console.log(treeWalker.currentNode);
+            //treeWalker.currentNode.draggable = "true";
+            serialised = '';
+	} while (treeWalker.nextNode());
+      }
       window.addEventListener('DOMContentLoaded', () => {
         var treeWalker;
         //Element.prototype.ondragover = dragover_handler; // Nice try! This won't work.
@@ -79,6 +94,7 @@
   </head>
   <body>
     <h2>Example ondragover and drop event handlers from MDN, modified</h2>
+    <p><button onclick="saveTheDOM();" style="font-weight:800;">SAVE</button><p/>
     This drag-and-drop example uses the same event handlers as shown in
     <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#The_basics">
     the MDN web docs section "HTML Drag and Drop API&mdash;The Basics"</a>,
@@ -111,15 +127,15 @@
     <em>ondragover</em>, and <em>ondrop</em> properties.
     <div id="div">This DIV element has no <em>draggable</em> attribute.
       The web browser gives no indication that it can be dragged.</div>
-    <p id="p1" draggable="true" ondragstart="dragstart_handler(event)">
+    <p class="outlined" id="p1" draggable="true" ondragstart="dragstart_handler(event)">
       This P element has a <em>draggable</em> attribute and a <em>dragstart</em> handler.</div>
-    <p id="p2" draggable="true">This P element has a <em>draggable</em> attribute, but
+    <p class="outlined" id="p2" draggable="true">This P element has a <em>draggable</em> attribute, but
       no drag effect is defined for it because it has no <em>dragstart</em> handler.</p>
-    <p ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+    <p class="outlined" ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
       This P element has <em>ondrop</em> and <em>ondragover</em> handlers.
       Two <em>ondrop</em> handlers are called when an element is dropped on it:
       first, the one specific to it, then the one for the whole body.</p>
-    <p ondrop="drop_handler(event)">
+    <p class="outlined" ondrop="drop_handler(event)">
       This P element has an <em>ondrop</em> handler. It has no <em>ondragover</em> handler.
       Elements can nevertheless still be dropped on it because the whole body is a drop zone.</p>
     <div>
