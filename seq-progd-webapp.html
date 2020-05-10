@@ -4,59 +4,67 @@
     <meta charset="utf-8">
     <title>web-call/cc homepage</title>
     <link href="css/screen.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css"></script>
-    <link href="css/prism-coy.css" rel="stylesheet" type="text/css"></script>
-    <script src="js/biwascheme-0.6.9-min.js" type="text/javascript"></script>
-    <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
-    <script src="js/jquery.timers.min.js" type="text/javascript"></script>
-    <script src="js/jquery.cookie.min.js" type="text/javascript"></script>
-    <script src="js/jquery.terminal-2.3.0.js" type="text/javascript"></script>
-    <script src="js/prism.js" type="text/javascript"></script>
-    <script src="js/prism-scheme.js" type="text/javascript"></script>
-    <script src="js/jquery.terminal.prism.js" type="text/javascript"></script>
-    <script src="js/keyboard.js" type="text/javascript"></script>
-    <script src="js/biwascheme_terminal.js" type="text/javascript"></script>
+    <link href="css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
+    <script src="js/biwascheme-0.6.9-min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/jquery.timers.min.js"></script>
+    <script src="js/jquery.cookie.min.js"></script>
+    <script src="js/jquery.terminal-2.3.0.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/prism-scheme.js"></script>
+    <script src="js/jquery.terminal.prism.js"></script>
+    <script src="js/keyboard.js"></script>
+    <script src="js/biwascheme_terminal.js"></script>
+    <script>
+      var body;
+      var cldn;
+      window.addEventListener('DOMContentLoaded', () => {
+	body = document.body;
+	cldn = body.children;
+	console.log("(In JS) body => " + body);
+      });
+    </script>
+    <style>
+      h3 { margin: 0; padding-left: 0; border-left: none; }
+      ul { margin: 0; }
+      p  { margin-top: 1em; margin-bottom: 0; }
+    </style>
   </head>
   <body>
-
     <div id="content">
-      Read and understand the code:
-      <ul style="margin:0;">
-        <li><a href="simple_seq_webapp.scm">simple_seq_webapp.scm</a></li>
-        <li><a href="calculator.scm">calculator.scm</a></li>
+      <h1>web-call.cc</h1>
+      <h3>A sequentially programmed web application</h3>
+      <p>The following are loadable programs:</p>
+      <ul>
+	<li><a href="simple_seq_webapp.scm">simple_seq_webapp.scm</a></li>
+	<li><a href="calculator.scm">calculator.scm</a></li>
       </ul>
-      then try one of the following into the BiwaScheme console below, followed by a RETURN:
-      <ul style="margin:0;">
-        <li>(load "simple_seq_webapp.scm")</li>
-        <li>(load "calculator.scm")</li>
+      <p>To try one of them, type one of following commands into the BiwaScheme console, terminated
+      by a RETURN:</p>
+      <ul>
+	<li>(load "simple_seq_webapp.scm")</li>
+	<li>(load "calculator.scm")</li>
       </ul>
+      <p>The calculator program is slow to load but practically self explanatory. To understand
+      how to use the "simple sequential web app" you'll have to read the code. Read
+      the page <a href="https://doc.mashweb.club/experiments/seq_webapp_biwascheme/">"Sequentially
+      Programmed Web App Demo"</a> for more background on sequentially programmed applications.</p>
       <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
-
     </div>
-<div id="testarea" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:100px; width:425px;">
-  Test Area 1: Simple Sequentially Programmed Web App
-    <button id="button1" style="height:60px; width:100px;">Button #1</button>
-    <button id="button2" style="height:60px; width:100px;">Button #2</button>
-    <div id="div1" style="float:left; height:30px; width:80px; background-color:yellow; padding:15px;">
-      Div #1
+    <div id="testarea" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:100px; width:425px;">
+    Test Area 1: Simple Sequentially Programmed Web App
+      <button id="button1" style="height:60px; width:100px;">Button #1</button>
+      <button id="button2" style="height:60px; width:100px;">Button #2</button>
+      <div id="div1" style="float:left; height:30px; width:80px; background-color:yellow; padding:15px;">
+	Div #1
+      </div>
+      <div id="div2" style="float:left; height:30px; width:80px; background-color:pink; padding:15px;">
+	Div #2
+      </div>
     </div>
-    <div id="div2" style="float:left; height:30px; width:80px; background-color:pink; padding:15px;">
-      Div #2
+    <div id="testarea2" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:auto; min-height:100px; width:200px;">
+      Test Area 2: Calculator Web App, Programmed Sequentially<br />
     </div>
-</div>
-<div id="testarea2" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:auto; min-height:100px; width:200px;">
-  Test Area 2: Calculator Web App, Programmed Sequentially<br />
-</div>
-
-    <!-- Google Analytics -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-2023947-5', 'auto');
-      ga('send', 'pageview');
-    </script>
   </body>
 </html>

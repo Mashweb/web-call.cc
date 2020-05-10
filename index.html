@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>web-call/cc homepage</title>
+    <!-- Some of the following inclusions might not be necessary or useful -->
     <link href="css/screen.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css"></link>
-    <link href="css/prism-coy.css" rel="stylesheet" type="text/css"></link>
+    <link href="css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
     <script src="js/biwascheme-0.6.9-min.js"></script>
     <script src="js/jquery.mousewheel.min.js"></script>
     <script src="js/jquery.timers.min.js"></script>
@@ -27,7 +28,7 @@
     </script>
     <style>
       h3 { margin: 0; padding-left: 0; border-left: none; }
-      ul { margin-block-start: 0; }
+      ul { margin: 0; }
       p  { margin-top: 1em; margin-bottom: 0; }
     </style>
   </head>
@@ -36,55 +37,35 @@
       <h1>web-call.cc</h1>
       <h3>What's on this website:</h3>
       <ul>
-	<li><a href="doc/func.html">Functional specification of the Zen Database</a>
-	<li><a href="seq-progd-webapp.html">Sequentially programmed web app examples</a><br/></li>
-	<li><a href="mdn-drag-and-drop.html">Example ondragover and ondrop event handlers from MDN</a><br/></li>
-	<li><a href="mdn-drag-and-drop-modd.html">Example ondragover and ondrop event handlers from MDN, modified</a><br/></li>
-	<li><a href="mdn-drag-and-drop-mod-2.html">Example ondragover and ondrop event handlers from MDN, completely generalised (but not yet working)</a><br/></li>
+	<li><a href="doc/func.html">Functional specification of the Zen Database</a></li>
+	<li><a href="seq-progd-webapp.html">Sequentially programmed web app examples</a></li>
+	<li><a href="mdn-drag-and-drop.html">Example ondragover and ondrop event handlers from MDN</a></li>
+	<li><a href="mdn-drag-and-drop-modd.html">Example ondragover and ondrop event handlers from MDN, modified</a></li>
+	<li><a href="mdn-drag-and-drop-mod-2.html">Example ondragover and ondrop event handlers from MDN, completely generalised</a></li>
       </ul>
-      <p>The following are loadable programs:
-	<ul>
-	  <li><a href="simple_seq_webapp.scm">simple_seq_webapp.scm</a></li>
-	  <li><a href="calculator.scm">calculator.scm</a></li>
-	</ul>
-	To try one of them, type one of following commands into the BiwaScheme console, terminated
-	by a RETURN:
-	<ul>
-	  <li>(load "simple_seq_webapp.scm")</li>
-	  <li>(load "calculator.scm")</li>
-	</ul>
-	The calculator program is slow to load but practically self explanatory. To understand
-	how to use the "simple sequential web app" you'll have to read the code.
-      </p>
-      <p>
-        The following examples show how BiwaScheme can manipulate the DOM:
-        <pre>
+      <p>The following examples show how BiwaScheme can manipulate the DOM:</p>
+      <pre>
 <code>(define elem #f)
-(define children #f)
+(define nodes #f)
 (set! elem (js-ref (js-invoke (getelem "body") "children") "0"))
 elem ;; => [object HTMLDivElement]
+(js-ref elem "tagName") ;; => "DIV"
 (js-ref elem "children") ;; => [object HTMLCollection]
-(set! elem (js-ref (js-invoke (getelem "body") "children") "0"))</code>
-        </pre>
-      </p>
+(set! nodes (js-ref elem "childNodes"))
+nodes ;; => [object NodeList]
+(js-array->list nodes)
+;; => ([object Text] [object HTMLHeadingElement] [object Text] ...)
+(js-obj->alist (js-ref elem "children"))
+;; => ((0 . [object HTMLHeadingElement]) (1 . [object HTMLHeadingElement]) ...)
+
+;; To call the browser function 'console.dir', define a Scheme function:
+(define console-dir (js-ref (js-eval "console") "dir"))
+;; Call the Scheme function like this:
+(console-dir elem)</code>
+      </pre>
       <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
     </div>
-    <div id="testarea" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:100px; width:425px;">
-    Test Area 1: Simple Sequentially Programmed Web App
-      <button id="button1" style="height:60px; width:100px;">Button #1</button>
-      <button id="button2" style="height:60px; width:100px;">Button #2</button>
-      <div id="div1" style="float:left; height:30px; width:80px; background-color:yellow; padding:15px;">
-	Div #1
-      </div>
-      <div id="div2" style="float:left; height:30px; width:80px; background-color:pink; padding:15px;">
-	Div #2
-      </div>
-    </div>
-    <div id="testarea2" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; float:left; height:auto; min-height:100px; width:200px;">
-      Test Area 2: Calculator Web App, Programmed Sequentially<br />
-    </div>
     <div style="clear:left;">
-      <p>-- End --</p>
     </div>
   </body>
 </html>
