@@ -20,20 +20,26 @@
   (display (string-append "nodeName: " (js-ref node "nodeName")))
   (js-ref node "nodeName"))
 
-;; Maybe not working.
+(define q '())
+
+;; Something in children->string or dom->string causes infinite loop or recursion.
+
 (define (children->string nodes)
   (display "---> Entering children->string")
   (display nodes)
   (console-dir nodes)
   (cond
-   ((and nodes (list? nodes) (> (length nodes) 0))
+   ((null? nodes)
+    (display "Got an empty list"))
+   ((list? nodes)
     (display "Got non-empty list")
     (dom->string (car nodes))
-    (children->string (cdr nodes)))
+    (display "(cdr nodes) => ")
+    (display (cdr nodes))
+    (children->string (cdr nodes))) ;; No effect?
    (else
     (display "Error: children->string called with empty list or non-list"))))
 
-;; Maybe not working.  
 (define (dom->string node)
   (display "----> Entering dom->string")
   (display node)
@@ -42,6 +48,6 @@
    ((list? node)
     (display "Error: node->string called with list"))
    (else
-    (display (string-append "nodeName: " (node-name node)))
-    (children->string (js-child-nodes node))
-    (node-name node))))
+    ;;(display (string-append "nodeName: " (node-name node)))
+    (children->string (js-child-nodes node)) ;; No effect?
+    (push! (node-name node) q))))
