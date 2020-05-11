@@ -17,15 +17,6 @@
     <script src="js/jquery.terminal.prism.js"></script>
     <script src="js/keyboard.js"></script>
     <script src="js/biwascheme_terminal.js"></script>
-    <script>
-      var body;
-      var cldn;
-      window.addEventListener('DOMContentLoaded', () => {
-	body = document.body;
-	cldn = body.children;
-	console.log("(In JS) body => " + body);
-      });
-    </script>
     <style>
       h3 { margin: 0; padding-left: 0; border-left: none; }
       ul { margin: 0; }
@@ -33,6 +24,14 @@
     </style>
   </head>
   <body>
+    <p id="paragraph">This is a paragraph.</p>
+    <div id="junk">
+      <ol>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+      </ol>
+    </div>
     <div id="content">
       <h1>web-call.cc</h1>
       <h3>What's on this website:</h3>
@@ -43,25 +42,33 @@
 	<li><a href="mdn-drag-and-drop-modd.html">Example ondragover and ondrop event handlers from MDN, modified</a></li>
 	<li><a href="mdn-drag-and-drop-mod-2.html">Example ondragover and ondrop event handlers from MDN, completely generalised</a></li>
       </ul>
-      <p>The following examples show how BiwaScheme can manipulate the DOM:</p>
+      <p>The following shows how BiwaScheme can interact with the DOM and the browser console:</p>
       <pre>
-<code>(define elem #f)
-(define nodes #f)
-(set! elem (js-ref (js-invoke (getelem "body") "children") "0"))
-elem ;; => [object HTMLDivElement]
-(js-ref elem "tagName") ;; => "DIV"
-(js-ref elem "children") ;; => [object HTMLCollection]
-(set! nodes (js-ref elem "childNodes"))
-nodes ;; => [object NodeList]
-(js-array->list nodes)
+<code>(load "browser-util.scm")
+
+(define body (js-ref (getelem "body") "0"))
+(js-ref body "children") ;; => [object HTMLCollection]
+(js-ref body "childNodes") ;; => [object NodeList]
+(define children (js-child-nodes body))
+(define text (first children))
+(js-ref text "nodeName") ;; => "#text"
+(js-ref text "tagName") ;; =>
+(define div (second children))
+(js-ref div "nodeName") ;; => "DIV"
+(js-ref div "tagName") ;; => "DIV"
+
+(console-dir div)
+(set! children (js-get-children div))
+(console-dir (car children))
+(dom-string div)
+
+(js-array->list children)
 ;; => ([object Text] [object HTMLHeadingElement] [object Text] ...)
 (js-obj->alist (js-ref elem "children"))
 ;; => ((0 . [object HTMLHeadingElement]) (1 . [object HTMLHeadingElement]) ...)
 
-;; To call the browser function 'console.dir', define a Scheme function:
-(define console-dir (js-ref (js-eval "console") "dir"))
-;; Call the Scheme function like this:
-(console-dir elem)</code>
+(node-name body) ;; => "BODY"
+(js-child-nodes body) ;; => ([object Text] [object HTMLParagraphElement] ...)</code>
       </pre>
       <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
     </div>
