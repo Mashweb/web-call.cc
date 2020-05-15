@@ -29,20 +29,48 @@
                  (js-ref attr-node "value")))
          attr-list)))
 
-(define (children->string nodes)
-  (map dom->string nodes))
+(define (children->sexp nodes)
+  (map dom->sexp nodes))
 
-(define (element->string element)
+(define (element->sexp element)
   (cons (node-name element) (element-attributes element)))
+
+(define (dom->string node)
+  (format "~s" (dom->sexp node)))
 
 ;; This just tests for ELEMENT_NODE and TEXT_NODE, but there are many
 ;; other types of node that should be handled. See https://mzl.la/2zcB5om.
-(define (dom->string node)
+(define (dom->sexp node)
   (case (node-type node)
     ((1)
      (cons
-      (element->string node)
-      (children->string (js-child-nodes node))))
+      (element->sexp node)
+      (children->sexp (js-child-nodes node))))
     ((3)
      (js-ref node "data"))
     (else (node-name node))))
+
+(define (dom->string node)
+  (format "~s" (dom->sexp node)))
+
+;;;; DOM deserialization
+
+(define (text-node-new node)
+  (js-invoke (js-eval "document.createTextNode") node))
+
+(define (string->sexp str)
+  (read (open-input-string str)))
+
+(define (symbol->element part)
+  (display part)
+  (cond
+   ((list? part)
+    (display "symbol->element: got a list")
+    (element-new (car part)))
+   (else
+    (display "symbol->element: got a non-list")
+    ;; This doesn't work, probably because it's not quoted for JavaScript:
+    (text-node-new part))))
+
+(define (sexp->dom sexp)
+  (map symbol->element sexp))
