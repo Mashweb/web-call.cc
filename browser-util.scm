@@ -53,10 +53,18 @@
 (define (dom->string node)
   (format "~s" (dom->sexp node)))
 
+;; Example HTTP request:
+;; (http-post "/doms" '(("dom" . "((DIV (id \"junk\") (style \"background-color:yellow;\")) \"      \" ((OL) \"       
+ \" ((LI) \"One\") \"        \" ((LI) \"Two\") \"        \" ((LI) \"Three\") \"      
+\") \"    \")")))
+
 ;;;; DOM deserialization
 
+;; FIXME: This doesn't handle input like "\n   ".
 (define (text-node-new node)
-  (js-invoke (js-eval "document.createTextNode") node))
+  (display (string-append "text-node-new: " node))
+  (display (string-length node))
+  (js-eval (string-append "document.createTextNode('" node "')")))
 
 (define (string->sexp str)
   (read (open-input-string str)))
