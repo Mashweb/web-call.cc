@@ -55,8 +55,8 @@
 
 ;; Example HTTP request:
 ;; (http-post "/doms" '(("dom" . "((DIV (id \"junk\") (style \"background-color:yellow;\")) \"      \" ((OL) \"       
- \" ((LI) \"One\") \"        \" ((LI) \"Two\") \"        \" ((LI) \"Three\") \"      
-\") \"    \")")))
+;; \" ((LI) \"One\") \"        \" ((LI) \"Two\") \"        \" ((LI) \"Three\") \"      
+;; \") \"    \")")))
 
 ;;;; DOM deserialization
 
