@@ -3,9 +3,34 @@
 ;;;; Console
 
 ;; To call the browser function 'console.dir', define a Scheme function:
-(define console-dir (js-ref (js-eval "console") "dir"))
+(define (console-dir obj)
+  (js-call% "console.dir" obj))
+
+;;;; AJAX
+
+(js-eval "define_libfunc('http-post-text', 2, 2, function(ar){
+    var path = ar[0];
+    assert_string(path);
+    var data = ar[1];
+    assert_string(data);
+
+    return new BiwaScheme.Pause(function(pause){
+      $.ajax({
+        'type': 'POST',
+        'url': path,
+        'contentType': 'text/plain',
+        'data': data,
+        'dataType': 'text/plain',
+        'success': pause.resume(data)
+      });
+    });
+  })")
 
 ;;;; DOM navigation
+
+;; Get the first element matching the selector.
+(define (getelem1 selector)
+  (js-ref (getelem selector) "0"))
 
 (define (js-childNodes node)
   (js-ref node "childNodes"))
