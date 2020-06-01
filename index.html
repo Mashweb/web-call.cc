@@ -80,7 +80,7 @@ children ;; => ([object HTMLDivElement] [object Text] [object HTMLDivElement] ..
 => (("id" "junk") ("style" "background-color:yellow;"))
 (define junk-str (dom->string junk))
 (display junk-str)
-(http-post-text junk-str) ;; [Inserts the DOM into the Zen Database.]
+(http-post-text "/doms" junk-str) ;; [Inserts the DOM into the Zen Database.]
 </code>
       </pre>
       <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
