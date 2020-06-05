@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>web-call/cc homepage</title>
+    <!-- Some of the following inclusions might not be necessary or useful -->
+    <link href="css/screen.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
+    <script src="js/biwascheme-0.6.9-min.js"></script>
+    <script src="js/jquery.mousewheel.min.js"></script>
+    <script src="js/jquery.timers.min.js"></script>
+    <script src="js/jquery.cookie.min.js"></script>
+    <script src="js/jquery.terminal-2.3.0.js"></script>
+    <script src="js/prism.js"></script>
+    <script src="js/prism-scheme.js"></script>
+    <script src="js/jquery.terminal.prism.js"></script>
+    <script src="js/keyboard.js"></script>
+    <script src="js/biwascheme_terminal.js"></script>
+    <style>
+      div#div { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
+      h3 { margin: 0; padding-left: 0; border-left: none; }
+      ul { margin: 0; }
+      p  { margin-top: 1em; margin-bottom: 0; }
+    </style>
+    <script src="js/optimal-select.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        var treeWalker;
+
+	treeWalker = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, {
+	    acceptNode: function (node) {
+		return NodeFilter.FILTER_ACCEPT;
+	    }
+	}, false);
+
+	console.log("TreeWalker");
+	do {
+	    console.log(treeWalker.currentNode);
+            treeWalker.currentNode.draggable = "true";
+	} while (treeWalker.nextNode());
+      });
+    </script>
+  </head>
+  <body id="body">
+    <ol id="draggables">
+      <li>One</li>
+      <li>Two</li>
+      <li>Three</li>
+    </ol>
+    <div id="div">This is a DROP ZONE.</div>
+    <div id="content">
+      <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
+    </div>
+  </body>
+</html>

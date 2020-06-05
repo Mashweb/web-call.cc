@@ -187,6 +187,9 @@
 (define-event-handler click-handler click)
 (define-event-handler keydown-handler keydown)
 (define-event-handler keyup-handler keyup)
+(define-event-handler dragstart-handler dragstart)
+(define-event-handler dragover-handler dragover)
+(define-event-handler drop-handler drop)
 
 ;;;; get-input
 
