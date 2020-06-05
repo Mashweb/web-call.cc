@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example ondragover and drop event handlers from MDN</title>
+    <style>
+      div, p { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
+    </style>
+    <script>
+      var fragment;
+      function dragstart_handler(ev) {
+        console.log("Entering dragstart_handler");
+        // Add the target element's id to the data transfer object
+        console.log("dragstart_handler: ev.target.id => " + ev.target.id);
+        ev.dataTransfer.setData("text/plain", ev.target.id);
+        ev.dataTransfer.effectAllowed = "copy";
+      }
+      function dragover_handler(ev) {
+        //console.log("Entering dragover_handler");
+        //console.group("dragover");
+        //console.dir(ev);
+        //console.groupEnd();
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "copy";
+        //ev.dataTransfer.effectAllowed = "copy";
+      }
+      function drop_handler(ev) {
+        console.log("Entering drop_handler");
+        console.group("drop");
+        console.dir(ev);
+        console.groupEnd();
+        ev.preventDefault();
+        // Get the id of the target and add the moved element to the target's DOM
+        const data = ev.dataTransfer.getData("text/plain");
+        console.log("typeof data => " + typeof data);
+        console.log("data.length => " + data.length);
+        console.log("data => " + data);
+        console.log("ev.target.id => " + ev.target.id);
+        ev.target.appendChild(document.getElementById(data).cloneNode(true));
+      }
+    </script>
+  </head>
+  <body>
+    <h2>Example ondragover and drop event handlers from MDN</h2>
+    This drag-and-drop example uses the same event handlers as shown in
+    <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#The_basics">
+    the MDN web docs section "HTML Drag and Drop API&mdash;The Basics"</a>.
+    It shows how to:
+    <ol>
+      <li>
+        define a draggable element by putting a <em>draggable</em> attribute in the element's HTML
+        tag and attaching a <em>dragstart</em> handler to it;
+      </li>
+      <li>
+        define a drag data item, which the example uses to identify the dragged element;
+      </li>
+      <li>
+        define the drag effect as a <em>move</em> operation; and
+      </li>
+      <li>
+        define a drop zone by putting <em>ondrop</em> and <em>ondragover</em> attributes in
+        an element's HTML tag.
+      </li>
+    </ol>
+    Some extra elements have been added to experiment with the <em>ondragstart</em>,
+    <em>ondragover</em>, and <em>ondrop</em> properties.
+    <div id="div">This DIV element has no <em>draggable</em> attribute.
+      The web browser gives no indication that it can be dragged.</div>
+    <p id="p1" draggable="true" ondragstart="dragstart_handler(event)">
+      This P element has a <em>draggable</em> attribute and a <em>dragstart</em> handler.</p>
+    <p id="p2" draggable="true">This P element has a <em>draggable</em> attribute, but
+      no drag effect is defined for it because it has no <em>dragstart</em> handler.</p>
+    <p ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+      <span style="font-weight:900;">Drop Zone</span>&mdash;This P element has
+      <em>ondrop</em> and <em>ondragover</em> handlers.</p>
+    <p ondrop="drop_handler(event)">
+      <span style="font-weight:900;">Broken Drop Zone</span>&mdash;This P element has
+      an <em>ondrop</em> handler, but it doesn't work as a
+      drop zone because it has no <em>ondragover</em> handler.</p>
+    <div>
+      DIV 0, DIV 1, and DIV 2 are <em>draggable</em>, but
+      no drag effect is defined for them because they have no <em>dragstart</em> handlers.
+      <div id="div0" draggable="true">DIV 0</div>
+      <div id="div1" draggable="true">DIV 1</div>
+      <div id="div2" draggable="true">DIV 2</div>
+    </div>
+  </body>
+</html>
