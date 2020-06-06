@@ -80,12 +80,6 @@
          ,teardown
          ,result-g))))
 
-;; This is from the unit tests (https://github.com/biwascheme/biwascheme/blob/master/test/unit.js):
-;;(let1 ls '() (dotimes (x 3 ls) (set! ls (cons x ls))))
-
-;; This almost works.
-;;(dotimes '(print 1 5))
-
 ;; Define a simple iterator (which actually uses tail-call rescursion):
 ;; Adaptation of the factorial at https://wiki.c2.com/?SchemeIdioms .
 ;; See also _ANSI Common Lisp_, p. 164 and _Teach Yourself Scheme_, Chapter 8.
