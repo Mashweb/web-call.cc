@@ -25,6 +25,9 @@
 	console.log("TreeWalker");
 	do {
 	    console.log(treeWalker.currentNode);
+	    // Text selections, images, and links have an OS-dependent default rendering
+	    // of them being dragged. If we want that default behavior, we should not
+	    // set the "draggable" attribute of them.
             treeWalker.currentNode.draggable = "true";
 	} while (treeWalker.nextNode());
       });
@@ -66,9 +69,6 @@
        Other experimental code can be found <a href="index2.html">here</a>.
     </p>
     <div id="div">This is a DROP ZONE for drag-and-drop operations.</div>
-    <div id="content">
-      <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div>
-    </div>
     <script src="js/biwascheme-0.6.9-min.js" type="text/javascript"></script>
     <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
     <script src="js/jquery.timers.min.js" type="text/javascript"></script>
