@@ -8,6 +8,7 @@
     <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
     <style>
       div#div { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
+      div#div2 { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
       h3 { margin: 0; padding-left: 0; border-left: none; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
       p  { margin-top: 1em; margin-bottom: 0; }
@@ -22,9 +23,9 @@
 		return NodeFilter.FILTER_ACCEPT;
 	    }
 	}, false);
-	console.log("TreeWalker");
+	//console.log("TreeWalker");
 	do {
-	    console.log(treeWalker.currentNode);
+	    //console.log(treeWalker.currentNode);
 	    // Text selections, images, and links have an OS-dependent default rendering
 	    // of them being dragged. If we want that default behavior, we should not
 	    // set the "draggable" attribute of them.
@@ -47,11 +48,11 @@
       </div>
       <div style="padding: 10px 0 5px 15px; border: 1px solid blue;">
 	Tools:
-	<ul>
+	<ul id="tools">
 	  <li><button>Add</button></li>
 	  <li><button>Copy</button></li>
 	  <li><button>Paste</button></li>
-	  <li><button>Move</button></li>
+	  <li><button id="move">Move</button></li>
 	  <li><button>Delete</button></li>
 	  <li><button>Undo</button></li>
 	  <li><button>Redo</button></li>
@@ -63,12 +64,13 @@
       <div id="term"></div>
     </div>
     <p>This page demonstrates a prototype of the Zen DOM editor.
-       To start the demo, load "in-browser-gui.scm" in the Scheme console
-       above to attach BiwaScheme handlers to the drag and drop events,
-       then evaluate "(reset (test))" there.
-       Other experimental code can be found <a href="index2.html">here</a>.
+      To start the demo, use the above Scheme console to load
+      "in-browser-gui.scm", which will attach BiwaScheme handlers
+      to the drag and drop events, and evaluate "(reset (test))".
+      Other experimental code can be found <a href="index2.html">here</a>.
     </p>
     <div id="div">This is a DROP ZONE for drag-and-drop operations.</div>
+    <div id="div2">Try dragging this DIV.</div>
     <script src="js/biwascheme-0.6.9-min.js" type="text/javascript"></script>
     <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
     <script src="js/jquery.timers.min.js" type="text/javascript"></script>

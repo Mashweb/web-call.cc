@@ -38,6 +38,12 @@
 (define (js-child-nodes node)
   (js-array->list (js-childNodes node)))
 
+(define (js-children element)
+  (js-ref element "children"))
+
+(define (js-children-list element)
+  (js-array->list (js-children element)))
+
 ;;;; DOM serialization
 
 (define (node-type node)

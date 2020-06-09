@@ -37,6 +37,15 @@
 (define first car)
 (define second cadr)
 (define third caddr)
+(define fourth cadddr)
+
+;; Courtesy Sean Eshbaugh: https://bit.ly/2BRWvIN
+(define (nth n l)
+  (if (or (> n (length l)) (< n 0))
+    (error "Index out of bounds.")
+    (if (eq? n 0)
+      (car l)
+      (nth (- n 1) (cdr l)))))
 
 (define rest cdr)
 
