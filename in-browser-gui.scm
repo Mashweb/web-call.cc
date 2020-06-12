@@ -1,20 +1,35 @@
 (load "browser-util.scm")
 (define (test)
   (let loop1
-      ((op "move")
+      ((op #f)
        (target #f)
        (selector #f)
        (unfinished #t))
-    (display "Pick a tool.")
-    ;; For now this with-handlers clause doesn't do anything, but it will be modified to.
-    (with-handlers ((click-handler "#move"))
-      (let* ((input (get-input))
-	     (event-type (js-ref (first input) "name"))
-	     (event (second input)))
-	(set! op "move")
-	(console-log "move")
-	(console-dir event)
-	(display "You have chosen the Move tool.")))
+    
+    (let loop1a
+	()
+      (format #t "Pick a tool.~%")		     
+      (with-handlers ((click-handler "#add")
+		      (click-handler "#copy")
+		      (click-handler "#paste")
+		      (click-handler "#move")
+		      (click-handler "#delete")
+		      (click-handler "#undo")
+		      (click-handler "#redo")
+		      (click-handler "#save"))
+	(let* ((input (get-input))
+	       (event-type (js-ref (first input) "name"))
+	       (jquery-event (second input)))
+	  (console-dir jquery-event)
+	  (set! op (js-ref (js-ref (get-original-event jquery-event) "srcElement") "outerText"))
+	  (console-log (format #f "op => ~a" op))
+	  (if (not (or (equal? op "Copy") (equal? op "Move")))
+	      (begin
+		(format #t "Unimplemented operation.~%")
+		(loop1a))))))
+
+    (display "Now try dragging and dropping an HTML element.")
+    (newline)
 	
     (while unfinished
       (with-handlers ((dragstart-handler "#canvas") ;; Change the selector after testing.
@@ -22,47 +37,54 @@
 		      (drop-handler "#canvas"))
 	(let* ((input (get-input))
 	       (event-type (js-ref (first input) "name"))
-	       (event (second input))
-	       (original-event #f)
-	       (data-transfer #f))
+	       (jquery-event (second input))) ;; The generic parts of an event.
 	  (case event-type
 	    (("dragstart")
-	     (display "dragstart")
 	     (console-log "dragstart")
-	     (set! target (js-ref event "target"))
+	     (set! target (js-ref jquery-event "target"))
 	     (console-log target)
-	     (display "Set selector")
-	     (console-log "Set selector")
 	     ;; FIXME: This means of calling select looks more complicated than necessary.
 	     (set! selector (js-invoke (js-eval "OptimalSelect") "select" target))
-	     (console-log event)
-	     (console-dir event)
 	     (console-log (format #f "selector => ~a" selector))
-	     (console-dir (js-ref event "originalEvent"))
-	     (set! original-event (js-ref event "originalEvent"))
-	     (set! data-transfer (js-ref original-event "dataTransfer"))
-	     (js-invoke data-transfer "setData" "text/plain" selector))
-	     ;;(js-invoke (js-ref event "originalEvent.dataTransfer") "setData" "text/plain" selector))
+	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector))
 	    (("dragover")
-	     ;;(console-log "dragover")
-	     ;;(console-dir event)
-	     (js-invoke event "preventDefault")
-	     (js-set! event "originalEvent.dataTransfer.dropEffect" "move"))
+	     (js-invoke jquery-event "preventDefault")
+	     ;; Assume op is "Copy" or "Move".
+	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" op)
+	     (console-dir jquery-event)
+	     )
 	    (("drop")
-	     (display "drop")
 	     (console-log "drop")
-	     (js-invoke event "preventDefault")
-	     (perform-operation op event)
-	     (console-log "Operation finished.")
+	     (js-invoke jquery-event "preventDefault")
+	     (perform-operation op jquery-event)
+	     (format #t "Operation complete.~%")
+	     (console-log "Operation complete.")
 	     (set! unfinished #f))))))
     (loop1)))
 
-(define (perform-operation op ev)
-  (console-log (format #f "Operation: ~a" op))
-  (case op
-    (("move")
-     (console-dir ev)
-     (console-dir (getelem1 "#div"))
-     (js-invoke (js-ref ev "target") "appendChild" (getelem1 "#div")))
-    (else
-     (display "Unknown operation"))))
+;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
+;; unmassaged by jQuery.
+(define (get-original-event jquery-event)
+  (js-ref jquery-event "originalEvent"))
+    
+;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
+(define (get-data-transfer-obj jquery-event)
+  ;; FIXME: Is it really necessary to dereference twice?
+  (js-ref (js-ref jquery-event "originalEvent") "dataTransfer"))
+
+(define (perform-operation op jq-ev)
+  (let ((selector #f))
+    (console-log (format #f "Operation: ~a" op))
+    (case op
+      (("Copy")
+       (console-dir jq-ev)
+       (set! selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
+       (console-log selector)
+       (js-invoke (js-ref jq-ev "target") "appendChild" (js-invoke (getelem1 selector) "cloneNode" "true")))
+      (("Move")
+       (console-dir jq-ev)
+       (set! selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
+       (console-log selector)
+       (js-invoke (js-ref jq-ev "target") "appendChild" (getelem1 selector)))
+      (else
+       (display "Unimplemented operation.")))))

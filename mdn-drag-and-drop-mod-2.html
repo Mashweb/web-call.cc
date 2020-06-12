@@ -24,6 +24,7 @@
         //console.groupEnd();
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
+        console.dir(ev);
       }
       function drop_handler_for_body(ev) {
         console.log("Entering drop_handler_for_body");

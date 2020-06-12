@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Example ondragover and drop event handlers from MDN</title>
+    <title>Example ondragover and drop event handlers from MDN with 'copy' effect</title>
     <style>
       div, p { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
     </style>
@@ -40,7 +40,7 @@
     </script>
   </head>
   <body>
-    <h2>Example ondragover and drop event handlers from MDN</h2>
+    <h2>Example ondragover and drop event handlers from MDN with 'copy' effect</h2>
     This drag-and-drop example uses the same event handlers as shown in
     <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API#The_basics">
     the MDN web docs section "HTML Drag and Drop API&mdash;The Basics"</a>.
@@ -54,7 +54,7 @@
         define a drag data item, which the example uses to identify the dragged element;
       </li>
       <li>
-        define the drag effect as a <em>move</em> operation; and
+        define the drag effect as a <em>copy</em> operation; and
       </li>
       <li>
         define a drop zone by putting <em>ondrop</em> and <em>ondragover</em> attributes in
@@ -76,6 +76,9 @@
       <span style="font-weight:900;">Broken Drop Zone</span>&mdash;This P element has
       an <em>ondrop</em> handler, but it doesn't work as a
       drop zone because it has no <em>ondragover</em> handler.</p>
+    <p ondrop="drop_handler(event)" ondragover="dragover_handler(event)">
+      <span style="font-weight:900;">Drop Zone</span>&mdash;This P element has
+      <em>ondrop</em> and <em>ondragover</em> handlers.</p>
     <div>
       DIV 0, DIV 1, and DIV 2 are <em>draggable</em>, but
       no drag effect is defined for them because they have no <em>dragstart</em> handlers.
