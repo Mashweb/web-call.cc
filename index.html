@@ -7,11 +7,14 @@
     <link href="css/jquery.terminal.min.css" rel="stylesheet" type="text/css">
     <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
     <style>
+      h2 { padding-top: 0.2em; margin-bottom: 0; border-bottom: 1px solid black; }
+      div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
       div.prominent { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
       p  { margin-top: 1em; margin-bottom: 0; }
       button { width: 50px; }
+      #content { padding-left: 1em; border-left: 0; z-index: 1; }
     </style>
     <script src="js/optimal-select.js"></script>
     <script>
@@ -42,16 +45,16 @@
     <h2>web-call.cc</h2>
     <div id="canvas">
       <h4>DOM editor tools:</h4>
-      <ul id="tools">
-	<li><button id="add">Add</button></li>
-	<li><button id="copy">Copy</button></li>
-	<li><button id="paste">Paste</button></li>
-	<li><button id="move">Move</button></li>
-	<li><button id="delete">Delete</button></li>
-	<li><button id="undo">Undo</button></li>
-	<li><button id="redo">Redo</button></li>
-	<li><button id="save">Save</button></li>
-      </ul>
+      <div id="tools">
+	<button id="add">Add</button>
+	<button id="copy">Copy</button>
+	<button id="paste">Paste</button>
+	<button id="move">Move</button>
+	<button id="delete">Delete</button>
+	<button id="undo">Undo</button>
+	<button id="redo">Redo</button>
+	<button id="save">Save</button>
+      </div>
       <div class="prominent">
 	<p>This page demonstrates a prototype of the Zen DOM editor.
 	  The code is a work in progress in an alpha stage of development.
@@ -80,6 +83,8 @@
       <div class="prominent">This is another DIV.</div>
       <div class="prominent">This is a third DIV.</div>
       <div class="prominent">This is a fourth DIV.</div>
+    </div>
+    <div>
       <div id="content">
 	<div id="term"></div>
       </div>

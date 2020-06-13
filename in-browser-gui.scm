@@ -21,7 +21,8 @@
 	       (event-type (js-ref (first input) "name"))
 	       (jquery-event (second input)))
 	  (console-dir jquery-event)
-	  (set! op (js-ref (js-ref (get-original-event jquery-event) "srcElement") "outerText"))
+	  ;;(set! op (js-ref (js-ref (get-original-event jquery-event) "srcElement") "outerText"))
+	  (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
 	  (console-log (format #f "op => ~a" op))
 	  (if (not (or (equal? op "Copy") (equal? op "Move")))
 	      (begin
