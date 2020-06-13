@@ -22,6 +22,7 @@
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "copy";
         //ev.dataTransfer.effectAllowed = "copy";
+        return false;
       }
       function drop_handler(ev) {
         console.log("Entering drop_handler");
