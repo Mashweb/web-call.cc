@@ -17,12 +17,6 @@
 
 (load "mini-framework.scm")
 
-;;;; Console
-
-;; To call the browser function 'console.dir', define a Scheme function:
-(define (console-dir obj)
-  (js-call% "console.dir" obj))
-
 ;;;; AJAX
 
 (js-eval "define_libfunc('http-post-text', 2, 2, function(ar){
@@ -130,3 +124,14 @@
 
 (define (sexp->dom sexp)
   (map symbol->element sexp))
+
+;;;; Console and messages
+
+;; To call the browser function 'console.dir', define a Scheme function:
+(define (console-dir obj)
+  (js-call% "console.dir" obj))
+
+(define (message selector str)
+  (console-log selector)
+  (js-set! (getelem1 selector) "innerHTML"
+	   (string-append "<p style='color:red; font-size:2em;'>" str "</p>"))

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>web-call.cc</title>
     <style>
-      h2 { padding-top: 0.2em; margin-bottom: 0; border-bottom: 1px solid black; }
+      h2 { padding: 0.2em; margin-bottom: 1em; border-bottom: 1px solid black; }
       div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
       div.prominent { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
@@ -35,6 +35,7 @@
     </script>
     <script src="biwascheme.js">
       (load "browser-util.scm")
+      (message "#message" "Hello, World!")
       (define (test)
        (let loop1
 	((op #f)
@@ -44,7 +45,8 @@
 	
 	(let loop1a
 	 ()
-	 (alert "Pick a tool.")
+	 (message "#message"
+	  "Please choose one of the DOM-editor tools. (Currently only Copy and Move are working.)")
 	 (with-handlers ((click-handler "#add")
 			 (click-handler "#copy")
 			 (click-handler "#paste")
@@ -56,13 +58,14 @@
 	  (let* ((input (get-input))
 		 (event-type (js-ref (first input) "name"))
 		 (jquery-event (second input)))
+	   (message "#error" "")
 	   (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
 	   (if (not (or (equal? op "Copy") (equal? op "Move")))
 	    (begin
-	     (alert "Unimplemented operation.")
+	     (message "#error" "Unimplemented operation.")
 	     (loop1a))))))
 	
-	(alert "Now try dragging and dropping an HTML element.")
+	(message "#message" "Now try dragging and dropping an HTML element.")
 	
 	(while unfinished
 	 (with-handlers ((dragstart-handler "#canvas") ;; Change the selector after testing.
@@ -103,14 +106,16 @@
 	(set! selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
 	(js-invoke (js-ref jq-ev "target") "appendChild" (getelem1 selector)))
        (else
-	(alert "Unimplemented operation.")))))
+	(message "#message" "Unimplemented operation.")))))
       (reset (test))
     </script>
   </head>
   <body>
     <h2>web-call.cc</h2>
+    <div id="message"></div>
+    <div id="error"></div>
     <div id="canvas">
-      <h4>DOM editor tools:</h4>
+      <h3>DOM editor tools:</h3>
       <div id="tools">
 	<button id="add">Add</button>
 	<button id="copy">Copy</button>
@@ -124,9 +129,10 @@
       <div class="prominent">
 	<p>This page demonstrates a prototype of the Zen DOM editor.
 	  The code is a work in progress in an alpha stage of development.
-	  It has been cursorily tested in Chrome, Firefox, Edge, and Safari.
-	  It does not work in Explorer or mobile browsers.
-	  You will be instructed to choose a tool. Currently,
+	  It will be improved as time permits.
+	  The interesting aspect of it is not the tools it provides the user,
+	  but rather the very clear and simple programming of those tools.
+	<p>The program prompts you in red at the top of the page. Currently,
 	  "Copy" and "Move" are the only tools that work.
 	  Clicking on any other tool will produce the message
 	  "Unimplemented operation."</p>
@@ -137,7 +143,7 @@
                   (drop-handler "#canvas"))
     (let* ((input (get-input))
            (event-type (js-ref (first input) "name"))
-           (jquery-event (second input))) ;; The generic parts of an event.
+           (jquery-event (second input)))
       (case event-type
         (("dragstart")
          (set! target (js-ref jquery-event "target"))
@@ -153,6 +159,8 @@
          (set! unfinished #f))))))
 </code></pre>
 	  That is just a few lines of simple code!
+	  This demo has been cursorily tested in Chrome, Firefox, Edge, and Safari.
+	  It does not work in Explorer or mobile browsers.
 	<p>The BiwaScheme code can be
           downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
 	  <a href="browser-util.scm">browser-util.scm</a>, and
