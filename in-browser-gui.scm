@@ -67,8 +67,9 @@
 	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector))
 	    (("dragover")
 	     (js-invoke jquery-event "preventDefault")
+	     (js-invoke jquery-event "stopPropagation")
 	     ;; Assume op is "Copy" or "Move".
-	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" op)
+	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" (string-downcase op))
 	     (console-dir jquery-event)
 	     )
 	    (("drop")
