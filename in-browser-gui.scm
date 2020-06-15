@@ -50,7 +50,7 @@
     (newline)
 	
     (while unfinished
-      (with-handlers ((dragstart-handler "#canvas") ;; Change the selector after testing.
+      (with-handlers ((dragstart-handler "#canvas")
 		      (dragover-handler "#canvas")
 		      (drop-handler "#canvas"))
 	(let* ((input (get-input))
