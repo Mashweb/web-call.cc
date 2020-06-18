@@ -127,11 +127,15 @@
 
 ;;;; Console and messages
 
-;; To call the browser function 'console.dir', define a Scheme function:
 (define (console-dir obj)
   (js-call% "console.dir" obj))
 
+(define (console-group str)
+  (js-call% "console.group" str))
+
+(define (console-group-end)
+  (js-call% "console.groupEnd"))
+
 (define (message selector str)
-  (console-log selector)
   (js-set! (getelem1 selector) "innerHTML"
 	   (string-append "<p style='color:red; font-size:2em;'>" str "</p>"))
