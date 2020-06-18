@@ -23,9 +23,9 @@
        (selector #f)
        (unfinished #t))
     
+    (message "Please choose a DOM-editor tool. (Currently only Copy-insert and Move-insert are working.)")
     (let loop1a
 	()
-      (message "Please choose a DOM-editor tool. (Currently only Copy-insert and Move-insert are working.)")
       (with-handlers ((click-handler "#add")
 		      (click-handler "#copy")
 		      (click-handler "#paste")
@@ -46,7 +46,7 @@
 	    (("Move-insert")
 	     (set! op "move"))
 	    (else
-	     (error "Unimplemented operation.")
+	     (message "Unimplemented operation. Please choose a different DOM-editor tool.")
 	     (loop1a))))))
 
     (message "Now try dragging and dropping an HTML element.")
@@ -72,7 +72,7 @@
 	     (js-invoke jquery-event "stopPropagation")
 	     ;; Assume op is "Copy" or "Move".
 	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" (string-downcase op))
-	     (console-dir jquery-event)
+	     ;;(console-dir jquery-event)
 	     )
 	    (("drop")
 	     (console-log "drop")
