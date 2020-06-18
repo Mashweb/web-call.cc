@@ -136,6 +136,10 @@
 (define (console-group-end)
   (js-call% "console.groupEnd"))
 
-(define (message selector str)
-  (js-set! (getelem1 selector) "innerHTML"
-	   (string-append "<p style='color:red; font-size:2em;'>" str "</p>"))
+(define (message str)
+  (js-set! (getelem1 "#message") "innerHTML"
+	   (string-append "<p style='color:#66ff8c; font-size:2em;'>" str "</p>"))
+
+(define (error str)
+  (js-set! (getelem1 "#error") "innerHTML"
+	   (string-append "<p style='color:#66ff8c; font-size:2em;'>" str "</p>"))

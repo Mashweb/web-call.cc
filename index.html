@@ -3,18 +3,15 @@
   <head>
     <meta charset="utf-8">
     <title>web-call.cc</title>
-    <link href="css/screen.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.terminal.min.css" rel="stylesheet" type="text/css">
-    <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
     <style>
-      h2 { padding-top: 0.2em; margin-bottom: 0; border-bottom: 1px solid black; }
+      h1 { padding: 0.2em; margin-bottom: 0.2em; border-bottom: 1px solid black; }
       div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
-      div.prominent { margin:15px; min-height:10px; padding:10px; border:2px solid blue; }
+      div.prominent { margin:15px; min-height:20px; padding:10px; border:2px solid blue; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
-      p  { margin-top: 1em; margin-bottom: 0; }
-      button { width: 50px; }
-      #content { padding-left: 1em; border-left: 0; z-index: 1; }
+      p  { margin-top: 0em; margin-bottom: 0.5em; }
+      button { width: 7em; }
+      button.ghosted { background-color:#a0a0a0; }
     </style>
     <script src="js/optimal-select.js"></script>
     <script>
@@ -33,42 +30,36 @@
 	    // set the "draggable" attribute of them.
             treeWalker.currentNode.draggable = "true";
 	} while (treeWalker.nextNode());
-	function onclick_handler(ev) {
-	    console.log("click");
-	    console.dir(ev);
-	}
-	  window.scrollTo(0, 0);
       });
     </script>
   </head>
   <body>
-    <h2>web-call.cc</h2>
+    <h1>web-call.cc demo #1</h1>
     <div id="canvas">
-      <h4>DOM editor tools:</h4>
+      <div>
+	<div id="message"></div>
+	<div id="error"></div>
+      </div>
+      <h3>DOM editor tools:</h3>
       <div id="tools">
-	<button id="add">Add</button>
-	<button id="copy">Copy</button>
-	<button id="paste">Paste</button>
-	<button id="move">Move</button>
-	<button id="delete">Delete</button>
-	<button id="undo">Undo</button>
-	<button id="redo">Redo</button>
-	<button id="save">Save</button>
+	<button id="add" class="ghosted">Add-insert</button>
+	<button id="copy" style="background-color:lightgreen">Copy-insert</button>
+	<button id="paste" class="ghosted">Paste-insert</button>
+	<button id="move" style="background-color:lightgreen">Move-insert</button>
+	<button id="delete" class="ghosted">Delete</button>
+	<button id="undo" class="ghosted">Undo</button>
+	<button id="redo" class="ghosted">Redo</button>
+	<button id="save" class="ghosted">Save</button>
       </div>
       <div class="prominent">
 	<p>This page demonstrates a prototype of the Zen DOM editor.
-	  The code is a work in progress in an alpha stage of development.
-	  It has been cursorily tested in Chrome, Firefox, Edge, and Safari.
-	  It does not work in Explorer or mobile browsers.
-	  To start the demo, type the command
-	  <pre><code>  (load "in-browser-gui.scm")</code></pre>
-	  in the console at the bottom of the page, followed by RETURN or ENTER.
-	  The command will attach BiwaScheme handlers
-	  to drag and drop events. Then type the command
-	  <pre><code>  (reset (test))</code></pre> in the console,
-	  followed by RETURN or ENTER.
-	  You will be instructed to choose a tool. Currently,
-	  "Copy" and "Move" are the only tools that work.
+	  It will be improved as time permits.
+	  The interesting aspect of it is not the tools <em>per se</em>,
+	  but rather the very clear and simple programming of those tools.
+	  It does not yet work in Explorer or mobile browsers.</p>
+	<p>The program prompts you in green at the top of the page.
+	  It will instruct you to choose a tool.
+	  Currently, "Copy-insert" and "Move-insert" are the only tools that work.
 	  Clicking on any other tool will produce the message
 	  "Unimplemented operation."</p>
 	<p>The BiwaScheme code can be
@@ -77,25 +68,21 @@
 	  <a href="mini-framework.scm">mini-framework.scm</a>.
 	  Other experimental code can be found <a href="index2.html">here</a>.</p>
       </div>
-      <div class="prominent" id="div">This is a DIV.</div>
+      <div class="prominent">This is a DIV.</div>
       <div class="prominent">This is another DIV.</div>
       <div class="prominent">This is a third DIV.</div>
       <div class="prominent">This is a fourth DIV.</div>
     </div>
     <div>
-      <div id="content">
-	<div id="term"></div>
-      </div>
-      <script src="js/biwascheme-0.6.9-min.js" type="text/javascript"></script>
-      <script src="js/jquery.mousewheel.min.js" type="text/javascript"></script>
-      <script src="js/jquery.timers.min.js" type="text/javascript"></script>
-      <script src="js/jquery.cookie.min.js" type="text/javascript"></script>
-      <script src="js/jquery.terminal.min.js" type="text/javascript"></script>
-      <script src="js/prism.js" type="text/javascript"></script>
-      <script src="js/prism-scheme.js" type="text/javascript"></script>
-      <script src="js/jquery.terminal.prism.js" type="text/javascript"></script>
-      <script src="js/keyboard.js" type="text/javascript"></script>
-      <script src="js/biwascheme_terminal.js" type="text/javascript"></script>
+    <script src="js/biwascheme-0.6.9-min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      var onError = function(e){ console.error(e); }
+      var biwa = new BiwaScheme.Interpreter(onError);
+      biwa.evaluate('(load "in-browser-gui.scm") (reset (test))'
+		    , function(result) {
+			console.log('BiwaScheme loaded.');
+		    });
+    </script>
     </div>
   </body>
 </html>

@@ -25,7 +25,7 @@
     
     (let loop1a
 	()
-      (format #t "Pick a tool.~%")		     
+      (message "Please choose a DOM-editor tool. (Currently only Copy-insert and Move-insert are working.)")
       (with-handlers ((click-handler "#add")
 		      (click-handler "#copy")
 		      (click-handler "#paste")
@@ -38,16 +38,18 @@
 	       (event-type (js-ref (first input) "name"))
 	       (jquery-event (second input)))
 	  (console-dir jquery-event)
-	  ;;(set! op (js-ref (js-ref (get-original-event jquery-event) "srcElement") "outerText"))
 	  (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
 	  (console-log (format #f "op => ~a" op))
-	  (if (not (or (equal? op "Copy") (equal? op "Move")))
-	      (begin
-		(format #t "Unimplemented operation.~%")
-		(loop1a))))))
+	  (case op
+	    (("Copy-insert")
+	     (set! op "copy"))
+	    (("Move-insert")
+	     (set! op "move"))
+	    (else
+	     (error "Unimplemented operation.")
+	     (loop1a))))))
 
-    (display "Now try dragging and dropping an HTML element.")
-    (newline)
+    (message "Now try dragging and dropping an HTML element.")
 	
     (while unfinished
       (with-handlers ((dragstart-handler "#canvas")
@@ -76,7 +78,7 @@
 	     (console-log "drop")
 	     (js-invoke jquery-event "preventDefault")
 	     (perform-operation op jquery-event)
-	     (format #t "Operation complete.~%")
+	     (message "Operation complete.")
 	     (console-log "Operation complete.")
 	     (set! unfinished #f))))))
     (loop1)))
@@ -95,15 +97,15 @@
   (let ((selector #f))
     (console-log (format #f "Operation: ~a" op))
     (case op
-      (("Copy")
+      (("copy")
        (console-dir jq-ev)
        (set! selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
        (console-log selector)
        (js-invoke (js-ref jq-ev "target") "appendChild" (js-invoke (getelem1 selector) "cloneNode" "true")))
-      (("Move")
+      (("move")
        (console-dir jq-ev)
        (set! selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
        (console-log selector)
        (js-invoke (js-ref jq-ev "target") "appendChild" (getelem1 selector)))
       (else
-       (display "Unimplemented operation.")))))
+       (error "Unimplemented operation.")))))
