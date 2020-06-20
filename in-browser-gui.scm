@@ -72,7 +72,8 @@
 	     ;; FIXME: This means of calling select looks more complicated than necessary.
 	     (set! selector (js-invoke (js-eval "OptimalSelect") "select" target))
 	     (console-log (format #f "selector => ~a" selector))
-	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector))
+	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
+	     (element-add-class-name! target "outlined"))
 	    (("dragover")
 	     (js-invoke jquery-event "preventDefault")
 	     (js-invoke jquery-event "stopPropagation")
@@ -109,6 +110,7 @@
     (console-log (format #f "target: ~a" target))
     (console-log (format #f "dragged: ~a" dragged))
     (console-log (format #f "parent: ~a" parent))
+    (element-remove-class-name! dragged "outlined")
     (case op
       (("copy")
        (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true")))

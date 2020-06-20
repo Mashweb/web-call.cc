@@ -8,6 +8,7 @@
       div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
       div.prominent { margin:15px; min-height:20px; padding:10px; border:2px solid blue; }
+      .outlined { border:2px solid red !important; }
       div.inline { display:inline-flex; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
       p  { margin-top: 0em; margin-bottom: 0.5em; }
@@ -37,6 +38,23 @@
   <body>
     <h1>web-call.cc demo #1</h1>
     <div>
+      <p>This page demonstrates a prototype of the Zen DOM editor.
+	It will be improved as time permits.
+	The interesting aspect of it is not the tools <em>per se</em>,
+	but rather the very clear and simple programming of those tools.
+	It does not yet work in Explorer or mobile browsers.</p>
+      <p>The program prompts you in large green text.
+	It will instruct you to choose a tool.
+	Currently, "Copy-insert" and "Move-insert" are the only tools that work.
+	Clicking on any other tool will produce the message
+	"Unimplemented operation."</p>
+      <p>The BiwaScheme code can be
+        downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
+	<a href="browser-util.scm">browser-util.scm</a>, and
+	<a href="mini-framework.scm">mini-framework.scm</a>.
+	Other experimental code can be found <a href="index2.html">here</a>.</p>
+    </div>
+    <div>
       <div id="message"></div>
       <div id="error"></div>
     </div>
@@ -54,29 +72,42 @@
       <button id="save" class="ghosted">Save</button>
     </div>
     <div id="canvas" style="overflow: auto;">
-      <div class="prominent">
-	<p>This page demonstrates a prototype of the Zen DOM editor.
-	  It will be improved as time permits.
-	  The interesting aspect of it is not the tools <em>per se</em>,
-	  but rather the very clear and simple programming of those tools.
-	  It does not yet work in Explorer or mobile browsers.</p>
-	<p>The program prompts you in green at the top of the page.
-	  It will instruct you to choose a tool.
-	  Currently, "Copy-insert" and "Move-insert" are the only tools that work.
-	  Clicking on any other tool will produce the message
-	  "Unimplemented operation."</p>
-	<p>The BiwaScheme code can be
-          downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
-	  <a href="browser-util.scm">browser-util.scm</a>, and
-	  <a href="mini-framework.scm">mini-framework.scm</a>.
-	  Other experimental code can be found <a href="index2.html">here</a>.</p>
-      </div>
       <div class="prominent">This is a DIV.</div>
       <div class="prominent">This is another DIV.</div>
       <div class="prominent">This is a third DIV.</div>
       <div class="prominent">This is a fourth DIV.</div>
       <div class="prominent inline">This is an inline DIV.</div>
       <div class="prominent inline">This is another inline DIV.</div>
+      <div class="prominent inline">This is a third inline DIV.</div>
+      <address>This is an address.</address>
+      <article>This is an article.</article>
+      <aside>This is an aside.</aside>
+      <footer>This is a footer.</footer>
+      <header>This is a header.</header>
+      <h1>This is an H1 section heading.</h1>
+      <h2>This is an H2 section heading.</h2>
+      <h3>This is an H3 section heading.</h3>
+      <hgroup>This is a multi-level heading group.
+	<h2>This is an H2 section heading.</h2>
+	<h3>This is an H3 section heading.</h3>
+      </hgroup>
+      <main>This is a main element.</main>
+      <nav>This is a navigation element.</nav>
+      <section>This is a section.</section>
+      <blockquote>This is a block quotation.</blockquote>
+      <dt>This is a description or definition list.
+	<dd>This is a description, definition, or value for the preceding term in a description list.</dd>
+	<dd>This is another DD element.</dd>
+      </dt>
+      <figure>This is a figure.
+	<figcaption>This is a figure caption.</figcaption>
+      </figure>
+      <hr></hr>
+      <ol>
+	<li>List item 1</li>
+	<li>List item 2</li>
+	<li>List item 3</li>
+      </ol>
     </div>
     <div>
     <script src="js/biwascheme-0.6.9-min.js"></script>
