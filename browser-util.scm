@@ -139,9 +139,9 @@
 (define (message str)
   (console-log (format #f "Message: ~a" str))
   (js-set! (getelem1 "#message") "innerHTML"
-	   (string-append "<p style='color:#66ff8c; font-size:2em;'>" str "</p>"))
+	   (string-append "<p style='background-color:#f0d060; color:#208020; font-size:2em;'>" str "</p>"))
 
 (define (error str)
   (console-log (format #f "Error: ~a" str))
   (js-set! (getelem1 "#error") "innerHTML"
-	   (string-append "<p style='color:#66ff8c; font-size:2em;'>" str "</p>"))
+	   (string-append "<p style='color:#cc8080; font-size:2em;'>" str "</p>"))
