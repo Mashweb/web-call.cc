@@ -8,7 +8,8 @@
       div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
       div.prominent { margin:15px; min-height:20px; padding:10px; border:2px solid blue; }
-      .outlined { border:2px solid red !important; }
+      .dragged { border:2px solid orange !important; }
+      .dragover { border: 5px solid red !important; }
       div.inline { display:inline-flex; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
       p  { margin-top: 0em; margin-bottom: 0.5em; }
@@ -108,17 +109,36 @@
 	<li>List item 2</li>
 	<li>List item 3</li>
       </ol>
+      <table>
+	<tbody>
+	  <tr>
+	    <td>1</td>
+	    <td>2</td>
+	    <td>3</td>
+	  </tr>
+	  <tr>
+	    <td>4</td>
+	    <td>5</td>
+	    <td>6</td>
+	  </tr>
+	  <tr>
+	    <td>7</td>
+	    <td>8</td>
+	    <td>9</td>
+	  </tr>
+	</tbody>
+      </table>
     </div>
     <div>
-    <script src="js/biwascheme-0.6.9-min.js"></script>
-    <script>
-      var onError = function(e){ console.error(e); }
-      var biwa = new BiwaScheme.Interpreter(onError);
-      biwa.evaluate('(load "in-browser-gui.scm") (reset (test))'
-		    , function(result) {
-			console.log('BiwaScheme loaded.');
-		    });
-    </script>
+      <script src="js/biwascheme-0.6.9-min.js"></script>
+      <script>
+	var onError = function(e){ console.error(e); }
+	var biwa = new BiwaScheme.Interpreter(onError);
+	biwa.evaluate('(load "in-browser-gui.scm") (reset (test))'
+		      , function(result) {
+			  console.log('BiwaScheme loaded.');
+		      });
+      </script>
     </div>
   </body>
 </html>
