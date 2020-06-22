@@ -41,11 +41,11 @@
 	  (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
 	  (case op
 	    (("Copy-insert")
-	     (set! op "copy"))
+	     (set! op "copyinsert"))
 	    (("Copy-before")
 	     (set! op "copybefore"))
 	    (("Move-insert")
-	     (set! op "move"))
+	     (set! op "moveinsert"))
 	    (("Move-before")
 	     (set! op "movebefore"))
 	    (else
@@ -94,7 +94,7 @@
 ;; unmassaged by jQuery.
 (define (get-original-event jquery-event)
   (js-ref jquery-event "originalEvent"))
-    
+
 ;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
 (define (get-data-transfer-obj jquery-event)
   ;; FIXME: Is it really necessary to dereference twice?
@@ -103,17 +103,25 @@
 (define (perform-operation op jq-ev)
   (let* ((target (js-ref jq-ev "target"))
 	 (dragged (getelem1 (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain")))
-	 (parent (js-ref target "parentNode")))
+	 (parent (js-ref target "parentNode"))
+	 (clone #f))
     (element-remove-class-name! dragged "dragged")
     (element-remove-class-name! target "dragover")
+    (console-dir target)
+    (console-dir dragged)
+    (console-dir parent)
     (case op
-      (("copy")
+      (("copyinsert")
        (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true")))
       (("copybefore")
+       (set! clone (js-invoke dragged "cloneNode" "true"))
        (js-invoke parent "insertBefore" (js-invoke dragged "cloneNode" "true") target))
-      (("move")
-       (js-invoke target "appendChild" dragged))
+      (("moveinsert")
+       (if (js-invoke target "contains" dragged)
+	   (alert "Invalid operation: dragged element contains itself.")
+	   (js-invoke target "appendChild" dragged)))
       (("movebefore")
-       (js-invoke parent "insertBefore" dragged target)))))
-
+       (if (js-invoke dragged "contains" parent)
+	   (alert "Invalid operation: dragged element contains itself.")
+	   (js-invoke parent "insertBefore" dragged target)))))
        

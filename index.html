@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <title>web-call.cc</title>
     <style>
-      h1 { padding: 0.2em; margin-bottom: 0.2em; border-bottom: 1px solid black; }
+      h1.headline { padding: 0.2em; margin-bottom: 0.2em; border-bottom: 1px solid black; }
       div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
       div#menu { padding-left: 40px; }
-      div.prominent { margin:15px; min-height:20px; padding:10px; border:2px solid blue; }
+      .ex { margin:4px; min-height:20px; padding:10px; border:2px solid blue; }
       .dragged { border:2px solid orange !important; }
-      .dragover { border: 5px solid red !important; }
+      .dragover { border: 2px solid red !important; }
       div.inline { display:inline-flex; }
       ul { margin: 0; padding: 10px 10px 5px 24px; }
       p  { margin-top: 0em; margin-bottom: 0.5em; }
@@ -37,7 +37,7 @@
     </script>
   </head>
   <body>
-    <h1>web-call.cc demo #1</h1>
+    <h1 class="headline">web-call.cc demo #1</h1>
     <div>
       <p>This page demonstrates a prototype of the Zen DOM editor.
 	It will be improved as time permits.
@@ -49,7 +49,35 @@
 	Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
 	are the only tools that work.
 	Clicking on any other tool will produce the message
-	"Unimplemented operation."</p>
+	"Unimplemented operation."
+        The program will eventually implement 4 rules of insertions and moves:
+	<ol>
+	  <li>Branches of the DOM can be designated as draggable
+	    and other branches of the DOM can be designated not draggable.</li>
+	  <li>Branches of the DOM can be designated as valid drop targets
+	    and other branches of the DOM can be designated not valid as
+	    drop targets.</li>
+	  <li>The HTML Content Model places restrictions upon what other elements
+	    are allowed to be nested inside which other elements.
+	    The program implements rules (so far still incomplete) to enforce these
+	    restrcitions.
+	    (Refer to the relevant sections of
+	    <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+	    and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+	    A good but simple
+	    <a href="https://clearlydecoded.com/html-content-models">explanation</a>
+	    can be found on ClearlyDecoded.com.)</li>
+	  <li>An element cannot be moved into itself, nor into a descendent of itself.
+	    For example, if a "Move-insert" operation is attempted
+	    and  an element around for awhile then dropped at its original position,
+	    the operation is invalid.
+	    Likewise, if a "Move-before" operation is attempted and an element
+	    is dropped on its own child element or its child's child element,
+	    the operation is invalid.
+	    Invalid operations will produce no change to the DOM structure.</li>
+	</ol>
+	So far, only the 4th rule is implemented.
+      </p>
       <p>The BiwaScheme code can be
         downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
 	<a href="browser-util.scm">browser-util.scm</a>, and
@@ -74,30 +102,32 @@
       <button id="save" class="ghosted">Save</button>
     </div>
     <div id="canvas" style="overflow: auto;">
-      <div class="prominent">This is a DIV.</div>
-      <div class="prominent">This is another DIV.</div>
-      <div class="prominent">This is a third DIV.</div>
-      <div class="prominent">This is a fourth DIV.</div>
-      <div class="prominent inline">This is an inline DIV.</div>
-      <div class="prominent inline">This is another inline DIV.</div>
-      <div class="prominent inline">This is a third inline DIV.</div>
-      <address>This is an address.</address>
-      <article>This is an article.</article>
-      <aside>This is an aside.</aside>
-      <footer>This is a footer.</footer>
-      <header>This is a header.</header>
-      <h1>This is an H1 section heading.</h1>
-      <h2>This is an H2 section heading.</h2>
-      <h3>This is an H3 section heading.</h3>
-      <hgroup>This is a multi-level heading group.
-	<h2>This is an H2 section heading.</h2>
-	<h3>This is an H3 section heading.</h3>
-      </hgroup>
-      <main>This is a main element.</main>
-      <nav>This is a navigation element.</nav>
-      <section>This is a section.</section>
-      <blockquote>This is a block quotation.</blockquote>
-      <dt>This is a description or definition list.
+      <div class="ex" id="div1">This is DIV 1.<div class="ex" id="div1a">DIV1a</div></div>
+      <div class="ex" id="div2">This is DIV 2.</div>
+      <div class="ex" id="div3">This is DIV 3.</div>
+      <div class="ex" id="div4">This is DIV 4.</div>
+      <div class="ex inline" id="idiv1">This is inline DIV 1.</div>
+      <div class="ex inline" id="idiv2">This is inline DIV 2.</div>
+      <div class="ex inline" id="idiv3">This is inline DIV 3.</div>
+      <div class="ex inline" id="idiv4">This is inline DIV 4.</div>
+      <hr/>
+      <h2>Content Categories</h3>
+      <h3>HTML Content Sectioning Tags</h3>
+      <address class="ex">This is an address.</address>
+      <article class="ex">This is an article.</article>
+      <aside class="ex">This is an aside.</aside>
+      <footer class="ex">This is a footer.</footer>
+      <header class="ex">This is a header.</header>
+      <h1 class="ex">This is an H1 section heading.</h1>
+      <h2 class="ex">This is an H2 section heading.</h2>
+      <h3 class="ex">This is an H3 section heading.</h3>
+      <main class="ex">This is a main element.</main>
+      <nav class="ex">This is a navigation element.</nav>
+      <section class="ex">This is a section.</section>
+      <hr/>
+      <h2>HTML Text Content Tags</h2>
+      <blockquote class="ex">This is a block quotation.</blockquote>
+      <dt class="ex">This is a description or definition list.
 	<dd>This is a description, definition, or value for the preceding term in a description list.</dd>
 	<dd>This is another DD element.</dd>
       </dt>
