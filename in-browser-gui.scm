@@ -20,6 +20,7 @@
   (let loop1
       ((op #f)
        (selector #f)
+       (drop-effect #f)
        (unfinished #t))
     
     (message "Please press one of DOM-edit-tool buttons below. (Currently only Copy-insert and Move-insert are working.)")
@@ -41,12 +42,16 @@
 	  (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
 	  (case op
 	    (("Copy-insert")
+	     (set! drop-effect "copy")
 	     (set! op "copy"))
 	    (("Copy-before")
+	     (set! drop-effect "copy")
 	     (set! op "copybefore"))
 	    (("Move-insert")
+	     (set! drop-effect "move")
 	     (set! op "move"))
 	    (("Move-before")
+	     (set! drop-effect "move")
 	     (set! op "movebefore"))
 	    (else
 	     (message "Unimplemented operation. Please press a different DOM-edit-tool button.")
@@ -78,7 +83,7 @@
 	     (set! dragover-target (js-ref jquery-event "srcElement"))
 	     (element-add-class-name! dragover-target "dragover")
 	     ;; Assume op is "Copy" or "Move".
-	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" (string-downcase op)))
+	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" drop-effect))
 	    (("dragleave")
 	     (set! dragover-target (js-ref jquery-event "target"))
 	     (element-remove-class-name! dragover-target "dragover"))
