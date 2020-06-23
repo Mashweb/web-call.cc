@@ -3,88 +3,58 @@
   <head>
     <meta charset="utf-8">
     <title>web-call.cc</title>
-    <style>
-      h1.headline { padding: 0.2em; margin-bottom: 0.2em; border-bottom: 1px solid black; }
-      div#canvas { padding: 10px; border: 1em solid white; background-color: #a5a096; }
-      div#menu { padding-left: 40px; }
-      .ex { margin:4px; min-height:20px; padding:10px; border:2px solid blue; }
-      .dragged { border:2px solid orange !important; }
-      .dragover { border: 2px solid red !important; }
-      div.inline { display:inline-flex; }
-      ul { margin: 0; padding: 10px 10px 5px 24px; }
-      p  { margin-top: 0em; margin-bottom: 0.5em; }
-      button { width: 8em; }
-      button.ghosted { background-color:#a0a0a0; }
-    </style>
+    <link href="css/gui.css" rel="stylesheet" type="text/css">
     <script src="js/optimal-select.js"></script>
     <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        var treeWalker;
-	treeWalker = document.createTreeWalker($("#canvas")[0], NodeFilter.SHOW_ELEMENT, {
-	    acceptNode: function (node) {
-		return NodeFilter.FILTER_ACCEPT;
-	    }
-	}, false);
-	//console.log("TreeWalker");
-	do {
-	    //console.log(treeWalker.currentNode);
-	    // Text selections, images, and links have an OS-dependent default rendering
-	    // of them being dragged. If we want that default behavior, we should not
-	    // set the "draggable" attribute of them.
-            treeWalker.currentNode.draggable = "true";
-	} while (treeWalker.nextNode());
-      });
+      var biwa;
+      window.onload = function() {
+	  var onError = function(e){ console.error(e); }
+	  biwa = new BiwaScheme.Interpreter(onError);
+	  biwa.evaluate('(load "in-browser-gui.scm")\
+                         (js-call% "makeDraggable" (getelem1 "#canvas"))\
+                         (reset (test))',
+			function(result) {
+			    console.log('BiwaScheme and prototype DOM editor fully loaded.');
+			});
+	  notDraggable = $("#div3")[0];
+	  makeDraggable = function (node) {
+	      var treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT, {
+		  acceptNode: function (node) {
+		      return NodeFilter.FILTER_ACCEPT;
+		  }
+	      }, false);
+	      console.log("TreeWalker created.");
+	      do {
+		  //console.log(treeWalker.currentNode);
+		  // Text selections, images, and links have an OS-dependent default rendering
+		  // of them being dragged. If we want that default behavior, we should not
+		  // set the "draggable" attribute of them.
+		  treeWalker.currentNode.draggable = "true";
+	      } while (treeWalker.nextNode());
+	  }
+	  //biwa.evaluate('(js-call (js-eval "makeDraggable") (getelem1 "#canvas"))', function(result) { console.log(result); });
+      };
     </script>
   </head>
   <body>
     <h1 class="headline">web-call.cc demo #1</h1>
     <div>
-      <p>This page demonstrates a prototype of the Zen DOM editor.
+      This page demonstrates a prototype of the Zen DOM editor.
+	<aside>Aside: When a web page is loaded, the browser creates a Document Object
+	  Model (DOM) of the page. The DOM is basically just a tree of text objects
+	  and <em>element</em> objects
+	  like DIVs (divisions of the page), paragraphs, headers, articles, sections,
+	  blockquotes, links, lists, interactive components (like buttons and forms),
+	  and many more. The DOM defines the structure of the page by defining
+	  which of the page's elements are inside, i.e. <em>nested within,</em>
+	  which other page elements.</aside>
 	It will be improved as time permits.
 	The interesting aspect of it is not the tools <em>per se</em>,
 	but rather the <a href="in-browser-gui.scm">very clear and simple
 	programming</a> of those tools.
-	It does not yet work in Explorer or mobile browsers.</p>
-      <p>The program prompts you in large green text.
-	It will instruct you to choose a tool.
-	Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
-	are the only tools that work.
-	Clicking on any other tool will produce the message
-	"Unimplemented operation."
-        The program will eventually implement 4 rules of insertions and moves:
-	<ol>
-	  <li>Branches of the DOM can be designated as draggable
-	    and other branches of the DOM can be designated not draggable.</li>
-	  <li>Branches of the DOM can be designated as valid drop targets
-	    and other branches of the DOM can be designated not valid as
-	    drop targets.</li>
-	  <li>The HTML Content Model places restrictions upon what other elements
-	    are allowed to be nested inside which other elements.
-	    The program implements rules (so far still incomplete) to enforce these
-	    restrcitions.
-	    (Refer to the relevant sections of
-	    <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
-	    and <a href="https://bit.ly/w3-content-models">w3.org</a>.
-	    A good but simple
-	    <a href="https://clearlydecoded.com/html-content-models">explanation</a>
-	    can be found on ClearlyDecoded.com.)</li>
-	  <li>An element cannot be moved into itself, nor into a descendent of itself.
-	    For example, if a "Move-insert" operation is attempted
-	    and  an element around for awhile then dropped at its original position,
-	    the operation is invalid.
-	    Likewise, if a "Move-before" operation is attempted and an element
-	    is dropped on its own child element or its child's child element,
-	    the operation is invalid.
-	    Invalid operations will produce no change to the DOM structure.</li>
-	</ol>
-	So far, only the 4th rule is implemented.
-      </p>
-      <p>The BiwaScheme code can be
-        downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
-	<a href="browser-util.scm">browser-util.scm</a>, and
-	<a href="mini-framework.scm">mini-framework.scm</a>.
-	Other experimental code can be found <a href="index2.html">here</a>.</p>
-    </div>
+	It does not yet work in Explorer or mobile browsers.
+	In case you do not find the operation of the demo to be obvious,
+	there are instructions at the bottom of the page.</p>
     <div>
       <div id="message"></div>
       <div id="error"></div>
@@ -105,23 +75,59 @@
     <div id="canvas" style="overflow: auto;">
       <div class="ex" id="div1">This is DIV 1.<div class="ex" id="div1a">DIV1a</div></div>
       <div class="ex" id="div2">This is DIV 2.</div>
-      <div class="ex" id="div3">This is DIV 3.</div>
+      <div class="ex" id="div3">This is DIV 3.
+	<div class="ex" id="div3a">This is DIV 3a.</div>
+	<div class="ex" id="div3b">This is DIV 3b.</div>	
+      </div>
       <div class="ex" id="div4">This is DIV 4.</div>
       <div class="ex inline" id="idiv1">This is inline DIV 1.</div>
-      <div class="ex inline" id="idiv2">This is inline DIV 2.</div>
+      <div class="ex inline" id="idiv2">This is inline DIV 2.
+	<div class="ex inline" id="idiv2a">This is inline DIV 2a.</div>
+      </div>
       <div class="ex inline" id="idiv3">This is inline DIV 3.</div>
       <div class="ex inline" id="idiv4">This is inline DIV 4.</div>
     </div>
+      <p>The program prompts you in large green text.
+	It will instruct you to choose a tool.
+	Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
+	are the only tools that work.
+	Clicking on any other tool will produce the message
+	"Unimplemented operation."</p>
+      The program will eventually implement 4 rules for insertions and moves:
+      <ol>
+	<li>Branches of the DOM can be designated as draggable
+	  and other branches of the DOM can be designated not draggable.</li>
+	<li>Branches of the DOM can be designated as valid drop targets
+	  and other branches of the DOM can be designated not valid as
+	  drop targets.</li>
+	<li>The HTML Content Model places restrictions upon what elements
+	  are allowed to be nested inside which other elements.
+	  The program implements rules (so far still incomplete) to enforce these
+	  restrcitions.
+	  (Refer to the relevant sections of
+	  <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+	  and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+	  A good but simple
+	  <a href="https://clearlydecoded.com/html-content-models">explanation</a>
+	  can be found on ClearlyDecoded.com.)</li>
+	<li>An element cannot be moved into itself, nor into a descendent of itself.
+	  For example, if a "Move-insert" operation is attempted
+	  and  an element around for awhile then dropped at its original position,
+	  the operation is invalid.
+	  Likewise, if a "Move-before" operation is attempted and an element
+	  is dropped on its own child element or its child's child element,
+	  the operation is invalid.
+	  Invalid operations will produce no change to the DOM structure.</li>
+      </ol>
+      <p>So far, only the 4th rule is implemented.</p>
+      <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
+        downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
+	<a href="browser-util.scm">browser-util.scm</a>, and
+	<a href="mini-framework.scm">mini-framework.scm</a>.
+	Other experimental code can be found <a href="index2.html">here</a>.</p>
+    </div>
     <div>
       <script src="js/biwascheme-0.6.9-min.js"></script>
-      <script>
-	var onError = function(e){ console.error(e); }
-	var biwa = new BiwaScheme.Interpreter(onError);
-	biwa.evaluate('(load "in-browser-gui.scm") (reset (test))'
-		      , function(result) {
-			  console.log('BiwaScheme loaded.');
-		      });
-      </script>
     </div>
   </body>
 </html>
