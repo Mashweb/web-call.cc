@@ -40,21 +40,22 @@
     <h1 class="headline">web-call.cc demo #1</h1>
     <div>
       This page demonstrates a prototype of the Zen DOM editor.
-	<aside>Aside: When a web page is loaded, the browser creates a Document Object
-	  Model (DOM) of the page. The DOM is basically just a tree of text objects
-	  and <em>element</em> objects
-	  like DIVs (divisions of the page), paragraphs, headers, articles, sections,
-	  blockquotes, links, lists, interactive components (like buttons and forms),
-	  and many more. The DOM defines the structure of the page by defining
-	  which of the page's elements are inside, i.e. <em>nested within,</em>
-	  which other page elements.</aside>
-	It will be improved as time permits.
-	The interesting aspect of it is not the tools <em>per se</em>,
-	but rather the <a href="in-browser-gui.scm">very clear and simple
+      <aside>Aside: When a web page is loaded, the browser creates a Document Object
+	Model (DOM) of the page. The DOM is basically just a tree of text objects
+	and <em>element</em> objects
+	like DIVs (divisions of the page), paragraphs, headers, articles, sections,
+	blockquotes, links, lists, interactive components (like buttons and forms),
+	and many more. The DOM defines the structure of the page by defining
+	which of the page's elements are inside, i.e. <em>nested within,</em>
+	which other page elements.</aside>
+      It will be improved as time permits.
+      The interesting aspect of it is not the tools <em>per se</em>,
+      but rather the <a href="in-browser-gui.scm">very clear and simple
 	programming</a> of those tools.
-	It does not yet work in Explorer or mobile browsers.
-	In case you do not find the operation of the demo to be obvious,
-	there are instructions at the bottom of the page.</p>
+      It does not yet work in Explorer or mobile browsers.
+      In case you do not find the operation of the demo to be obvious,
+      there are instructions at the bottom of the page.
+    </div>
     <div>
       <div id="message"></div>
       <div id="error"></div>
@@ -95,14 +96,17 @@
 	"Unimplemented operation."</p>
       The program will eventually implement 4 rules for insertions and moves:
       <ol>
-	<li>Branches of the DOM can be designated as draggable
-	  and other branches of the DOM can be designated not draggable.</li>
-	<li>Branches of the DOM can be designated as valid drop targets
-	  and other branches of the DOM can be designated not valid as
+	<li>Branches of the DOM will be designable as draggable
+	  and other branches of the DOM will be designable as not draggable.
+	  However, currently just one branch can be designated as draggable
+	  at startup. That branch currently comprises the elements
+	  in the large gray block.</li>
+	<li>Branches of the DOM will be designable as valid drop targets
+	  and other branches of the DOM will be designable as not valid
 	  drop targets.</li>
 	<li>The HTML Content Model places restrictions upon what elements
 	  are allowed to be nested inside which other elements.
-	  The program implements rules (so far still incomplete) to enforce these
+	  The program will implement rules to enforce these
 	  restrcitions.
 	  (Refer to the relevant sections of
 	  <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
@@ -124,8 +128,12 @@
         downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
 	<a href="browser-util.scm">browser-util.scm</a>, and
 	<a href="mini-framework.scm">mini-framework.scm</a>.
-	Other experimental code can be found <a href="index2.html">here</a>.</p>
-    </div>
+	Other experimental code can be found <a href="index2.html">here</a>.
+	This website can be cloned. See
+	<a href="https://github.com/Mashweb/web-call.cc">the project
+	  on GitHub</a>.</p>
+    <p>If you like this project or want to see more about it,
+      please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
     <div>
       <script src="js/biwascheme-0.6.9-min.js"></script>
     </div>
