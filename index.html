@@ -16,7 +16,7 @@
 			function(result) {
 			    console.log('BiwaScheme and prototype DOM editor fully loaded.');
 			});
-	  notDraggable = $("#div3")[0];
+	  notDraggable = $("#block6")[0];
 	  makeDraggable = function (node) {
 	      var treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT, {
 		  acceptNode: function (node) {
@@ -48,7 +48,7 @@
 	and many more. The DOM defines the structure of the page by defining
 	which of the page's elements are inside, i.e. <em>nested within,</em>
 	which other page elements.</aside>
-      It will be improved as time permits.
+      It will be improved as time permits. There are bugs and these are being investigated.
       The interesting aspect of it is not the tools <em>per se</em>,
       but rather the <a href="in-browser-gui.scm">very clear and simple
 	programming</a> of those tools.
@@ -74,19 +74,29 @@
       <button id="save" class="ghosted">Save</button>
     </div>
     <div id="canvas" style="overflow: auto;">
-      <div class="ex" id="div1">This is DIV 1.<div class="ex" id="div1a">DIV1a</div></div>
-      <div class="ex" id="div2">This is DIV 2.</div>
-      <div class="ex" id="div3">This is DIV 3.
-	<div class="ex" id="div3a">This is DIV 3a.</div>
-	<div class="ex" id="div3b">This is DIV 3b.</div>	
+      
+      <div class="ex" id="block1">Block 1</div>
+      <div class="ex" id="block2">Block 2</div>
+      <div class="ex" id="block3">Block 3
+	<div class="ex" id="block3a">Block3a</div>
+	<div class="ex" id="block3b">Block3b</div>
       </div>
-      <div class="ex" id="div4">This is DIV 4.</div>
-      <div class="ex inline" id="idiv1">This is inline DIV 1.</div>
-      <div class="ex inline" id="idiv2">This is inline DIV 2.
-	<div class="ex inline" id="idiv2a">This is inline DIV 2a.</div>
+      <div class="ex" id="block4">Block 4
+	<div class="ex" id="block4a">Block 4a</div>
+	<div class="ex" id="block4b">Block 4b</div>	
       </div>
-      <div class="ex inline" id="idiv3">This is inline DIV 3.</div>
-      <div class="ex inline" id="idiv4">This is inline DIV 4.</div>
+      
+      <div class="ex inline" id="inline1">Inline 1</div>
+      <div class="ex inline" id="inline2">Inline 2</div>
+      <div class="ex inline" id="inline3">Inline 3
+	<div class="ex inline" id="inline3">Inline 3a</div>
+      </div>
+      <div class="ex" id="block5">Block 5
+	<div class="ex inline" id="inline5a">Inline 5a</div>
+      </div>
+      <div class="ex" id="block6">Block 6
+      </div>
+      
     </div>
       <p>The program prompts you in large green text.
 	It will instruct you to choose a tool.
