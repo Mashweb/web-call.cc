@@ -16,7 +16,7 @@
 			function(result) {
 			    console.log('BiwaScheme and prototype DOM editor fully loaded.');
 			});
-	  notDraggable = $("#block6")[0];
+	  notDraggable = $("#block7")[0];
 	  makeDraggable = function (node) {
 	      var treeWalker = document.createTreeWalker(node, NodeFilter.SHOW_ELEMENT, {
 		  acceptNode: function (node) {
@@ -93,8 +93,13 @@
       </div>
       <div class="ex" id="block5">Block 5
 	<div class="ex inline" id="inline5a">Inline 5a</div>
+	<div class="ex inline" id="inline5b">Inline 5b</div>
       </div>
-      <div class="ex" id="block6">Block 6
+      <div class="ex" id="block7">Block 6
+	<div class="ex inline" id="inline6a">Inline 6a</div>
+	<div class="ex inline" id="inline6b">Inline 6b</div>
+      </div>
+      <div class="ex" id="block8">Block 7
       </div>
       
     </div>
