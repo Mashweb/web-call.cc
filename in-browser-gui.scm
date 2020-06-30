@@ -74,8 +74,9 @@
 	    (("dragstart")
 	     (set! dragged (js-ref jquery-event "target"))
 	     ;; FIXME: This means of calling select looks more complicated than necessary.
-	     (set! selector (js-invoke (js-eval "OptimalSelect") "select" dragged))
+	     (set! selector (js-invoke (js-eval "window") "finder" dragged))
 	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
+	     (console-log (format #f "dragstart: dragged-selector => ~a" selector))
 	     (element-add-class-name! dragged "dragged"))
 	    (("dragover")
 	     (js-invoke jquery-event "preventDefault")
@@ -91,7 +92,7 @@
 	     (js-invoke jquery-event "preventDefault")
 	     (unless (perform-operation op jquery-event)
 	       (loop1a))
-	     (message "Operation complete.")
+	     (message (format #f "~a operation complete." op))
 	     (set! unfinished #f))))))
     (loop1)))
 
@@ -107,10 +108,13 @@
 
 (define (perform-operation op jq-ev)
   (let* ((target (js-ref jq-ev "target"))
-	 (dragged (getelem1 (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain")))
+	 (dragged-selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
+	 (dragged (getelem1 dragged-selector))
 	 (parent (js-ref target "parentNode")))
+    (console-log (format #f "perform-operation ~a" op))
     (element-remove-class-name! dragged "dragged")
     (element-remove-class-name! target "dragover")
+    (console-log (format #f "dragged-selector => ~a" dragged-selector))
     (case op
       (("copy")
        (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true")))
@@ -126,7 +130,7 @@
        (console-group "Move-insert: dragged")
        (console-dir dragged)
        (console-group-end)
-       (if (js-invoke target "contains" dragged)
+       (if (js-invoke dragged "contains" target)
 	   (alert "Invalid operation: dragged element contains itself.")
 	   (js-invoke target "appendChild" dragged)))
       (("movebefore")
