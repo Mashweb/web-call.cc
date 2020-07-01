@@ -23,7 +23,7 @@
        (drop-effect #f)
        (unfinished #t))
     
-    (message "Please press one of DOM-edit-tool buttons below. (Currently only Copy-insert and Move-insert are working.)")
+    (message "Please press one of DOM-edit-tool buttons below. (Currently only Copy-insert, Copy-before, and Move-insert, and Move-before are working.)")
     (let loop1a
 	()
       (with-handlers ((click-handler "#add")
