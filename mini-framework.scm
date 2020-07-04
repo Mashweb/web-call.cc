@@ -1,19 +1,22 @@
-; Copyright (C) 2020 Thomas Elam
-;
-; This file is part of web-call.cc.
-;
-; web-call.cc is free software: you can redistribute it and/or modify
-; it under the terms of the GNU General Public License as published by
-; the Free Software Foundation, either version 3 of the License, or
-; (at your option) any later version.
-;
-; web-call.cc is distributed in the hope that it will be useful,
-; but WITHOUT ANY WARRANTY; without even the implied warranty of
-; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-; GNU General Public License for more details.
-;
-; You should have received a copy of the GNU General Public License
-; along with web-call.Cc.  If not, see <https://www.gnu.org/licenses/>.
+;; Copyright (C) 2020 Thomas Elam
+;;
+;; This file is part of web-call.cc.
+;;
+;; web-call.cc is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; web-call.cc is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with web-call.Cc.  If not, see <https://www.gnu.org/licenses/>.
+
+;; Everything in this file below this sentence except for the function nth
+;; was programmed by Alexander Sukhoverkhov (naryl.pandora@gmail.com).
 
 ;;;; shift-reset
 
@@ -104,16 +107,6 @@
        (let ((,result-g (begin ,@body)))
          ,teardown
          ,result-g))))
-
-;; Define a simple iterator (which actually uses tail-call rescursion):
-;; Adaptation of the factorial at https://wiki.c2.com/?SchemeIdioms .
-;; See also _ANSI Common Lisp_, p. 164 and _Teach Yourself Scheme_, Chapter 8.
-(define-macro (repeat n . body)
-  (let ((i (gensym)))
-    `(let loop ((,i 1))
-       ,@body
-       (if (< ,i ,n)
-           (loop (+ 1 ,i))))))
 
 ;;;; JS stuff
 
