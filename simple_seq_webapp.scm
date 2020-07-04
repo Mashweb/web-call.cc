@@ -16,6 +16,10 @@
 ; along with web-call.cc.  If not, see <https://www.gnu.org/licenses/>.
 
 (load "mini-framework.scm")
+
+;; Everything in this file below this sentence
+;; was programmed by Alexander Sukhoverkhov (naryl.pandora@gmail.com).
+
 (define (test)
   (with-handlers ((click-handler "#div1")
                   (click-handler "#div2")

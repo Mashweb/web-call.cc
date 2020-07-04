@@ -18,6 +18,9 @@
 (load "mini-framework.scm")
 (load "web-components.scm")
 
+;; Everything in this file below this sentence
+;; was programmed by Alexander Sukhoverkhov (naryl.pandora@gmail.com).
+
 ;; Function for adding an mwc-button to the page.
 (define (add-calculator-button label)
   (element-append-child! (getelem "#testarea2") (make-mwc-button label)))
