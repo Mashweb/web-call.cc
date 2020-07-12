@@ -5,6 +5,8 @@ source code and design documents for the [web-call.cc](web-call.cc) website,
 examples of special ondragover and ondrop event-handler code,
 and a code example showing the dynamic modification of a stylesheet.
 
+---
+
 ## The Main Demo--An In-Browser DOM Editor Using BiwaScheme
 
 ### Building
@@ -23,13 +25,17 @@ npm i rollup @rollup/plugin-node-resolve >/dev/null 2>&1
 npx rollup --config >/dev/null 2>&1
 ```
 
-### Rebuilding the Main Demo
+### Rebuilding
 
 Edit index.js, then run `npx rollup --config` to regenerate `bundle.js`.
+
+---
 
 ## Examples of Special ondragover and ondrop Event-Handler Code
 
 See [the full list of demos on this website](index2.html).
+
+---
 
 ## Dynamic Stylesheets Demo from Sitepen.com
 
@@ -46,12 +52,12 @@ Demo")
 has been created to resurrect the demo,
 but the 2-file demo is also reproduced here, with very minor changes.
 
-## System dependencies
+### System dependencies
 
 Version 1.13.0 of Dojo. The file index.html
 uses Google's API CDN to source this.
 
-## How to understand this dynamic stylesheet demo
+### How to understand this dynamic stylesheet demo
 
 Browse <a href="demo">demo</a>. Open the browser's
 developer tools. Play with the reset and present buttons and the "nubbin"
@@ -62,12 +68,12 @@ id "dv1" change as you make the adjustments.
 Add rows to the table by pressing the "+" button to verify that the
 new row is using the same styles as the first row.
 
-## Summary
+### Summary
 
 This demo of dynamic stylesheets is mainly for just that: a demo.
 However, the code is there to be copied and used if someone finds it useful.
 
-## To Do
+### To Do
 
 * It would be nice to have various versions of this demo for newer libraries.
 Version 1.13.0 of Dojo might seem to be old.
