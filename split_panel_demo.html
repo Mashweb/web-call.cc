@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>Dynamic Stylesheets: Split Panel Demo</title>
+  <style type="text/css">
+    body {
+	font-family:"Lucida Grande","Verdana","Arial","Helvetica",sans-serif;
+	font-size:13px;
+	color:#2E2E2E;
+	padding: 0 10px;
+    }
+
+    h1 {
+	margin: 0.5em 0 1em 0;
+    }
+    /**
+     * @section the layout controls
+     */
+    .controlsContainer {
+	border: 1px solid #666;
+	border-bottom: none;
+	position: relative;
+    }
+    .buttonTray {
+	padding: 2px;
+    }
+    .controlsContainer button {
+	border: 1px outset #fff;
+	margin: 1px 2px;
+    }
+    .controlsContainer .addRowsButton { 
+	margin: 3px;
+	float: right;
+    }
+    .sliderTray {
+	position: relative; 
+	background-color: #fff; 
+	height: 12px; 
+    }
+    .divider {
+	width: 10px;
+	height: 12px; 
+	position: absolute;
+	cursor: W-resize;
+	z-index: 10;
+    }
+    .divider span {
+	background: url("images/nubbin.png") no-repeat;
+	display:block;
+	height: 12px;
+	width: 16px;
+	font-size: 2px;
+	margin: 0 0 0 -8px;
+    }
+
+    /**
+     * @section the split panel and columns layout
+     */
+    .splitPanelContainer {
+	position: relative;
+	border: 1px solid #333;
+    }
+    .row {
+	border-top: 1px solid #ccc;
+	padding-top: 1px;
+	#zoom: 1;
+    }
+    .row .clear {
+	clear:both;
+    }
+    .column {
+	float: left;
+    }
+    .column .content {
+	padding: 10px;
+    }
+    .column-1 {
+	background-color: #fcc;
+    }
+    .column-2 {
+	background-color: #ccf;
+    }
+    
+    /**
+     * @section split panel presets
+     */
+
+    .splitPanelContainer-50-50 .column {
+	width: 49.999%; /* for our good friend ie */
+    }
+
+    .splitPanelContainer-70-30 .column-1 {
+	width: 70%;
+    }
+    .splitPanelContainer-70-30 .column-2 {
+	width: 30%;
+    }
+
+    .splitPanelContainer-30-70 .column-1 {
+	width: 30%;
+    }
+    .splitPanelContainer-30-70 .column-2 {
+	width: 70%;
+    }
+  </style>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js"></script>
+  <script type="text/javascript">
+    dojo.require("dojo.dnd.move");
+    dojo.require("dojo.string");
+    dojo.require("dojox.html.styles");
+    
+    dyncssDemo = {
+	sheetName: "dyncssDemo",
+	containerId: "splitC1",
+	rulesMap: {}, 
+	
+	minLeft: 5, 
+	maxLeft: 95,
+	lastLeft: 0
+    };
+    
+    dojo.addOnLoad(function() {
+
+	dojo.mixin(dyncssDemo, {
+	    
+	    syncDivider: function() {
+		// summary: position the divider to the current left column width
+		
+		// dojo.style returns widths as their computedStyle px values
+		var leftCol = dojo.query("> .row .column-1", dojo.byId(dyncssDemo.containerId))[0];
+		dojo.style(dyncssDemo.divider.node, "left", dojo.style(leftCol, "width")+"px");
+	    },
+	    updateContainer: function() {
+		// summary: modify the dynamic stylesheet to update the column widths
+		
+		// The following statements are executed once, and the
+		// values captured in the closure.
+		var container = dojo.byId(this.containerId);
+		var sheetName = this.sheetName;
+		var rulesMap = dyncssDemo.rulesMap;
+		var containerClass = "userProportions";
+		var rules = [
+		    { 
+			selector: "#${containerId}.userProportions .column-1", 
+			declarations: [
+			    "width: ${leftWidth}"
+			]
+		    },
+		    { 
+			selector: "#${containerId}.userProportions .column-2", 
+			declarations: [
+			    "width: ${rightWidth}"
+			]
+		    }
+		];
+		// create the closure
+		return function(props) {
+		    var sheet = dojox.html.getDynamicStyleSheet(sheetName);
+		    dojo.forEach(rules, function(rule) {
+			// sub in the actual values from the provided property bag
+			var declarationStr = dojo.string.substitute(rule.declarations.join(";\n"), props), 
+			selector = dojo.string.substitute(rule.selector, props); 
+
+			if(rulesMap[ selector ]) {
+			    // removeCssRule needs to loop over the
+			    // entire stylesheet to find a matching
+			    // selector/delaration pair we minimize
+			    // that cost by maintaining a hash of the
+			    // rules we've added. It's then just a
+			    // lookup to determine if a matching rule
+			    // exists already that needs to be removed
+			    // to be redefined.
+
+			    // We already have rule of this
+			    // name. Remove it first.
+			    dojox.html.removeCssRule(selector, rulesMap[selector], sheetName);
+			}
+			var rs = dojox.html.insertCssRule(selector, declarationStr, sheetName);
+
+			// store it for fast lookup and later removal 
+			rulesMap[selector] = declarationStr;
+		    });
+		};
+	    }(),
+	    onMove: function(mover, leftTop) {
+		// summary: handle an onMove event from the divider
+
+		// make it a %age, btween 5 and 95%: 
+		var contentWidth = this.containerWidth;
+		
+		var pcent = Math.min(this.maxLeft, Math.max(this.minLeft, parseInt(leftTop.l / contentWidth * 10000, 10) / 100));
+		if(pcent !== this.lastLeft) {
+		    // only update if the left value has actually changed
+		    this.lastLeft = pcent;
+		    this.updateContainer({
+			leftWidth: pcent+"%", 
+			rightWidth: 100-pcent+"%", 
+			containerId: this.containerId
+		    });
+		    if(this.isFirstMove) {
+			dojo.addClass(this.containerId, "userProportions");
+			this.isFirstMove = false;
+		    }
+		}
+	    },
+	    onMoveStart: function(startMover){ 
+		// summary: setup for the drag
+		var container = dojo.byId(dyncssDemo.containerId);
+		this.containerWidth = dojo.contentBox(container).w; 
+		this.isFirstMove = true;
+		this.moveEventHandle = dojo.connect(dyncssDemo.divider, "onMove", this, "onMove");
+	    },
+
+	    onMoveStop: function(mover){ 
+		// summary: tidy up after the drag
+		dojo.disconnect(this.moveEventHandle);
+	    }, 
+
+	    setPanelLayout: function(cid, name) {
+		// summary: apply a named layout
+		var container = dojo.byId(cid);
+		// add the prefix
+		name = name ? "splitPanelContainer-" + name : "splitPanelContainer-50-50"; 
+
+		var classes = [
+		    "userProportions", 
+		    "splitPanelContainer-50-50", 
+		    "splitPanelContainer-70-30", 
+		    "splitPanelContainer-30-70"
+		];
+
+		dojo.forEach(classes, function(cls) {
+		    if(name === cls) {
+			dojo.addClass(container, cls);
+		    } else {
+			dojo.removeClass(container, cls);
+		    }
+		});
+		this.syncDivider();
+	    },
+	    addRow: function() {
+		var container = dojo.byId(this.containerId);
+		var firstRow = dojo.query(".row", container)[0];
+		dojo.place( dojo.clone(firstRow), container, "last");
+	    }
+	});
+    });
+
+    var init = function(){
+	// connect to dnd events
+	dojo.subscribe("/dnd/move/start", dyncssDemo, "onMoveStart");
+	dojo.subscribe("/dnd/move/stop", dyncssDemo, "onMoveStop");
+
+	dojo.declare("dyncssDemo.horizontalMover",
+		     dojo.dnd.move.constrainedMoveable,
+		     {
+			 onMove: function(/* dojo.dnd.Mover */ mover, /* Object */ leftTop){
+			     // summary: called during every move notification,
+			     //	should actually move the node, can be overwritten.
+			     var c = this.constraintBox, s = mover.node.style;
+			     s.left = (leftTop.l < c.l ? c.l : c.r < leftTop.l ? c.r : leftTop.l) + "px";
+			 }
+		     });
+	// instantiate the divider - the draggable nubin that will drive the column resizing
+	dyncssDemo.divider = new dyncssDemo.horizontalMover("dv1", {
+	    constraints: function() {
+		var box = dojo.contentBox( this.node.parentNode );
+		var edgeOffset = 20;
+		box.l+= edgeOffset;
+		box.w -= (edgeOffset * 2);
+		return box;
+	    }
+	});
+	dyncssDemo.syncDivider();
+    };
+
+    dojo.addOnLoad(init);
+
+  </script>
+</head>
+<body>
+  <h1>Dynamic Stylesheet Demo</h1>
+
+  <p>Using a draggable nubbin, update dynamic stylesheet for 2 panels. 
+  The point is to keep the element style in the cascade.
+  The presets buttons replace the 'userProportion' class on the container with one of a few predefined
+  rule groups in the stylesheet</p>
+  
+  <div class="controlsContainer">
+    <button class="addRowsButton" onclick="dyncssDemo.addRow()" title="Add row">+</button>
+    <div class="buttonTray">
+      <button onclick="dyncssDemo.setPanelLayout('splitC1')">Reset Default</button>
+      <button onclick="dyncssDemo.setPanelLayout('splitC1', '30-70')">Preset: 30:70</button>
+      <button onclick="dyncssDemo.setPanelLayout('splitC1', '50-50')">Preset: 50:50</button>
+      <button onclick="dyncssDemo.setPanelLayout('splitC1', '70-30')">Preset: 70:30</button>
+    </div>
+    <div class="sliderTray">
+      <div id="dv1" class="divider"><span></span></div>
+    </div>
+  </div>
+  <div id="splitC1" class="splitPanelContainer splitPanelContainer-70-30">
+    <div class="row">
+      <div class="column column-1"><div class="content">Column 1</div></div>
+      <div class="column column-2"><div class="content">Column 2</div></div>
+      <br class="clear"/>
+    </div>
+  </div>
+  <p>Drag the little arrow to size the columns. You can use the + button to add rows</p>
+
+</body>
+</html>
