@@ -53,6 +53,8 @@
 	    (("Move-before")
 	     (set! drop-effect "move")
 	     (set! op "movebefore"))
+	    (("Save")
+	     (http-post-text "http://localhost:8080/doms" (dom->string (getelem1 "div#canvas"))))
 	    (else
 	     (message "Unimplemented operation. Please press a different DOM-edit-tool button.")
 	     (loop1a))))))
