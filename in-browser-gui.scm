@@ -30,7 +30,7 @@
     (let loop1a
 	()
       (with-handlers ((click-handler "#add")
-		      (click-handler "#copy")
+		      (click-handler "#copyx")
 		      (click-handler "#copy-before")
 		      (click-handler "#paste")
 		      (click-handler "#move")

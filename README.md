@@ -16,18 +16,15 @@ It is suggested that you install them using
 [nvm](https://github.com/nvm-sh/nvm).
 Once you have recent, compatible versions of `node` and `npm`,
 edit index.js if you like,
-then run the following commands in this directory
+then run the following command in this directory
 using a suitable shell, such as Bash:
 ```
-npm init --yes >/dev/null
-npm i @medv/finder >/dev/null 2>&1
-npm i rollup @rollup/plugin-node-resolve >/dev/null 2>&1
-npx rollup --config >/dev/null 2>&1
+. build-demo-1.sh
 ```
 
 ### Rebuilding
 
-Edit index.js, then run `npx rollup --config` to regenerate `bundle.js`.
+Edit index.js and rollup.config.js as necessary, then run `npx rollup --config` to regenerate `bundle.js`.
 
 ---
 

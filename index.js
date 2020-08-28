@@ -1,7 +1,5 @@
-
 import { finder } from '@medv/finder'
+import { vaadin } from '@vaadin/vaadin'
 
-console.log('@medv/finder loaded');
-var h3 = $("h3")[0];
-console.log('h3 selector => ', finder(h3));
+console.log('@medv/finder and @vaadin/vaadin loaded');
 window.finder = finder;

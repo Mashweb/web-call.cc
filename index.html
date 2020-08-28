@@ -45,119 +45,143 @@
     </script>
   </head>
   <body>
-    <h1 class="headline">web-call.cc demo #1</h1>
-    <div>
-      This page demonstrates a prototype of the Zen DOM editor.
-      <aside>Aside: When a web page is loaded, the browser creates a Document Object
-	Model (DOM) of the page. The DOM is basically just a tree of text objects
-	and <em>element</em> objects
-	like DIVs (divisions of the page), paragraphs, headers, articles, sections,
-	blockquotes, links, lists, interactive components (like buttons and forms),
-	and many more. The DOM defines the structure of the page by defining
-	which of the page's elements are inside, i.e. <em>nested within,</em>
-	which other page elements.</aside>
-      It will be improved as time permits.
-      The interesting aspect of it is not the tools <em>per se</em>,
-      but rather the <a href="in-browser-gui.scm">very clear and simple
-	programming</a> of those tools.
-      It does not yet work in Explorer or mobile browsers.
-      In case you do not find the operation of the demo to be obvious,
-      there are instructions at the bottom of the page.
-    </div>
-    <div>
-      <div id="message"></div>
-      <div id="error"></div>
-    </div>
-    <h3>DOM editor tools:</h3>
-    <div id="tools">
-      <button id="add" class="ghosted">Add-insert</button>
-      <button id="copy" style="background-color:lightgreen">Copy-insert</button>
-      <button id="copy-before" style="background-color:lightgreen">Copy-before</button>
-      <button id="paste" class="ghosted">Paste-insert</button>
-      <button id="move" style="background-color:lightgreen">Move-insert</button>
-      <button id="move-before" style="background-color:lightgreen">Move-before</button>
-      <button id="delete" class="ghosted">Delete</button>
-      <button id="undo" class="ghosted">Undo</button>
-      <button id="redo" class="ghosted">Redo</button>
-      <button id="save" class="ghosted">Save</button>
-    </div>
-    <div id="canvas" style="overflow: auto;">
-      
-      <div class="ex" id="block1">Block 1</div>
-      <div class="ex" id="block2">Block 2</div>
-      <div class="ex" id="block3">Block 3
-	<div class="ex" id="block3a">Block3a</div>
-	<div class="ex" id="block3b">Block3b</div>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color">
+      </style>
+    </custom-style>
+    <vaadin-app-layout>
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <vaadin-tabs slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:home"></iron-icon>
+	  Demo #1
+	</vaadin-tab>
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:list"></iron-icon>
+	  <a href="index2.html">Other experimental code</a>
+	</vaadin-tab>
+      </vaadin-tabs>
+
+      <div class="content">
+	<h3>web-call.cc demo #1</h3>
+
+	<div>
+	  This page demonstrates a prototype of the Zen DOM editor.
+	  <aside>Aside: When a web page is loaded, the browser creates a Document Object
+	    Model (DOM) of the page. The DOM is basically just a tree of text objects
+	    and <em>element</em> objects
+	    like DIVs (divisions of the page), paragraphs, headers, articles, sections,
+	    blockquotes, links, lists, interactive components (like buttons and forms),
+	    and many more. The DOM defines the structure of the page by defining
+	    which of the page's elements are inside, i.e. <em>nested within,</em>
+	    which other page elements.</aside>
+	  It will be improved as time permits.
+          There is one known, elusive bug.
+	  The interesting aspect of it is not the tools <em>per se</em>,
+	  but rather the <a href="in-browser-gui.scm">very clear and simple
+	    programming</a> of those tools.
+	  It does not yet work in Explorer or mobile browsers.
+	  In case you do not find the operation of the demo to be obvious,
+	  there are instructions at the bottom of the page.
+	</div>
+	<div>
+	  <div id="message"></div>
+	  <div id="error"></div>
+	</div>
+	<h3>DOM editor tools:</h3>
+	<div id="tools">
+	  <button id="add" class="ghosted">Add-insert</button>
+	  <button id="copyx" style="background-color:lightgreen">Copy-insert</button>
+	  <button id="copy-before" style="background-color:lightgreen">Copy-before</button>
+	  <button id="paste" class="ghosted">Paste-insert</button>
+	  <button id="move" style="background-color:lightgreen">Move-insert</button>
+	  <button id="move-before" style="background-color:lightgreen">Move-before</button>
+	  <button id="delete" class="ghosted">Delete</button>
+	  <button id="undo" class="ghosted">Undo</button>
+	  <button id="redo" class="ghosted">Redo</button>
+	  <button id="save" class="ghosted">Save</button>
+	</div>
+	<div id="canvas" style="overflow: auto;">
+	  
+	  <div class="ex" id="block1">Block 1</div>
+	  <div class="ex" id="block2">Block 2</div>
+	  <div class="ex" id="block3">Block 3
+	    <div class="ex" id="block3a">Block3a</div>
+	    <div class="ex" id="block3b">Block3b</div>
+	  </div>
+	  <div class="ex" id="block4">Block 4
+	    <div class="ex" id="block4a">Block 4a</div>
+	    <div class="ex" id="block4b">Block 4b</div>	
+	  </div>
+	  
+	  <div class="ex inline" id="inline1">Inline 1</div>
+	  <div class="ex inline" id="inline2">Inline 2</div>
+	  <div class="ex inline" id="inline3">Inline 3
+	    <div class="ex inline" id="inline3a">Inline 3a</div>
+	  </div>
+	  <div class="ex" id="block5">Block 5
+	    <div class="ex inline" id="inline5a">Inline 5a</div>
+	    <div class="ex inline" id="inline5b">Inline 5b</div>
+	  </div>
+	  <div class="ex" id="block6">Block 6
+	    <div class="ex inline" id="inline6a">Inline 6a</div>
+	    <div class="ex inline" id="inline6b">Inline 6b</div>
+	  </div>
+	  <div class="ex" id="block7">Block 7</div>
+	  <div class="ex" id="block8">Block 8</div>
+	  
+	</div>
+	  <p>The program prompts you in large green text.
+	    It will instruct you to choose a tool.
+	    Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
+	    are the only tools that work.
+	    Clicking on any other tool will produce the message
+	    "Unimplemented operation."</p>
+	  The program will eventually implement 4 rules for insertions and moves:
+	  <ol>
+	    <li>Branches of the DOM will be designable as draggable
+	      and other branches of the DOM will be designable as not draggable.
+	      However, currently just one branch can be designated as draggable
+	      at startup. That branch currently comprises the elements
+	      in the large gray block.</li>
+	    <li>Branches of the DOM will be designable as valid drop targets
+	      and other branches of the DOM will be designable as not valid
+	      drop targets.</li>
+	    <li>The HTML Content Model places restrictions upon what elements
+	      are allowed to be nested inside which other elements.
+	      The program will implement rules to enforce these
+	      restrcitions.
+	      (Refer to the relevant sections of
+	      <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+	      and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+	      A good but simple
+	      <a href="https://clearlydecoded.com/html-content-models">explanation</a>
+	      can be found on ClearlyDecoded.com.)</li>
+	    <li>An element cannot be moved into itself, nor into a descendent of itself.
+	      For example, if a "Move-insert" operation is attempted
+	      and  an element around for awhile then dropped at its original position,
+	      the operation is invalid.
+	      Likewise, if a "Move-before" operation is attempted and an element
+	      is dropped on its own child element or its child's child element,
+	      the operation is invalid.
+	      Invalid operations will produce no change to the DOM structure.</li>
+	  </ol>
+	  <p>So far, only the 4th rule is implemented. The 1st rule is partially
+	    implemented.</p>
+	  <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
+	    downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
+	    <a href="browser-util.scm">browser-util.scm</a>, and
+	    <a href="mini-framework.scm">mini-framework.scm</a>.
+	    There is <a href="index2.html">other experimental code here</a>.
+	    This website can be cloned. See
+	    <a href="https://github.com/Mashweb/web-call.cc">the project
+	      on GitHub</a>.</p>
+	<p>If you like this project or want to see more about it,
+	  please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
       </div>
-      <div class="ex" id="block4">Block 4
-	<div class="ex" id="block4a">Block 4a</div>
-	<div class="ex" id="block4b">Block 4b</div>	
-      </div>
-      
-      <div class="ex inline" id="inline1">Inline 1</div>
-      <div class="ex inline" id="inline2">Inline 2</div>
-      <div class="ex inline" id="inline3">Inline 3
-	<div class="ex inline" id="inline3a">Inline 3a</div>
-      </div>
-      <div class="ex" id="block5">Block 5
-	<div class="ex inline" id="inline5a">Inline 5a</div>
-	<div class="ex inline" id="inline5b">Inline 5b</div>
-      </div>
-      <div class="ex" id="block6">Block 6
-	<div class="ex inline" id="inline6a">Inline 6a</div>
-	<div class="ex inline" id="inline6b">Inline 6b</div>
-      </div>
-      <div class="ex" id="block7">Block 7</div>
-      <div class="ex" id="block8">Block 8</div>
-      
-    </div>
-      <p>The program prompts you in large green text.
-	It will instruct you to choose a tool.
-	Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
-	are the only tools that work.
-	Clicking on any other tool will produce the message
-	"Unimplemented operation."</p>
-      The program will eventually implement 4 rules for insertions and moves:
-      <ol>
-	<li>Branches of the DOM will be designable as draggable
-	  and other branches of the DOM will be designable as not draggable.
-	  However, currently just one branch can be designated as draggable
-	  at startup. That branch currently comprises the elements
-	  in the large gray block.</li>
-	<li>Branches of the DOM will be designable as valid drop targets
-	  and other branches of the DOM will be designable as not valid
-	  drop targets.</li>
-	<li>The HTML Content Model places restrictions upon what elements
-	  are allowed to be nested inside which other elements.
-	  The program will implement rules to enforce these
-	  restrcitions.
-	  (Refer to the relevant sections of
-	  <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
-	  and <a href="https://bit.ly/w3-content-models">w3.org</a>.
-	  A good but simple
-	  <a href="https://clearlydecoded.com/html-content-models">explanation</a>
-	  can be found on ClearlyDecoded.com.)</li>
-	<li>An element cannot be moved into itself, nor into a descendent of itself.
-	  For example, if a "Move-insert" operation is attempted
-	  and  an element around for awhile then dropped at its original position,
-	  the operation is invalid.
-	  Likewise, if a "Move-before" operation is attempted and an element
-	  is dropped on its own child element or its child's child element,
-	  the operation is invalid.
-	  Invalid operations will produce no change to the DOM structure.</li>
-      </ol>
-      <p>So far, only the 4th rule is implemented. The 1st rule is partially
-        implemented.</p>
-      <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
-        downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
-	<a href="browser-util.scm">browser-util.scm</a>, and
-	<a href="mini-framework.scm">mini-framework.scm</a>.
-	There is <a href="index2.html">other experimental code here</a>.
-	This website can be cloned. See
-	<a href="https://github.com/Mashweb/web-call.cc">the project
-	  on GitHub</a>.</p>
-    <p>If you like this project or want to see more about it,
-      please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
+    </vaadin-app-layout>
     <div>
       <script src="js/biwascheme-0.6.9-min.js"></script>
     </div>
