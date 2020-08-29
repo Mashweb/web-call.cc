@@ -13,6 +13,17 @@
     <meta charset="utf-8">
     <title>web-call.cc</title>
     <link href="css/gui.css" rel="stylesheet" type="text/css">
+    <style>
+      .vblock {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 4em;
+	height: 4em;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    </style>
     <script>
       var biwa;
       window.onload = function() {
@@ -105,32 +116,45 @@
 	</div>
 	<div id="canvas" style="overflow: auto;">
 	  
-	  <div class="ex" id="block1">Block 1</div>
-	  <div class="ex" id="block2">Block 2</div>
-	  <div class="ex" id="block3">Block 3
-	    <div class="ex" id="block3a">Block3a</div>
-	    <div class="ex" id="block3b">Block3b</div>
+	  <div class="ex" id="block1">Block 1
+	    <div class="ex" id="block1a">Block1a</div>
+	    <div class="ex" id="block1b">Block1b</div>
 	  </div>
-	  <div class="ex" id="block4">Block 4
-	    <div class="ex" id="block4a">Block 4a</div>
-	    <div class="ex" id="block4b">Block 4b</div>	
-	  </div>
-	  
 	  <div class="ex inline" id="inline1">Inline 1</div>
 	  <div class="ex inline" id="inline2">Inline 2</div>
 	  <div class="ex inline" id="inline3">Inline 3
 	    <div class="ex inline" id="inline3a">Inline 3a</div>
 	  </div>
-	  <div class="ex" id="block5">Block 5
-	    <div class="ex inline" id="inline5a">Inline 5a</div>
-	    <div class="ex inline" id="inline5b">Inline 5b</div>
+	  <div class="ex" id="block2">Block 2
+	    <div class="ex inline" id="inline2a">Inline 2a</div>
+	    <div class="ex inline" id="inline2b">Inline 2b</div>
 	  </div>
-	  <div class="ex" id="block6">Block 6
-	    <div class="ex inline" id="inline6a">Inline 6a</div>
-	    <div class="ex inline" id="inline6b">Inline 6b</div>
-	  </div>
-	  <div class="ex" id="block7">Block 7</div>
-	  <div class="ex" id="block8">Block 8</div>
+	  <div class="ex" id="block3">Block 3</div>
+          <div class="ex">A Vaadin List Box
+            <hr/>
+	    <vaadin-list-box selected="0">
+	      <vaadin-item>Option one</vaadin-item>
+	      <vaadin-item>Option two</vaadin-item>
+	      <vaadin-item>Option three</vaadin-item>
+	    </vaadin-list-box>
+          </div>
+          <div class="ex">A Vaadin Ordered Layout, Horizontal
+            <hr/>
+	    <vaadin-horizontal-layout>
+	      <div class="vblock">Item 1</div>
+	      <div class="vblock">Item 2</div>
+	      <div class="vblock">Item 3</div>
+	    </vaadin-horizontal-layout>
+          </div>
+          <div class="ex">A Vaadin Ordered Layout, Vertical
+            <hr/>
+	    <vaadin-vertical-layout>
+	      <div class="vblock">Item 1</div>
+	      <div class="vblock">Item 2</div>
+	      <div class="vblock">Item 3</div>
+	    </vaadin-vertical-layout>
+          </div>
+
 	  
 	</div>
 	  <p>The program prompts you in large green text.
