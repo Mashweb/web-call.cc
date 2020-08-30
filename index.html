@@ -18,10 +18,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 4em;
+	width: 8em;
 	height: 4em;
-	background-color: rgba(0, 0, 0, 0.1);
-	border: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 0.2em;
+	background-color: rgba(0, 255, 255, 0.0);
+	border: 0.1em solid rgba(0, 0, 0, 0.4);
+      }
+      h1 h2 {
+        margin-top: 0.2em;
+        margin-bottom: 0.2em;
       }
     </style>
     <script>
@@ -58,8 +63,7 @@
   <body>
     <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
     <custom-style>
-      <style include="lumo-typography lumo-color">
-      </style>
+      <style include="lumo-typography lumo-color"></style>
     </custom-style>
     <vaadin-app-layout>
       <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
@@ -76,46 +80,71 @@
       </vaadin-tabs>
 
       <div class="content">
-	<h3>web-call.cc demo #1</h3>
+	<h1 style="margin-top:0.2em; margin-bottom:0.5em;">web-call.cc demo #1</h1>
+	<h2 style="margin:0.2em 0em 0em 0em;">Alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor</h2>.
+	<vaadin-details id="definitions">
+	  <div slot="summary"><span id="defstate"></span></div>
 
-	<div>
-	  This page demonstrates a prototype of the Zen DOM editor.
-	  <aside>Aside: When a web page is loaded, the browser creates a Document Object
-	    Model (DOM) of the page. The DOM is basically just a tree of text objects
-	    and <em>element</em> objects
-	    like DIVs (divisions of the page), paragraphs, headers, articles, sections,
-	    blockquotes, links, lists, interactive components (like buttons and forms),
-	    and many more. The DOM defines the structure of the page by defining
-	    which of the page's elements are inside, i.e. <em>nested within,</em>
-	    which other page elements.</aside>
-	  It will be improved as time permits.
-          There is one known, elusive bug.
-	  The interesting aspect of it is not the tools <em>per se</em>,
-	  but rather the <a href="in-browser-gui.scm">very clear and simple
-	    programming</a> of those tools.
-	  It does not yet work in Explorer or mobile browsers.
-	  In case you do not find the operation of the demo to be obvious,
-	  there are instructions at the bottom of the page.
-	</div>
-	<div>
+	  <dl>
+	    <dt><i><b>What is a DOM?</b></i> When a web page is loaded, the browser creates a Document Object
+	      Model (DOM) of the page. The DOM is basically just a tree of text objects
+	      and <em>element</em> objects
+	      like DIVs (divisions of the page), paragraphs, headers, articles, sections,
+	      blockquotes, links, lists, interactive components (like buttons and forms),
+	      and many more. The DOM defines the structure of the page by defining
+	      which of the page's elements are inside, i.e. <em>nested within,</em>
+	      which other page elements.</dt>
+	    <dt><i><b>What is a live DOM editor?</b></i> A live DOM editor is a program or
+	      application in a web page that changes the relative positions,
+              and possibly attributes and properties, of DOM elements <i>on the fly</i>,
+              that is, without requiring the page to be refreshed or updated from the web server.
+              A useful live DOM editor should also probably be able to add and delete DOM elements.
+	      A useful DOM editor will likely be able to persist these changes
+	      by saving them locally or on the web server.</dt>
+	    <dt><i><b>What is the alpha prototype of the Zen live DOM editor?</b></i> The demo on
+	      this page, the alpha prototype of the Zen live DOM editor, is a demonstration of a
+	      <a href="http://localhost/dev/my-repos-on-github/web-call.cc/in-browser-gui.scm">
+	      very clear and simple way</a> to program a complex GUI
+	      (graphical user interface). As it is an alpha prototype, it still has bugs
+	      and it does not yet work in Explorer or mobile browsers. In case you do
+	      not find the operation of this DOM editor to be obvious, there are
+	      instructions at the bottom of the page.</dt>
+	  </dl>
+	</vaadin-details>
+	<script>
+	  customElements.whenDefined('vaadin-details').then(function() {
+	    const details = document.querySelector('#definitions');
+
+	    // listen for details state change
+	    details.addEventListener('opened-changed', function(e) {
+	      document.getElementById('defstate').textContent = e.detail.value ? 'Hide definitions' : 'Show definitions';
+	    });
+
+	    // set the state programmatically
+	    details.opened = true;
+	  });
+	</script>
+
+        <hr style="background-color:black;"/>
+
+        <div style="max-width:560px; margin: 2em 5em 0 4em; padding: 0.5em; border:1px solid black;">
 	  <div id="message"></div>
 	  <div id="error"></div>
-	</div>
-	<h3>DOM editor tools:</h3>
-	<div id="tools">
-	  <button id="add" class="ghosted">Add-insert</button>
-	  <button id="copyx" style="background-color:lightgreen">Copy-insert</button>
-	  <button id="copy-before" style="background-color:lightgreen">Copy-before</button>
-	  <button id="paste" class="ghosted">Paste-insert</button>
-	  <button id="move" style="background-color:lightgreen">Move-insert</button>
-	  <button id="move-before" style="background-color:lightgreen">Move-before</button>
-	  <button id="delete" class="ghosted">Delete</button>
-	  <button id="undo" class="ghosted">Undo</button>
-	  <button id="redo" class="ghosted">Redo</button>
-	  <button id="save" class="ghosted">Save</button>
-	</div>
-	<div id="canvas" style="overflow: auto;">
-	  
+	  <div id="tools">
+	    <button id="add" class="ghosted">Add-insert</button>
+	    <button id="copyx" style="background-color:lightgreen">Copy-insert</button>
+	    <button id="copy-before" style="background-color:lightgreen">Copy-before</button>
+	    <button id="paste" class="ghosted">Paste-insert</button>
+	    <button id="move" style="background-color:lightgreen">Move-insert</button>
+	    <button id="move-before" style="background-color:lightgreen">Move-before</button>
+	    <button id="delete" class="ghosted">Delete</button>
+	    <button id="undo" class="ghosted">Undo</button>
+	    <button id="redo" class="ghosted">Redo</button>
+	    <button id="save" class="ghosted">Save</button>
+	  </div>
+        </div>
+
+	<div id="canvas" style="max-width:720px; overflow: auto;">
 	  <div class="ex" id="block1">Block 1
 	    <div class="ex" id="block1a">Block1a</div>
 	    <div class="ex" id="block1b">Block1b</div>
@@ -130,15 +159,15 @@
 	    <div class="ex inline" id="inline2b">Inline 2b</div>
 	  </div>
 	  <div class="ex" id="block3">Block 3</div>
-          <div class="ex">A Vaadin List Box
+          <div class="ex">A <a href="https://vaadin.com/components/vaadin-list-box">Vaadin List Box</a>
             <hr/>
 	    <vaadin-list-box selected="0">
-	      <vaadin-item>Option one</vaadin-item>
-	      <vaadin-item>Option two</vaadin-item>
-	      <vaadin-item>Option three</vaadin-item>
+	      <vaadin-item class="vblock">Option one</vaadin-item>
+	      <vaadin-item class="vblock">Option two</vaadin-item>
+	      <vaadin-item class="vblock">Option three</vaadin-item>
 	    </vaadin-list-box>
           </div>
-          <div class="ex">A Vaadin Ordered Layout, Horizontal
+          <div class="ex">A <a href="https://vaadin.com/components/vaadin-ordered-layout">Vaadin Ordered Layout</a>, Horizontal
             <hr/>
 	    <vaadin-horizontal-layout>
 	      <div class="vblock">Item 1</div>
@@ -146,64 +175,84 @@
 	      <div class="vblock">Item 3</div>
 	    </vaadin-horizontal-layout>
           </div>
-          <div class="ex">A Vaadin Ordered Layout, Vertical
+          <div class="ex">A <a href="https://vaadin.com/components/vaadin-ordered-layout">Vaadin Ordered Layout</a>, Vertical
             <hr/>
 	    <vaadin-vertical-layout>
-	      <div class="vblock">Item 1</div>
-	      <div class="vblock">Item 2</div>
-	      <div class="vblock">Item 3</div>
+	      <div class="vblock">Item A</div>
+	      <div class="vblock">Item B</div>
+	      <div class="vblock">Item C</div>
 	    </vaadin-vertical-layout>
           </div>
-
-	  
 	</div>
-	  <p>The program prompts you in large green text.
-	    It will instruct you to choose a tool.
-	    Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
-	    are the only tools that work.
-	    Clicking on any other tool will produce the message
-	    "Unimplemented operation."</p>
-	  The program will eventually implement 4 rules for insertions and moves:
-	  <ol>
-	    <li>Branches of the DOM will be designable as draggable
-	      and other branches of the DOM will be designable as not draggable.
-	      However, currently just one branch can be designated as draggable
-	      at startup. That branch currently comprises the elements
-	      in the large gray block.</li>
-	    <li>Branches of the DOM will be designable as valid drop targets
-	      and other branches of the DOM will be designable as not valid
-	      drop targets.</li>
-	    <li>The HTML Content Model places restrictions upon what elements
-	      are allowed to be nested inside which other elements.
-	      The program will implement rules to enforce these
-	      restrcitions.
-	      (Refer to the relevant sections of
-	      <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
-	      and <a href="https://bit.ly/w3-content-models">w3.org</a>.
-	      A good but simple
-	      <a href="https://clearlydecoded.com/html-content-models">explanation</a>
-	      can be found on ClearlyDecoded.com.)</li>
-	    <li>An element cannot be moved into itself, nor into a descendent of itself.
-	      For example, if a "Move-insert" operation is attempted
-	      and  an element around for awhile then dropped at its original position,
-	      the operation is invalid.
-	      Likewise, if a "Move-before" operation is attempted and an element
-	      is dropped on its own child element or its child's child element,
-	      the operation is invalid.
-	      Invalid operations will produce no change to the DOM structure.</li>
-	  </ol>
-	  <p>So far, only the 4th rule is implemented. The 1st rule is partially
-	    implemented.</p>
-	  <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
-	    downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
-	    <a href="browser-util.scm">browser-util.scm</a>, and
-	    <a href="mini-framework.scm">mini-framework.scm</a>.
-	    There is <a href="index2.html">other experimental code here</a>.
-	    This website can be cloned. See
-	    <a href="https://github.com/Mashweb/web-call.cc">the project
-	      on GitHub</a>.</p>
-	<p>If you like this project or want to see more about it,
-	  please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
+
+	<vaadin-details id="explanation">
+	  <div slot="summary"><span id="exstate"></span></div>
+
+          <div id="explainer">
+            <h3>How to use the program</h3>
+	    <p>The program prompts you in large green text.
+	      It will instruct you to choose a tool.
+	      Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
+	      are the only tools that work.
+	      Clicking on any other tool will produce the message
+	      "Unimplemented operation."</p>
+	    The program will eventually implement 4 rules for insertions and moves:
+	    <ol>
+	      <li>Branches of the DOM will be designable as draggable
+		and other branches of the DOM will be designable as not draggable.
+		However, currently just one branch can be designated as draggable
+		at startup. That branch currently comprises the elements
+		in the large gray block.</li>
+	      <li>Branches of the DOM will be designable as valid drop targets
+		and other branches of the DOM will be designable as not valid
+		drop targets.</li>
+	      <li>The HTML Content Model places restrictions upon what elements
+		are allowed to be nested inside which other elements.
+		The program will implement rules to enforce these
+		restrcitions.
+		(Refer to the relevant sections of
+		<a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+		and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+		A good but simple
+		<a href="https://clearlydecoded.com/html-content-models">explanation</a>
+		can be found on ClearlyDecoded.com.)</li>
+	      <li>An element cannot be moved into itself, nor into a descendent of itself.
+		For example, if a "Move-insert" operation is attempted
+		and  an element around for awhile then dropped at its original position,
+		the operation is invalid.
+		Likewise, if a "Move-before" operation is attempted and an element
+		is dropped on its own child element or its child's child element,
+		the operation is invalid.
+		Invalid operations will produce no change to the DOM structure.</li>
+	    </ol>
+	    <p>So far, only the 4th rule is implemented. The 1st rule is partially
+	      implemented. The demo will be improved as time permits.</p>
+	    <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
+	      downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
+	      <a href="browser-util.scm">browser-util.scm</a>, and
+	      <a href="mini-framework.scm">mini-framework.scm</a>.
+	      There is <a href="index2.html">other experimental code here</a>.
+	      This website can be cloned. See
+	      <a href="https://github.com/Mashweb/web-call.cc">the project
+		on GitHub</a>.</p>
+	    <p>If you like this project or want to see more about it,
+	      please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
+          </div>
+	</vaadin-details>
+	<script>
+	  customElements.whenDefined('vaadin-details').then(function() {
+	    const details = document.querySelector('#explanation');
+
+	    // listen for details state change
+	    details.addEventListener('opened-changed', function(e) {
+	      document.getElementById('exstate').textContent = e.detail.value ? 'Hide explanation' : 'Show explanation';
+	    });
+
+	    // set the state programmatically
+	    details.opened = true;
+	  });
+	</script>
+
       </div>
     </vaadin-app-layout>
     <div>

@@ -26,7 +26,7 @@
        (drop-effect #f)
        (unfinished #t))
     
-    (message "Please press one of DOM-edit-tool buttons below. (Currently only Copy-insert, Copy-before, and Move-insert, and Move-before are working.)")
+    (message "Press one of DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded part of the page. (Currently the gray buttons are disabled.)")
     (let loop1a
 	()
       (with-handlers ((click-handler "#add")
