@@ -6,7 +6,7 @@ div#canvas { padding:0.6em; border:1em solid white; background-color:#f0f0f0; }
 div.inline { display:inline-flex; }
 p  { margin-top:0em; margin-bottom:0.5em; }
 button { width:8em; }
-button.ghosted { background-color:#a0a0a0; }
+button.ghosted { background-color:#b0b0e0; }
 div#message { display:inline-flex; background-color:#f0f0d0; color:#007040; font-size:1.2em; font-weight:600; padding:0.35em; border:0.08em solid #008000; }
 div#error { color:#cc8080; font-size:1.3em; }
 dt { margin:1em; padding:0.6em; background-color:#e0d0a0; }
