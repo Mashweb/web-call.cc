@@ -16,6 +16,9 @@ npm i @vaadin/vaadin --save
 echo "Installing Rollup ..."
 npm i rollup @rollup/plugin-node-resolve >/dev/null 2>&1
 
+echo "Installing Typescript plugin for Rollup ..."
+npm install @rollup/plugin-typescript --save-dev
+
 echo "Running rollup using rollup.config.js ..."
 npx rollup --config >/dev/null 2>&1
 
