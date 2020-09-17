@@ -11,8 +11,66 @@
       gtag('config', 'UA-173606225-1');
     </script>
     <meta charset="utf-8">
+    <meta name="theme-color" content="#222127">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>web-call.cc</title>
+    <script src="custom-elements/custom-elements.min.js"></script>
     <link href="css/gui.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="widgets/split-pane-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/tab-controller-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/tab-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/button-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/icon-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/text-input-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/accordion-pane-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/toolbar-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/dialog-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/calendar-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/title-pane-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/text-area-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/slider-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/label-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/checkbox-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/select-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/progress-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/radio-6.0.0.css"/>
+    <link rel="stylesheet" href="widgets/time-picker-6.0.0.css"/>
+    <link rel="stylesheet" href="themes/dojo/dojo-6.0.0.css">
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				font-family: arial;
+			}
+
+			body {
+				display: flex;
+				flex-direction: column;
+			}
+
+			.split-pane-holder {
+				flex: 1;
+				overflow: hidden;
+			}
+
+			.ce-layout {
+				margin: 5px;
+				display: inline-block;
+			}
+
+			.vertical-slider {
+				margin-left: 20px;
+				display: inline-block;
+			}
+		</style>
+    <style>
+      .split-pane-holder { flex: 1; overflow: hidden; }
+      .ce-layout { margin: 5px; display: inline-block; }
+      .vertical-slider { margin-left: 20px; display: inline-block; }
+    </style>
     <style>
       .vblock {
 	display: flex;
@@ -61,6 +119,7 @@
     </script>
   </head>
   <body>
+    <script src="themes/dojo/dojo-6.0.0.js"></script>
     <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
     <custom-style>
       <style include="lumo-typography lumo-color"></style>
@@ -86,29 +145,29 @@
 	  <div slot="summary"><span id="defstate"></span></div>
 
 	  <dl>
-	    <dt><i><b>What is a DOM?</b></i> When a web page is loaded, the browser creates a Document Object
+	    <dt><i><b>What is a DOM?</b></i></dt> <dd>When a web page is loaded, the browser creates a Document Object
 	      Model (DOM) of the page. The DOM is basically just a tree of text objects
 	      and <em>element</em> objects
 	      like DIVs (divisions of the page), paragraphs, headers, articles, sections,
 	      blockquotes, links, lists, interactive components (like buttons and forms),
 	      and many more. The DOM defines the structure of the page by defining
 	      which of the page's elements are inside, i.e. <em>nested within,</em>
-	      which other page elements.</dt>
-	    <dt><i><b>What is a live DOM editor?</b></i> A live DOM editor is a program or
+	      which other page elements.</dd>
+	    <dt><i><b>What is a live DOM editor?</b></i></dt> <dd>A live DOM editor is a program or
 	      application in a web page that changes the relative positions,
               and possibly attributes and properties, of DOM elements <i>on the fly</i>,
               that is, without requiring the page to be refreshed or updated from the web server.
               A useful live DOM editor should also probably be able to add and delete DOM elements.
 	      A useful DOM editor will likely be able to persist these changes
-	      by saving them locally or on the web server.</dt>
-	    <dt><i><b>What is the alpha prototype of the Zen live DOM editor?</b></i> This page,
+	      by saving them locally or on the web server.</dd>
+	    <dt><i><b>What is the alpha prototype of the Zen live DOM editor?</b></i></dt> <dd>This page,
 	      containing the alpha prototype of the Zen live DOM editor, is a demonstration of a
 	      <a href="http://localhost/dev/my-repos-on-github/web-call.cc/in-browser-gui.scm">
 	      very clear and simple way</a> to program a complex GUI
 	      (graphical user interface). Being an alpha prototype, it still has bugs
 	      and does not yet work in Explorer or mobile browsers. In case you do
 	      not find the operation of this DOM editor to be obvious, there are
-	      instructions at the bottom of the page.</dt>
+	      instructions at the bottom of the page.</dd>
 	  </dl>
 	</vaadin-details>
 	<script>
@@ -183,81 +242,168 @@
 	      <div class="vblock">Item C</div>
 	    </vaadin-vertical-layout>
           </div>
+	  <dojo-button class="ce-layout">Basic Dojo Button</dojo-button>
+	  <dojo-button class="ce-layout">Dojo Icon Button <dojo-icon type="searchIcon"></dojo-icon></dojo-button>
+	  <dojo-button class="ce-layout" id="dojoEnabledPopupButton">Dojo Popup</dojo-button>
+	  <dojo-button class="ce-layout" id="dojoEnabledToggleButton">Dojo Toggle</dojo-button>
+	  <dojo-button class="ce-layout" id="dojoDisabledBasicButton">Disabled Basic Dojo Button</dojo-button>
+	  <dojo-button class="ce-layout" id="dojoDisabledIconButton">Disabled Dojo Icon Button <dojo-icon type="searchIcon"></dojo-icon></dojo-button>
+	  <dojo-button class="ce-layout" id="dojoDisabledPopupButton">Disabled Dojo Popup</dojo-button>
+	  <dojo-button class="ce-layout" id="dojoDisabledToggleButton">Disabled Dojo Toggle</dojo-button>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoCheckedCheckbox" label="Checked checkbox"></dojo-checkbox>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledCheckedCheckbox" label="Disabled checked checkbox"></dojo-checkbox>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledUnCheckedCheckbox" label="Disabled unchecked checkbox"></dojo-checkbox>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoCheckedToggle" mode="toggle" label="Checked Toggle"></dojo-checkbox>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledCheckedToggle" mode="toggle" label="Disabled checked Toggle"></dojo-checkbox>
+	  <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledUnCheckedToggle" mode="toggle" label="Disabled unchecked Toggle"></dojo-checkbox>
+	  <dojo-radio class="ce-layout ce-block" id="dojoRadioOne" value="radioGroupOne" label="Radio one"></dojo-radio>
+	  <dojo-radio class="ce-layout ce-block" id="dojoRadioTwo" value="radioGroupOne" label="Radio two"></dojo-radio>
+	  <dojo-radio class="ce-layout ce-block" id="dojoDisabledUnCheckedRadio" label="Disabled unchecked Radio"></dojo-radio>
 	</div>
+      </div>
 
-	<vaadin-details id="explanation">
-	  <div slot="summary"><span id="exstate"></span></div>
+      <vaadin-details id="explanation">
+	<div slot="summary"><span id="exstate"></span></div>
 
-          <div id="explainer">
-            <h3>How to use this prototype DOM editor</h3>
-	    <p>This DOM editor prompts you in large green text.
-	      It will instruct you to choose a tool.
-	      Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
-	      are the only tools that work.
-	      Clicking on any other tool will produce the message
-	      "Unimplemented operation."</p>
-	    The program will eventually implement 4 rules for insertions and moves:
-	    <ol>
-	      <li>Branches of the DOM will be designable as draggable
-		and other branches of the DOM will be designable as not draggable.
-		However, currently just one branch can be designated as draggable
-		at startup. That branch currently comprises the elements
-		in the large gray block.</li>
-	      <li>Branches of the DOM will be designable as valid drop targets
+	<div id="explainer">
+	  <h3>How to use this prototype DOM editor</h3>
+	  <p>This DOM editor prompts you in large green text.
+	    It will instruct you to choose a tool.
+	    Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
+	    are the only tools that work.
+	    Clicking on any other tool will produce the message
+	    "Unimplemented operation."</p>
+	  The program will eventually implement 4 rules for insertions and moves:
+	  <ol>
+	    <li>Branches of the DOM will be designable as draggable
+	      and other branches of the DOM will be designable as not draggable.
+	      However, currently just one branch can be designated as draggable
+	      at startup. That branch currently comprises the elements
+	      in the large gray block.</li>
+	    <li>Branches of the DOM will be designable as valid drop targets
 		and other branches of the DOM will be designable as not valid
 		drop targets.</li>
-	      <li>The HTML Content Model places restrictions upon what elements
-		are allowed to be nested inside which other elements.
-		The program will implement rules to enforce these
-		restrcitions.
-		(Refer to the relevant sections of
-		<a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
-		and <a href="https://bit.ly/w3-content-models">w3.org</a>.
-		A good but simple
-		<a href="https://clearlydecoded.com/html-content-models">explanation</a>
-		can be found on ClearlyDecoded.com.)</li>
-	      <li>An element cannot be moved into itself, nor into a descendent of itself.
-		For example, if a "Move-insert" operation is attempted
-		and  an element around for awhile then dropped at its original position,
-		the operation is invalid.
-		Likewise, if a "Move-before" operation is attempted and an element
-		is dropped on its own child element or its child's child element,
-		the operation is invalid.
+	    <li>The HTML Content Model places restrictions upon what elements
+	      are allowed to be nested inside which other elements.
+	      The program will implement rules to enforce these
+	      restrcitions.
+	      (Refer to the relevant sections of
+	      <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+	      and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+	      A good but simple
+	      <a href="https://clearlydecoded.com/html-content-models">explanation</a>
+	      can be found on ClearlyDecoded.com.)</li>
+	    <li>An element cannot be moved into itself, nor into a descendent of itself.
+	      For example, if a "Move-insert" operation is attempted
+	      and  an element around for awhile then dropped at its original position,
+	      the operation is invalid.
+	      Likewise, if a "Move-before" operation is attempted and an element
+	      is dropped on its own child element or its child's child element,
+	      the operation is invalid.
 		Invalid operations will produce no change to the DOM structure.</li>
-	    </ol>
-	    <p>So far, only the 4th rule is implemented. The 1st rule is partially
-	      implemented. The demo will be improved as time permits.</p>
-	    <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
-	      downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
-	      <a href="browser-util.scm">browser-util.scm</a>, and
-	      <a href="mini-framework.scm">mini-framework.scm</a>.
-	      There is <a href="index2.html">other experimental code here</a>.
-	      This website can be cloned. See
-	      <a href="https://github.com/Mashweb/web-call.cc">the project
-		on GitHub</a>.</p>
-	    <p>If you like this project or want to see more about it,
-	      please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
-          </div>
-	</vaadin-details>
-	<script>
-	  customElements.whenDefined('vaadin-details').then(function() {
-	    const details = document.querySelector('#explanation');
+	  </ol>
+	  <p>So far, only the 4th rule is implemented. The 1st rule is partially
+	    implemented. The demo will be improved as time permits.</p>
+	  <p>The <a href="biwascheme.org">BiwaScheme</a> code can be
+	    downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
+	    <a href="browser-util.scm">browser-util.scm</a>, and
+	    <a href="mini-framework.scm">mini-framework.scm</a>.
+	    There is <a href="index2.html">other experimental code here</a>.
+	    This website can be cloned. See
+	    <a href="https://github.com/Mashweb/web-call.cc">the project
+	      on GitHub</a>.</p>
+	  <p>If you like this project or want to see more about it,
+	    please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
+	</div>
+      </vaadin-details>
+      <script>
+	customElements.whenDefined('vaadin-details').then(function() {
+	  const details = document.querySelector('#explanation');
 
-	    // listen for details state change
-	    details.addEventListener('opened-changed', function(e) {
-	      document.getElementById('exstate').textContent = e.detail.value ? 'Hide explanation' : 'Show explanation';
-	    });
-
-	    // set the state programmatically
-	    details.opened = true;
+	  // listen for details state change
+	  details.addEventListener('opened-changed', function(e) {
+	    document.getElementById('exstate').textContent = e.detail.value ? 'Hide explanation' : 'Show explanation';
 	  });
-	</script>
 
-      </div>
+	  // set the state programmatically
+	  details.opened = true;
+	});
+      </script>
+
     </vaadin-app-layout>
     <div>
       <script src="js/biwascheme-0.6.9-min.js"></script>
     </div>
     <script src="bundle.js"></script>
+    <script async src="widgets/icon-6.0.0.js"></script>
+    <script async src="widgets/button-6.0.0.js"></script>
+    <script>
+      // Buttons
+
+      var popupButton = document.getElementById('dojoEnabledPopupButton');
+      var toggleButton = document.getElementById('dojoEnabledToggleButton');
+      var disabledBasicButton = document.getElementById('dojoDisabledBasicButton');
+      var disabledIconButton = document.getElementById('dojoDisabledIconButton');
+      var disabledPopupButton = document.getElementById('dojoDisabledPopupButton');
+      var disabledToggleButton = document.getElementById('dojoDisabledToggleButton');
+
+      toggleButton.pressed = true;
+
+      toggleButton.addEventListener('click', function () {
+	  toggleButton.pressed = !toggleButton.pressed;
+      });
+      popupButton.popup = {
+	  expanded: false,
+	  id: 'dojoPopupButton'
+      };
+
+      disabledBasicButton.disabled = true;
+      disabledIconButton.disabled = true;
+      disabledPopupButton.popup = {
+	  expanded: false,
+	  id: 'dojoPopupButton'
+      };
+      disabledPopupButton.disabled = true;
+      disabledToggleButton.disabled = true;
+      disabledToggleButton.addEventListener('click', function () {
+	  disabledToggleButton.pressed = !disabledToggleButton.pressed;
+      });
+
+      // Checkbox
+      var checkbox = document.getElementById('dojoCheckedCheckbox');
+      var disabledCheckedCheckbox = document.getElementById('dojoDisabledCheckedCheckbox');
+      var disabledCheckbox = document.getElementById('dojoDisabledUnCheckedCheckbox');
+
+      checkbox.checked = true;
+      checkbox.addEventListener('change', function () {
+	  checkbox.checked = !checkbox.checked;
+      });
+
+      disabledCheckedCheckbox.checked = true;
+      disabledCheckedCheckbox.disabled = true;
+      disabledCheckbox.disabled = true;
+
+      // Toggle
+      var toggle = document.getElementById('dojoCheckedToggle');
+      var disabledCheckedToggle = document.getElementById('dojoDisabledCheckedToggle');
+      var disabledUnCheckedToggle = document.getElementById('dojoDisabledUnCheckedToggle');
+
+      toggle.checked = true;
+      toggle.addEventListener('change', function () {
+	  toggle.checked = !toggle.checked;
+      });
+
+      disabledCheckedToggle.disabled = true;
+      disabledCheckedToggle.checked = true;
+      disabledUnCheckedToggle.disabled = true;
+      disabledUnCheckedToggle.checked = false;
+
+      // Radio
+      var radioOne = document.getElementById('dojoRadioOne');
+      var radioTwo = document.getElementById('dojoRadioTwo');
+      var disabledRadio = document.getElementById('dojoDisabledUnCheckedRadio');
+
+      radioOne.checked = true;
+    </script>
   </body>
 </html>

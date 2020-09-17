@@ -9,5 +9,6 @@ button { width:8em; }
 button.ghosted { background-color:#b0b0e0; }
 div#message { display:inline-flex; background-color:#f0f0d0; color:#007040; font-size:1.2em; font-weight:600; padding:0.35em; border:0.08em solid #008000; }
 div#error { color:#cc8080; font-size:1.3em; }
-dt { margin:1em; padding:0.6em; background-color:#e0d0a0; }
+dt { margin:1em 0 0 1em; padding:0.4em 0.6em 0.4em 0.6em; background-color:#e0d0a0; }
+dd { padding:0.1em 0.6em 0.6em 0.6em; background-color:#e0d0a0; }
 div#explainer { margin:1em; padding:0.6em; background-color:#e0d0a0; }
