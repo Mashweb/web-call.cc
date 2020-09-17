@@ -123,6 +123,13 @@
     (console-log (format #f "dragged-selector => ~a" dragged-selector))
     (case op
       (("copy")
+       ;;(console-log (js-invoke dragged "tagName"))
+       (console-dir dragged)
+       (console-log (js-ref dragged "tagName"))
+       (console-log (js-invoke (js-ref dragged "tagName") "indexOf"))
+       (if (< 0 (js-invoke (js-ref dragged "tagName") "indexOf"))
+        (console-log "custom element")
+        (console-log "not custom element"))
        (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true")))
       (("copybefore")
        (js-invoke parent "insertBefore" (js-invoke dragged "cloneNode" "true") target))
