@@ -79,6 +79,7 @@
 	  (case event-type
 	    (("dragstart")
 	     (set! dragged (js-ref jquery-event "target"))
+	     (console-log (js-ref dragged "tagName"))
 	     ;; FIXME: This means of calling select looks more complicated than necessary.
 	     (set! selector (js-invoke (js-eval "window") "finder" dragged))
 	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
@@ -123,14 +124,11 @@
     (console-log (format #f "dragged-selector => ~a" dragged-selector))
     (case op
       (("copy")
-       ;;(console-log (js-invoke dragged "tagName"))
-       (console-dir dragged)
-       (console-log (js-ref dragged "tagName"))
-       (console-log (js-invoke (js-ref dragged "tagName") "indexOf"))
-       (if (< 0 (js-invoke (js-ref dragged "tagName") "indexOf"))
-        (console-log "custom element")
-        (console-log "not custom element"))
-       (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true")))
+       (console-log "copy")
+       (console-log (js-call% "isCustomElement" dragged))
+       (if (js-call% "isCustomElement" dragged)
+	   (console-log "custom element; handle specially")
+	   (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true"))))
       (("copybefore")
        (js-invoke parent "insertBefore" (js-invoke dragged "cloneNode" "true") target))
       (("move")
