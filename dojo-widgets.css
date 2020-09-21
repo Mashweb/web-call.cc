@@ -1,0 +1,55 @@
+@import "widgets/split-pane-6.0.0.css";
+@import "widgets/tab-controller-6.0.0.css";
+@import "widgets/tab-6.0.0.css";
+@import "widgets/button-6.0.0.css";
+@import "widgets/icon-6.0.0.css";
+@import "widgets/text-input-6.0.0.css";
+@import "widgets/accordion-pane-6.0.0.css";
+@import "widgets/toolbar-6.0.0.css";
+@import "widgets/dialog-6.0.0.css";
+@import "widgets/calendar-6.0.0.css";
+@import "widgets/title-pane-6.0.0.css";
+@import "widgets/text-area-6.0.0.css";
+@import "widgets/slider-6.0.0.css";
+@import "widgets/label-6.0.0.css";
+@import "widgets/checkbox-6.0.0.css";
+@import "widgets/select-6.0.0.css";
+@import "widgets/progress-6.0.0.css";
+@import "widgets/radio-6.0.0.css";
+@import "widgets/time-picker-6.0.0.css";
+@import "themes/dojo/dojo-6.0.0.css";
+<style>
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: arial;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.split-pane-holder {
+    flex: 1;
+    overflow: hidden;
+}
+
+.ce-layout {
+    margin: 5px;
+    display: inline-block;
+}
+
+.vertical-slider {
+    margin-left: 20px;
+    display: inline-block;
+}
+</style>
+<style>
+.split-pane-holder { flex: 1; overflow: hidden; }
+.ce-layout { margin: 5px; display: inline-block; }
+.vertical-slider { margin-left: 20px; display: inline-block; }
+</style>

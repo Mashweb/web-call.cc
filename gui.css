@@ -1,0 +1,41 @@
+@import "dojo-widgets.css";
+
+h1 { margin-top:0.25em; margin-bottom:0.25em; }
+div#canvas { padding:0.2em 0 0 0; border-top:0.4em solid white; background-color:#f0f0f0; }
+.ex { margin:0.2em; min-height:1em; padding:0.2em; border:0.1em solid blue; }
+.red { background-color:#ff8080; }
+.pink { background-color:pink; }
+.orange { background-color:orange; }
+.lightorange { background-color:#ffe080; }
+.yellow { background-color:lightyellow; }
+.green { background-color:#40b040; }
+.blue { background-color:#7c7cff; }
+.darkblue { background-color:#6868ff; }
+.lavender { background-color:#e080e0; }
+.fuscia { background-color:#f040f0; }
+.gray { background-color:gray; }
+.dragged { border:0.1em solid lightgreen !important; }
+.dragover { border:0.2em solid red !important; }
+div.inline { display:inline-flex; }
+p  { margin-top:0em; margin-bottom:0.5em; }
+button { width:8em; }
+button.ghosted { background-color:#b0b0e0; }
+div#message { display:inline-flex; background-color:#fbfbe4; color:#007030; font-size:1em; font-weight:650; padding:0.35em; border:0.08em solid #008000; }
+div#error { color:#cc8080; font-size:1.3em; }
+dt { margin:1em 0 0 1em; padding:0.4em 0.6em 0.4em 0.6em; background-color:#e0d0a0; }
+dd { padding:0.1em 0.6em 0.6em 0.6em; background-color:#e0d0a0; }
+div#explainer { margin:1em; padding:0.6em; background-color:#e0d0a0; }
+.vblock {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12em;
+
+    margin: 0.2em;
+    background-color: rgba(0, 255, 255, 0.0);
+    border: 0.1em solid rgba(0, 0, 0, 0.4);
+}
+h1 h2 {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}

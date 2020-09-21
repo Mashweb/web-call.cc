@@ -17,7 +17,12 @@
 
 (load "browser-util.scm")
 (load "config.scm")
-(console-log (format #f "zen-db => " zen-db))
+;;(console-log (format #f "zen-db => " zen-db))
+
+(define (message str)
+  ;;(console-log (format #f "Message: ~a" str))
+  (js-set! (getelem1 "#message") "innerHTML"
+	   (string-append "<span class='message'>" str "</span>")))
 
 (define (test)
   (let loop1
@@ -26,7 +31,7 @@
        (drop-effect #f)
        (unfinished #t))
     
-    (message "Press one of DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded part of the page. (Currently the light blue buttons are disabled.)")
+    (message "Press one of DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded area of the page. (Currently the bluish gray buttons are disabled.)")
     (let loop1a
 	()
       (with-handlers ((click-handler "#add")
@@ -79,11 +84,9 @@
 	  (case event-type
 	    (("dragstart")
 	     (set! dragged (js-ref jquery-event "target"))
-	     (console-log (js-ref dragged "tagName"))
-	     ;; FIXME: This means of calling select looks more complicated than necessary.
-	     (set! selector (js-invoke (js-eval "window") "finder" dragged))
+	     (console-log (format #f "dragged tagName => ~a" (js-ref dragged "tagName")))
+	     (set! selector (js-call% "finder" dragged))
 	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
-	     (console-log (format #f "dragstart: dragged-selector => ~a" selector))
 	     (element-add-class-name! dragged "dragged"))
 	    (("dragover")
 	     (js-invoke jquery-event "preventDefault")
@@ -117,7 +120,10 @@
   (let* ((target (js-ref jq-ev "target"))
 	 (dragged-selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
 	 (dragged (getelem1 dragged-selector))
-	 (parent (js-ref target "parentNode")))
+	 ;;(parent (js-ref target "parentNode"))
+	 (parent (js-ref (js-call% "findTrueTarget" target) "parentNode")) ;; TODO: Check whether this is correct.
+	 (is-custom-element #f)
+	 (tagName ""))
     (console-log (format #f "perform-operation ~a" op))
     (element-remove-class-name! dragged "dragged")
     (element-remove-class-name! target "dragover")
@@ -125,22 +131,18 @@
     (case op
       (("copy")
        (console-log "copy")
-       (console-log (js-call% "isCustomElement" dragged))
-       (if (js-call% "isCustomElement" dragged)
-	   (console-log "custom element; handle specially")
-	   (js-invoke target "appendChild" (js-invoke dragged "cloneNode" "true"))))
+       (js-invoke target "appendChild" (js-call% "cloneDOM" dragged)))
       (("copybefore")
-       (js-invoke parent "insertBefore" (js-invoke dragged "cloneNode" "true") target))
+       (begin
+	 ;;(console-dir (js-call% "cloneDOM" dragged))
+	 ;;(console-log "called console-dir")
+	 (console-log "parent:")
+	 (console-dir parent)
+	 (console-log "target:")
+	 (console-dir target)
+	 (js-invoke parent "insertBefore" (js-call% "cloneDOM" dragged) (js-call% "findTrueTarget" target))
+	 ))
       (("move")
-       (console-group "Move-insert: jq-ev")
-       (console-dir jq-ev)
-       (console-group-end)
-       (console-group "Move-insert: target")
-       (console-dir target)
-       (console-group-end)
-       (console-group "Move-insert: dragged")
-       (console-dir dragged)
-       (console-group-end)
        (if (js-invoke dragged "contains" target)
 	   (alert "Invalid operation: dragged element contains itself.")
 	   (js-invoke target "appendChild" dragged)))

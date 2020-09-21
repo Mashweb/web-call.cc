@@ -17,6 +17,17 @@
 
 (load "mini-framework.scm")
 
+;;;; Console and messages
+
+(define (console-dir obj)
+  (js-call% "console.dir" obj))
+
+(define (console-group str)
+  (js-call% "console.group" str))
+
+(define (console-group-end)
+  (js-call% "console.groupEnd"))
+
 ;;;; AJAX
 
 (js-eval "define_libfunc('http-post-text', 2, 2, function(ar){
@@ -125,18 +136,13 @@
 (define (sexp->dom sexp)
   (map symbol->element sexp))
 
-;;;; Console and messages
+;;;; DOM operations cognisant of custom elements: find target, clone, move, append, insert
+;;
+;; The HTML API's cloneNode method cannot be used for copying DOMs because:
+;;   * Some custom elements, such as Dojo widgets, are not wholly draggable,
+;;     so that when the user clicks on one of them, the target of the
+;;     dragstart event does not contain the whole widget.
+;;   * The id attribute of an element should not be used twice.
 
-(define (console-dir obj)
-  (js-call% "console.dir" obj))
-
-(define (console-group str)
-  (js-call% "console.group" str))
-
-(define (console-group-end)
-  (js-call% "console.groupEnd"))
-
-(define (message str)
-  (console-log (format #f "Message: ~a" str))
-  (js-set! (getelem1 "#message") "innerHTML"
-	   (string-append "<span class='message'>" str "</span>"))
+(define (clone-dom target)
+  (js-call% "cloneDOM" target))
