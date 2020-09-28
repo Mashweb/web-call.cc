@@ -1,0 +1,30 @@
+{
+  "name": "web-call.cc",
+  "version": "1.0.0",
+  "description": "In this Git repository, there are source code and design documents for the [web-call.cc](web-call.cc) website, examples of special ondragover and ondrop event-handler code, and a code example showing the dynamic modification of a stylesheet.",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mashweb/web-call.cc.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mashweb/web-call.cc/issues"
+  },
+  "homepage": "https://github.com/Mashweb/web-call.cc#readme",
+  "dependencies": {
+    "@medv/finder": "^2.0.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "@vaadin/vaadin": "^15.0.6",
+    "rollup": "^2.26.7"
+  },
+  "devDependencies": {}
+}
