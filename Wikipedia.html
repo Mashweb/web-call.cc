@@ -54,7 +54,7 @@
 <link rel="dns-prefetch" href="https://meta.wikimedia.org/">
 <!--[if lt IE 9]><script src="/w/resources/lib/html5shiv/html5shiv.js"></script><![endif]-->
 </head>
-<body id="canvas" class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Main_Page rootpage-Main_Page skin-vector action-view skin-vector-legacy minerva--history-page-action-enabled">
+<body id="draggables" class="canvas mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Main_Page rootpage-Main_Page skin-vector action-view skin-vector-legacy minerva--history-page-action-enabled">
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body" role="main">
@@ -633,7 +633,7 @@ additional terms may apply.  By using this site, you agree to the <a href="https
 	  var onError = function(e){ console.error(e); }
 	  biwa = new BiwaScheme.Interpreter(onError);
 	  biwa.evaluate('(load "in-browser-gui.scm")\
-                         (js-call% "makeDraggable" (getelem1 "#canvas"))\
+                         (js-call% "makeDraggable" (getelem1 "#draggables"))\
                          (reset (test))',
 			function(result) {
 			    console.log('BiwaScheme and prototype DOM editor fully loaded.');
@@ -654,7 +654,7 @@ additional terms may apply.  By using this site, you agree to the <a href="https
 		  treeWalker.currentNode.draggable = "true";
 	      } while (treeWalker.nextNode());
 	  }
-	  //biwa.evaluate('(js-call (js-eval "makeDraggable") (getelem1 "#canvas"))', function(result) { console.log(result); });
+	  //biwa.evaluate('(js-call (js-eval "makeDraggable") (getelem1 "#draggables"))', function(result) { console.log(result); });
       };
     </script>
     <div>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-173606225-1');
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#222127">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>web-call.cc</title>
+
+    <link href="gui.css" rel="stylesheet" type="text/css">
+
+    <script src="custom-elements/custom-elements.min.js"></script>
+    <script src="themes/dojo/dojo-6.0.0.js"></script>
+    <script src="in-browser-gui.js"></script>
+    <script>
+      var biwa;
+      window.onload = function() {
+          var onError = function(e){ console.error(e); }
+          biwa = new BiwaScheme.Interpreter(onError);
+          biwa.evaluate('(load "in-browser-program.scm")\
+                         (js-call% "setDraggability" (getelem1 ".draggables") "true")\
+                         (reset (test))',
+                        function(result) { console.log('Scheme loaded.'); });
+      };
+    </script>
+  </head>
+  <body>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color"></style>
+    </custom-style>
+    
+    <vaadin-app-layout style="overflow: auto;">
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <vaadin-tabs selected="1" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+        <vaadin-tab>
+          <iron-icon icon="vaadin:home"></iron-icon>
+          <a href="index.html">Demo #1: live DOM editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          Demo #2: programming
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="index2.html">Other experimental code</a>
+        </vaadin-tab>
+      </vaadin-tabs>
+      
+      <div class="content" style="max-width:560px; overflow: auto;">
+        <h1>web-call.cc demo #2</h1>
+	<h2 style="margin:0.2em 0 0 0;"><a href="https://doc.mashweb.club/">Zen</a> visual program editor</h2>
+        <h3 style="margin:0.2em 0em 0em 0em;">Alpha prototype</h3>
+        <vaadin-details id="explanation">
+          <div slot="summary"><span id="exstate"></span></div>
+	  Drag blocks into the light gray buffer to form a program. Click 'Run' to run the program.
+        </vaadin-details>
+
+	<div style="padding:1em 0 1em 12.35em;">
+	  <dojo-button id="dojoEnabledToggleButton">Run my program</dojo-button>
+	</div>
+	<div class="draggables" style="padding:0.2em 0 0.2em 2.1em; background-color:lightblue;">
+	  <dojo-button>my program</dojo-button>
+	  <dojo-button>function</dojo-button>
+	  <dojo-button>begin</dojo-button>
+	  <dojo-button>let*</dojo-button>
+	  <dojo-button>#t</dojo-button>
+	  <dojo-button>#f</dojo-button>
+	  <dojo-button>not</dojo-button>
+	  <dojo-button>and</dojo-button>
+	  <dojo-button>or</dojo-button>
+	  <dojo-button>if</dojo-button>
+	  <dojo-button>case</dojo-button>
+	  <dojo-button>while</dojo-button><br/>
+	  <dojo-button>=</dojo-button>
+	  <dojo-button><</dojo-button>
+	  <dojo-button><=</dojo-button>
+	  <dojo-button>></dojo-button>
+	  <dojo-button>>=</dojo-button><br/>
+	  <dojo-button>with-handlers</dojo-button>
+          <div id="progbuffer" class="workarea">
+          </div>
+	</div>
+
+      </div>
+    </vaadin-app-layout>
+    
+    <script src="js/biwascheme-0.6.9-min.js"></script>
+    <script src="bundle.js"></script>
+    <script async src="widgets/icon-6.0.0.js"></script>
+    <script async src="widgets/button-6.0.0.js"></script>
+    <script src="js/widgets-control.js"></script>
+  </body>
+</html>

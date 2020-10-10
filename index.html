@@ -27,7 +27,7 @@
           var onError = function(e){ console.error(e); }
           biwa = new BiwaScheme.Interpreter(onError);
           biwa.evaluate('(load "in-browser-gui.scm")\
-                         (js-call% "makeDraggable" (getelem1 "#canvas"))\
+                         (js-call% "setDraggability" (getelem1 "#draggables") "true")\
                          (reset (test))',
                         function(result) { console.log('Scheme loaded.'); });
       };
@@ -102,7 +102,7 @@
           <button id="save" class="ghosted">Save</button>
         </div>
 
-        <div id="canvas">
+        <div id="draggables" class="canvas">
           <div class="ex">Native HTML Elements
             <div class="ex pink" id="block1">Block 1
               <div class="ex lightorange" id="block1a">Block1a</div>
@@ -220,9 +220,7 @@
       </div>
     </vaadin-app-layout>
     
-    <div>
-      <script src="js/biwascheme-0.6.9-min.js"></script>
-    </div>
+    <script src="js/biwascheme-0.6.9-min.js"></script>
     <script src="bundle.js"></script>
     <script async src="widgets/icon-6.0.0.js"></script>
     <script async src="widgets/button-6.0.0.js"></script>

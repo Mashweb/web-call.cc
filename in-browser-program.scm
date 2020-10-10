@@ -16,95 +16,75 @@
 ; along with web-call.cc.  If not, see <https://www.gnu.org/licenses/>.
 
 (load "browser-util.scm")
-(load "config.scm")
-;;(console-log (format #f "zen-db => " zen-db))
 
-(define (message str)
-  ;;(console-log (format #f "Message: ~a" str))
-  (js-set! (getelem1 "#message") "innerHTML"
-	   (string-append "<span class='message'>" str "</span>")))
-
+(define (atom? x)
+  (and (not (pair? x)) (not (null? x))))
+  
 (define (test)
-  (let loop1
-      ((op #f)
-       (selector #f)
-       (drop-effect #f)
-       (unfinished #t))
-    
-    (message "Press one of DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded area of the page. (Currently the bluish gray buttons are disabled.)")
-    (let loop1a
-	()
-      (with-handlers ((click-handler "#add")
-		      (click-handler "#copyx")
-		      (click-handler "#copy-before")
-		      (click-handler "#paste")
-		      (click-handler "#move")
-		      (click-handler "#move-before")
-		      (click-handler "#delete")
-		      (click-handler "#undo")
-		      (click-handler "#redo")
-		      (click-handler "#save"))
-	(let* ((input (get-input))
-	       (event-type (js-ref (first input) "name"))
-	       (jquery-event (second input)))
-	  (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
-	  (case op
-	    (("Copy-insert")
-	     (set! drop-effect "copy")
-	     (set! op "copy"))
-	    (("Copy-before")
-	     (set! drop-effect "copy")
-	     (set! op "copybefore"))
-	    (("Move-insert")
-	     (set! drop-effect "move")
-	     (set! op "move"))
-	    (("Move-before")
-	     (set! drop-effect "move")
-	     (set! op "movebefore"))
-	    (("Save")
-	     (http-post-text (string-append zen-db "/doms")
-			     (dom->string (getelem1 "div#draggables"))))
-	    (else
-	     (message "Unimplemented operation. Please press a different DOM-edit-tool button.")
-	     (loop1a))))))
+  (define jquery-event #f)
+  (define input #f)
+  (define event-type #f)
+  (define dragstart-target #f)
+  (define dragover-target #f)
+  (define drop-target #f)
+  (define finished #f)
+  (define run-button (getelem1 "dojo-button:contains('Run my program')"))
+  (define atom #f)
 
-    (message "Now try dragging and dropping an HTML element.")
-	
-    (while unfinished
-      (with-handlers ((dragstart-handler "#draggables")
-		      (dragover-handler "#draggables")
-		      (dragleave-handler "#draggables")
-		      (drop-handler "#draggables"))
-	(let* ((input (get-input))
-	       (event-type (js-ref (first input) "name"))
-	       (jquery-event (second input)) ;; The generic parts of an event.
-	       (dragged #f)
-	       (dragover-target #f)
-	       (dragleave-target #f))
+  (js-set! run-button "pressed" #f)
+  
+  (while #t
+    (begin
+      (js-call% "setDraggability" (getelem1 ".draggables") "true")
+      (with-handlers ((dragstart-handler ".draggables > dojo-button"))
+	(set! input (get-input))
+	(set! jquery-event (second input)) ;; The generic parts of an event.
+	(set! dragstart-target (js-ref jquery-event "srcElement")))
+      (js-call% "setDraggability" (getelem1 ".draggables") "false")
+
+      (set! finished #f)
+      (while (not finished)
+	(with-handlers ((dragover-handler "#progbuffer")
+			(dragleave-handler "#progbuffer")
+			(drop-handler "#progbuffer"))
+	  (set! input (get-input))
+	  (set! event-type (js-ref (first input) "name"))
+	  (console-log (format #f "event-type => ~a" event-type))
+	  (set! jquery-event (second input)) ;; The generic parts of an event.
 	  (case event-type
-	    (("dragstart")
-	     (set! dragged (js-ref jquery-event "target"))
-	     (console-log (format #f "dragged tagName => ~a" (js-ref dragged "tagName")))
-	     (set! selector (js-call% "finder" dragged))
-	     (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
-	     (element-add-class-name! dragged "dragged"))
 	    (("dragover")
 	     (js-invoke jquery-event "preventDefault")
 	     (js-invoke jquery-event "stopPropagation")
 	     (set! dragover-target (js-ref jquery-event "srcElement"))
 	     (element-add-class-name! dragover-target "dragover")
-	     ;; Assume op is "Copy" or "Move".
-	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" drop-effect))
+	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" "copy"))
 	    (("dragleave")
 	     (set! dragover-target (js-ref jquery-event "target"))
 	     (element-remove-class-name! dragover-target "dragover"))
 	    (("drop")
 	     (js-invoke jquery-event "preventDefault")
-	     (unless (perform-operation op jquery-event)
-	       (loop1a))
-	     (message (format #f "~a operation complete." op))
-	     (set! unfinished #f))))))
-    (loop1)))
+	     (set! drop-target (js-ref jquery-event "target"))
+	     (element-remove-class-name! dragover-target "dragover")
+	     (console-log (format #f "drop: drop-target => ~a" drop-target))
+	     (set! atom (js-ref dragstart-target "innerText"))
+	     (js-call% "appendHTML"
+		       drop-target
+		       (string-append "<div class='ex'>" (js-ref dragstart-target "innerText") "</div>"))
+	     (if (eq? atom "=")
+		 (input-2-numbers drop-target)
+		 (console-log (format #f "Picked ~a" atom)))
+	     (console-log "Dropped ...")
+	     (set! finished #t))))))))
+
+(define (input-2-numbers target)
+  (console-log "input-2-numbers")
+  ;;(js-eval "document.body.focus()")
+  ;;(js-eval "$(document).on('keyup', function (e) { console.log(e.keyCode); });")
+  ;;(console-log "After js-eval")
+  (with-handlers ((keypress-handler "body"))
+    (console-log (get-input))
+    (console-log (get-input)))
+  (console-log "input-2-numbers finished"))
 
 ;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
 ;; unmassaged by jQuery.
