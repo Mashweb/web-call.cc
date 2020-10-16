@@ -162,11 +162,12 @@ findTrueTarget = function(element) {
 */
 
 appendHTML = function(location, html) {
-    $(location).append(html);
+    return $(location).append(html);
 }
 
 elementTag = function(elem) {
     // Thanks, Aaron Gillion. https://stackoverflow.com/a/34639030
+    // FIXME: Check this.
     return elem.innerHTML ? elem.outerHTML.slice(0,elem.outerHTML.indexOf(elem.innerHTML)) : elem.outerHTML;
 }
 

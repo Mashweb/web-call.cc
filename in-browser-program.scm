@@ -1,27 +1,48 @@
-; Copyright (C) 2020 Thomas Elam
-;
-; This file is part of web-call.cc.
-;
-; web-call.cc is free software: you can redistribute it and/or modify
-; it under the terms of the GNU General Public License as published by
-; the Free Software Foundation, either version 3 of the License, or
-; (at your option) any later version.
-;
-; web-call.cc is distributed in the hope that it will be useful,
-; but WITHOUT ANY WARRANTY; without even the implied warranty of
-; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-; GNU General Public License for more details.
-;
-; You should have received a copy of the GNU General Public License
-; along with web-call.cc.  If not, see <https://www.gnu.org/licenses/>.
+;; Copyright (C) 2020 Thomas Elam
+;;
+;; This file is part of web-call.cc.
+;;
+;; web-call.cc is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+;;
+;; web-call.cc is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; You should have received a copy of the GNU General Public License
+;; along with web-call.cc.  If not, see <https://www.gnu.org/licenses/>.
 
 (load "browser-util.scm")
 
-(define (atom? x)
-  (and (not (pair? x)) (not (null? x))))
-  
+(define (get-word whence)
+  (let ((textarea (element-new '(textarea id "word" rows "1" cols "30" autofocus "autofocus"))))
+    (element-append-child! whence textarea)
+    (sleep 0.1) ;; FIXME
+    (with-handlers ((keyup-handler "#word"))
+      (let ((jq-event #f)
+	    (char-code #f)
+	    (finished #f)
+	    (str #f))
+	(while (not finished)
+	       (begin
+		 (set! jq-event (second (get-input)))
+		 (set! str (js-ref textarea "value"))
+		 (set! char-code
+		       (if (js-undefined? (js-ref jq-event "which"))
+			   (js-ref jq-event "keyCode") ; For IE8
+			   (js-ref jq-event "which")))
+		 (if (eq? char-code 13)
+		     (begin
+		       (set! str (substring str 0 (- (string-length str) 1)))
+		       (set! finished #t)))))
+	(element-remove! textarea)
+	str))))
+
 (define (test)
-  (define jquery-event #f)
+  (define jq-event #f) ; JavaScript event as massaged by jQuery
   (define input #f)
   (define event-type #f)
   (define dragstart-target #f)
@@ -29,7 +50,8 @@
   (define drop-target #f)
   (define finished #f)
   (define run-button (getelem1 "dojo-button:contains('Run my program')"))
-  (define atom #f)
+  (define keyword #f)
+  (define elem #f)
 
   (js-set! run-button "pressed" #f)
   
@@ -38,63 +60,58 @@
       (js-call% "setDraggability" (getelem1 ".draggables") "true")
       (with-handlers ((dragstart-handler ".draggables > dojo-button"))
 	(set! input (get-input))
-	(set! jquery-event (second input)) ;; The generic parts of an event.
-	(set! dragstart-target (js-ref jquery-event "srcElement")))
+	(set! jq-event (second input)) ;; The generic parts of an event.
+	(set! dragstart-target (js-ref jq-event "srcElement")))
       (js-call% "setDraggability" (getelem1 ".draggables") "false")
 
       (set! finished #f)
+      (set! keyword #f)
       (while (not finished)
+	(begin
 	(with-handlers ((dragover-handler "#progbuffer")
 			(dragleave-handler "#progbuffer")
 			(drop-handler "#progbuffer"))
 	  (set! input (get-input))
 	  (set! event-type (js-ref (first input) "name"))
-	  (console-log (format #f "event-type => ~a" event-type))
-	  (set! jquery-event (second input)) ;; The generic parts of an event.
+	  ;;(console-log (format #f "event-type => ~a" event-type))
+	  (set! jq-event (second input)) ;; The generic parts of an event.
 	  (case event-type
 	    (("dragover")
-	     (js-invoke jquery-event "preventDefault")
-	     (js-invoke jquery-event "stopPropagation")
-	     (set! dragover-target (js-ref jquery-event "srcElement"))
+	     (js-invoke jq-event "preventDefault")
+	     (js-invoke jq-event "stopPropagation")
+	     (set! dragover-target (js-ref jq-event "srcElement"))
 	     (element-add-class-name! dragover-target "dragover")
-	     (js-set! (get-data-transfer-obj jquery-event) "dropEffect" "copy"))
+	     (js-set! (get-data-transfer-obj jq-event) "dropEffect" "copy"))
 	    (("dragleave")
-	     (set! dragover-target (js-ref jquery-event "target"))
+	     (set! dragover-target (js-ref jq-event "target"))
 	     (element-remove-class-name! dragover-target "dragover"))
 	    (("drop")
-	     (js-invoke jquery-event "preventDefault")
-	     (set! drop-target (js-ref jquery-event "target"))
+	     (js-invoke jq-event "preventDefault")
+	     (set! drop-target (js-ref jq-event "target"))
 	     (element-remove-class-name! dragover-target "dragover")
-	     (console-log (format #f "drop: drop-target => ~a" drop-target))
-	     (set! atom (js-ref dragstart-target "innerText"))
-	     (js-call% "appendHTML"
-		       drop-target
-		       (string-append "<div class='ex'>" (js-ref dragstart-target "innerText") "</div>"))
-	     (if (eq? atom "=")
-		 (input-2-numbers drop-target)
-		 (console-log (format #f "Picked ~a" atom)))
-	     (console-log "Dropped ...")
-	     (set! finished #t))))))))
-
-(define (input-2-numbers target)
-  (console-log "input-2-numbers")
-  ;;(js-eval "document.body.focus()")
-  ;;(js-eval "$(document).on('keyup', function (e) { console.log(e.keyCode); });")
-  ;;(console-log "After js-eval")
-  (with-handlers ((keypress-handler "body"))
-    (console-log (get-input))
-    (console-log (get-input)))
-  (console-log "input-2-numbers finished"))
+	     (console-log (format #f "drop: drop-target => ~a" (js-ref drop-target "outerHTML")))
+	     (set! keyword (js-ref dragstart-target "innerText"))
+	     ;;(console-log (format #f "keyword => ~a" keyword))
+	     (if (eq? keyword "=")
+		 (begin
+		   (js-call% "appendHTML" drop-target "<div class='ex'>= </div>")
+		   (set! elem (js-ref drop-target "lastChild")) ; FIXME: Why won't lastChildElement work?
+		   (console-log (format #f "drop: elem => ~a" (js-ref elem "outerHTML")))
+		   (js-set! elem "innerHTML" (string-append (js-ref elem "innerHTML") (get-word elem))))
+		 (js-call% "appendHTML"
+			   drop-target
+			   (string-append "<div class='ex'>" keyword "</div>")))
+	     (set! finished #t)))))))))
 
 ;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
 ;; unmassaged by jQuery.
-(define (get-original-event jquery-event)
-  (js-ref jquery-event "originalEvent"))
+(define (get-original-event jq-event)
+  (js-ref jq-event "originalEvent"))
 
 ;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
-(define (get-data-transfer-obj jquery-event)
+(define (get-data-transfer-obj jq-event)
   ;; FIXME: Is it really necessary to dereference twice?
-  (js-ref (js-ref jquery-event "originalEvent") "dataTransfer"))
+  (js-ref (js-ref jq-event "originalEvent") "dataTransfer"))
 
 (define (perform-operation op jq-ev)
   (let* ((target (js-ref jq-ev "target"))
