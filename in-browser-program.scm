@@ -21,23 +21,26 @@
   (let ((textarea (element-new '(textarea id "word" rows "1" cols "30" autofocus "autofocus"))))
     (element-append-child! whence textarea)
     (sleep 0.1) ;; FIXME
+    (js-set! textarea "value" "Enter argument here")
+    (sleep 1)
+    ;;(console-dir textarea)
     (with-handlers ((keyup-handler "#word"))
       (let ((jq-event #f)
 	    (char-code #f)
 	    (finished #f)
 	    (str #f))
 	(while (not finished)
-	       (begin
-		 (set! jq-event (second (get-input)))
-		 (set! str (js-ref textarea "value"))
-		 (set! char-code
-		       (if (js-undefined? (js-ref jq-event "which"))
-			   (js-ref jq-event "keyCode") ; For IE8
-			   (js-ref jq-event "which")))
-		 (if (eq? char-code 13)
-		     (begin
-		       (set! str (substring str 0 (- (string-length str) 1)))
-		       (set! finished #t)))))
+	  (begin
+	    (set! jq-event (second (get-input)))
+	    (set! str (js-ref textarea "value"))
+	    (set! char-code
+		  (if (js-undefined? (js-ref jq-event "which"))
+		      (js-ref jq-event "keyCode") ; For IE8
+		      (js-ref jq-event "which")))
+	    (if (eq? char-code 13)
+		(begin
+		  (set! str (substring str 0 (- (string-length str) 1)))
+		  (set! finished #t)))))
 	(element-remove! textarea)
 	str))))
 
