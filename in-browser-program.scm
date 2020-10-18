@@ -17,32 +17,158 @@
 
 (load "browser-util.scm")
 
-(define (get-word whence)
-  (let ((textarea (element-new '(textarea id "word" rows "1" cols "30" autofocus "autofocus"))))
+(define-macro (str-rm-last-char! str)
+  `(begin
+     (set! ,str (substring ,str 0 (- (string-length ,str) 1)))
+     ,str))
+
+;; FIXME: The logic in this function is rather complex. Check it.
+;;
+;; We will not try to support fully standard Scheme datum syntax, but here is a reference to the symbol syntax:
+;;
+;; The formal grammar of Scheme variables as defined in TSPL4:
+;; <symbol>      --> <initial> <subsequent>*
+;; <initial>     --> <letter> | ! | $ | % | & | * | / | : | < | = | > | ? | ~ | _ | ^
+;;                            | <Unicode Lu, Ll, Lt, Lm, Lo, Mn, Nl, No, Pd, Pc, Po, Sc, Sm, Sk, So, or Co>
+;;                            | \x <hex scalar value>
+;; <subsequent>  --> <initial> | <digit 10> | . | + | - | @ | <Unicode Nd, Mc, or Me>
+;; <letter>      --> a | b | ... | z | A | B | ... | Z
+(define (get-word whence prompt)
+  (let ((textarea (element-new '(textarea id "word" rows "1" cols "42"))))
     (element-append-child! whence textarea)
     (sleep 0.1) ;; FIXME
-    (js-set! textarea "value" "Enter argument here")
-    (sleep 1)
-    ;;(console-dir textarea)
+    (js-set! textarea "value" prompt)
+    (js-invoke textarea "focus")
+    (js-set! textarea "selectionEnd" 0)
     (with-handlers ((keyup-handler "#word"))
-      (let ((jq-event #f)
-	    (char-code #f)
+      (let ((char #f)
 	    (finished #f)
-	    (str #f))
-	(while (not finished)
-	  (begin
-	    (set! jq-event (second (get-input)))
-	    (set! str (js-ref textarea "value"))
-	    (set! char-code
-		  (if (js-undefined? (js-ref jq-event "which"))
-		      (js-ref jq-event "keyCode") ; For IE8
-		      (js-ref jq-event "which")))
-	    (if (eq? char-code 13)
-		(begin
-		  (set! str (substring str 0 (- (string-length str) 1)))
-		  (set! finished #t)))))
+	    (aborted #f)
+	    (str #f)
+	    (real-num #f)
+	    (first-char #t)
+	    (got-sym #f))
+
+	;; Get and examine the first character
+	
+	(set! char (get-char))
+	(console-log (format #f "char => ~a" char))
+	(set! str (extract-text textarea))
+	
+	(case char
+	  ((43 189 46 48 49 50 51 52 53 54 55 56 57) ; First character is +, -, ., or digit.
+
+	   ;; Getting number
+
+	   (begin
+	     ;; Upon getting the first key, clear the prompt.
+	     (clear-prompt! textarea)
+	     (set! str (extract-text textarea))
+	     (while (not finished)
+	       (begin
+		 (set! char (get-char))
+		 (set! str (extract-text textarea))
+		 
+		 (case char
+		   ((8)     ; FIXME: This is just to test to see if a BACKSPACE can be input.
+		    (console-log "BACKSPACE"))
+		   
+		   ((13 32) ; RETURN, SPACE. Considered terminator characters.
+		    (set! finished #t)
+		    (str-rm-last-char! str))
+
+		   ((27)    ; ESCAPE. Considered an abort character.
+		    (set! finihed #t)
+		    (set! aborted #t)
+		    (set-rm-last-char! str))
+		   
+		   ((46)    ; Period
+		    (if real-num
+			(str-rm-last-char! str)          ; Remove extraneous '.'.
+			(set! real-num #t)))
+		   
+		   ((43 45) ; +, -
+		    (if first-char
+			(set! signed #t)
+			(str-rm-last-char! str)))        ; Remove extraneous sign.
+		   
+		   ((48 49 50 51 52 53 54 55 56 57) ;; Digit.
+		    (console-log "digit"))
+
+		   (else
+		    (str-rm-last-char! str)))
+		 (set! first-char #f)))))        ; Remove extraneous character.
+
+	  ;; Testing for symbol
+	  
+	  (else
+	   (case char
+	     ((33 36 37 38 42 47 58 60 61 62 63 126 95 94)  ; !, $, %, &, *, /, :, <, =, >, ?, ~, _, ^
+	      (console-log "symbol name initial character, not letter")
+	      (set! got-sym #t))
+
+	     (else
+	      (if (letter? char)
+		  (set! got-sym #t)
+		  (begin
+		    (console-log "initial character not of number or symbol")
+		    (clear-prompt! textarea)
+		    (set! str "")))))
+
+	   (if (and got-sym (not finished))
+
+	       ;; Getting symbol
+
+	       (begin
+		 
+		 ;; Upon getting the first key, clear the prompt.
+		 (clear-prompt! textarea)
+		 (set! str (extract-text textarea))
+		 (while (not finished)
+		   (begin
+		     (set! char (get-char))
+		     (set! str (extract-text textarea))
+
+		     (case char
+		       ((48 49 50 51 52 53 54 55 56 57)  ; Digit
+			(console-log "digit"))
+
+		       ((13 32) ; RETURN, SPACE. Considered terminator characters.
+			(set! finished #t)
+			(str-rm-last-char! str))
+
+		       ((27)    ; ESCAPE. Considered a cancel character.
+			(set! finihed #t)
+			(set! aborted #t)
+			(set-rm-last-char! str))
+		   
+		       (else
+			(if (letter? char)
+			    (console-log "letter")
+			    (str-rm-last-char! str))))
+		     (set! first-char #f)))))))
+
 	(element-remove! textarea)
 	str))))
+
+(define (letter? char)
+  (or
+   (and (> char 64) (< char 91))   ;; [A-Z]
+   (and (> char 96) (< char 123)))) ;; [a-z]
+	    
+(define (get-char)
+  (event->charcode (second (get-input))))
+
+(define (event->charcode jq-event)
+  (js-ref jq-event (if (js-undefined? (js-ref jq-event "which"))
+		       "keyCode" ; For IE8
+		       "which")))
+
+(define (extract-text textarea)
+  (js-ref textarea "value"))
+  
+(define (clear-prompt! textarea)
+  (js-set! textarea "value" (substring (js-ref textarea "value") 0 1)))
 
 (define (test)
   (define jq-event #f) ; JavaScript event as massaged by jQuery
@@ -52,7 +178,7 @@
   (define dragover-target #f)
   (define drop-target #f)
   (define finished #f)
-  (define run-button (getelem1 "dojo-button:contains('Run my program')"))
+  (define run-button (getelem1 "dojo-button:contains('Run your program')"))
   (define keyword #f)
   (define elem #f)
 
@@ -100,53 +226,18 @@
 		   (js-call% "appendHTML" drop-target "<div class='ex'>= </div>")
 		   (set! elem (js-ref drop-target "lastChild")) ; FIXME: Why won't lastChildElement work?
 		   (console-log (format #f "drop: elem => ~a" (js-ref elem "outerHTML")))
-		   (js-set! elem "innerHTML" (string-append (js-ref elem "innerHTML") (get-word elem))))
+		   (js-set! elem "innerHTML"
+			    (string-append (js-ref elem "innerHTML")
+					   (get-word elem "Enter argument here, or cancel using ESCAPE.")))
+		   (js-set! elem "innerHTML"
+			    (string-append (js-ref elem "innerHTML")
+					   " " (get-word elem "Enter argument here, or cancel using ESCAPE."))))
 		 (js-call% "appendHTML"
 			   drop-target
 			   (string-append "<div class='ex'>" keyword "</div>")))
 	     (set! finished #t)))))))))
 
-;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
-;; unmassaged by jQuery.
-(define (get-original-event jq-event)
-  (js-ref jq-event "originalEvent"))
-
 ;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
-(define (get-data-transfer-obj jq-event)
+(define (get-data-transfer-obj jquery-event)
   ;; FIXME: Is it really necessary to dereference twice?
-  (js-ref (js-ref jq-event "originalEvent") "dataTransfer"))
-
-(define (perform-operation op jq-ev)
-  (let* ((target (js-ref jq-ev "target"))
-	 (dragged-selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
-	 (dragged (getelem1 dragged-selector))
-	 ;;(parent (js-ref target "parentNode"))
-	 (parent (js-ref (js-call% "findTrueTarget" target) "parentNode")) ;; TODO: Check whether this is correct.
-	 (is-custom-element #f)
-	 (tagName ""))
-    (console-log (format #f "perform-operation ~a" op))
-    (element-remove-class-name! dragged "dragged")
-    (element-remove-class-name! target "dragover")
-    (console-log (format #f "dragged-selector => ~a" dragged-selector))
-    (case op
-      (("copy")
-       (console-log "copy")
-       (js-invoke target "appendChild" (js-call% "cloneDOM" dragged)))
-      (("copybefore")
-       (begin
-	 ;;(console-dir (js-call% "cloneDOM" dragged))
-	 ;;(console-log "called console-dir")
-	 (console-log "parent:")
-	 (console-dir parent)
-	 (console-log "target:")
-	 (console-dir target)
-	 (js-invoke parent "insertBefore" (js-call% "cloneDOM" dragged) (js-call% "findTrueTarget" target))
-	 ))
-      (("move")
-       (if (js-invoke dragged "contains" target)
-	   (alert "Invalid operation: dragged element contains itself.")
-	   (js-invoke target "appendChild" dragged)))
-      (("movebefore")
-       (if (js-invoke dragged "contains" parent)
-	   (alert "Invalid operation: dragged element contains itself.")
-	   (js-invoke parent "insertBefore" dragged target))))))
+  (js-ref (js-ref jquery-event "originalEvent") "dataTransfer"))
