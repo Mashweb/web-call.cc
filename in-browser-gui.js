@@ -17,6 +17,7 @@ setDraggability = function (node, value) {
 	    treeWalker.currentNode.removeAttribute("draggable");
 	}
     } while (treeWalker.nextNode());
+    node.removeAttribute("draggable"); // Consider node to be only a container of draggables.
 }
 
 // cloneDOM

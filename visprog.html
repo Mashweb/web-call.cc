@@ -44,6 +44,7 @@
     <vaadin-app-layout style="overflow: auto;">
       <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar">&nbsp;&nbsp;web-call.cc</h2>
       <vaadin-tabs selected="1" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
@@ -60,18 +61,20 @@
       </vaadin-tabs>
       
       <div class="content" style="max-width:560px; overflow: auto;">
-        <h1>web-call.cc demo #2</h1>
-	<h2 style="margin:0.2em 0 0 0;"><a href="https://doc.mashweb.club/">Zen</a> visual program editor</h2>
-        <h3 style="margin:0.2em 0em 0em 0em;">Alpha prototype</h3>
+	<h2 style="margin:0.2em 0 0 0;">Demo #2: <a href="https://doc.mashweb.club/">Zen</a> visual programming</h2>
         <vaadin-details id="explanation">
           <div slot="summary"><span id="exstate"></span></div>
-	  Drag blocks into the light gray buffer to form a program. Click 'Run' to run the program.
+	  Drag blocks into the light gray buffer to form a program. Click 'Run your program' to run the program.
+	  This demo uses an alpha prototype of the Zen visual program editor.
         </vaadin-details>
 
 	<div style="padding:1em 0 1em 12.35em;">
-	  <dojo-button id="dojoEnabledToggleButton">Run my program</dojo-button>
+	  <dojo-button id="dojoEnabledToggleButton">Run your program</dojo-button>
 	</div>
 	<div class="draggables" style="padding:0.2em 0 0.2em 2.1em; background-color:lightblue;">
+	  Your program:
+          <div id="progbuffer" class="workarea"></div>
+	  Drag some of these forms into your program:<br/>
 	  <dojo-button>alert</dojo-button>
 	  <dojo-button>function</dojo-button>
 	  <dojo-button>begin</dojo-button>
@@ -93,8 +96,7 @@
 	  <dojo-button><</dojo-button>
 	  <dojo-button>></dojo-button><br/>
 	  <dojo-button>with-handlers</dojo-button>
-	  <dojo-button>getchar</dojo-button>
-          <div id="progbuffer" class="workarea"></div>
+	  <dojo-button>getchar</dojo-button><br/>
 	</div>
 
       </div>

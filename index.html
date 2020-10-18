@@ -42,10 +42,11 @@
     <vaadin-app-layout style="overflow: auto;">
       <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar">&nbsp;&nbsp;web-call.cc</h2>
       <vaadin-tabs slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
-          Demo #1
+          Demo #1: live DOM editing
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list" selected></iron-icon>
@@ -58,8 +59,7 @@
       </vaadin-tabs>
       
       <div class="content" style="max-width:560px; overflow: auto;">
-        <h1>web-call.cc demo #1</h1>
-        <h2 style="margin:0.2em 0em 0em 0em;">Alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor</h2>
+        <h2 style="margin:0.2em 0em 0em 0em;">Demo #1: <a href="https://doc.mashweb.club/">Zen</a> live DOM editing</h2>
         <vaadin-details id="definitions">
           <div slot="summary"><span id="defstate"></span></div>
 
@@ -79,8 +79,8 @@
               A useful live DOM editor should also probably be able to add and delete DOM elements.
               A useful DOM editor will likely be able to persist these changes
               by saving them locally or on the web server.</dd>
-            <dt><i><b>What is the alpha prototype of the Zen live DOM editor?</b></i></dt> <dd>This page,
-              containing the alpha prototype of the Zen live DOM editor, is a demonstration of a
+            <dt><i><b>What is this demo of live DOM editing?</b></i></dt> <dd>This page,
+              containing the alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor, is a demonstration of a
               <a href="http://localhost/dev/my-repos-on-github/web-call.cc/in-browser-gui.scm">
                 very clear and simple way</a> to program a complex GUI
               (graphical user interface). Being an alpha prototype, it still has bugs
