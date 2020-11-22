@@ -8,6 +8,7 @@
 customElements.whenDefined('vaadin-details').then(function() {
     const details1 = document.querySelector('#definitions');
     const details2 = document.querySelector('#explanation');
+    const bsconsole = document.querySelector('#bsconsole');
 
     if (details1) {
 	details1.addEventListener('opened-changed', function(e) {
@@ -20,6 +21,11 @@ customElements.whenDefined('vaadin-details').then(function() {
 	document.getElementById('exstate').textContent = e.detail.value ? "Hide explanation" : "Show explanation";
     });
     details2.opened = null;
+    
+    bsconsole.addEventListener('opened-changed', function(e) {
+	document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "Show Biwascheme console";
+    });
+    bsconsole.opened = null;
 });
 
 // Dojo Buttons

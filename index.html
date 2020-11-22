@@ -40,9 +40,12 @@
     </custom-style>
     
     <vaadin-app-layout style="overflow: auto;">
+
       <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar">&nbsp;&nbsp;web-call.cc</h2>
+
       <vaadin-tabs slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
@@ -60,9 +63,9 @@
       
       <div class="content" style="max-width:560px; overflow: auto;">
         <h2 style="margin:0.2em 0em 0em 0em;">Demo #1: <a href="https://doc.mashweb.club/">Zen</a> live DOM editing</h2>
+
         <vaadin-details id="definitions">
           <div slot="summary"><span id="defstate"></span></div>
-
           <dl>
             <dt><i><b>What is a DOM?</b></i></dt> <dd>When a web page is loaded, the browser creates a Document Object
               Model (DOM) of the page. The DOM is basically just a tree of text objects
@@ -80,7 +83,8 @@
               A useful DOM editor will likely be able to persist these changes
               by saving them locally or on the web server.</dd>
             <dt><i><b>What is this demo of live DOM editing?</b></i></dt> <dd>This page,
-              containing the alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor, is a demonstration of a
+              containing the alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor,
+	      is a demonstration of a
               <a href="http://localhost/dev/my-repos-on-github/web-call.cc/in-browser-gui.scm">
                 very clear and simple way</a> to program a complex GUI
               (graphical user interface). Being an alpha prototype, it still has bugs
@@ -221,7 +225,9 @@
               please visit <a href="Mashweb.Club">Mashweb.Club</a>.</p>
           </div>
         </vaadin-details>
-      </div>
+
+      </div> <!-- class="content" -->
+
     </vaadin-app-layout>
     
     <script src="js/biwascheme-0.6.9-min.js"></script>

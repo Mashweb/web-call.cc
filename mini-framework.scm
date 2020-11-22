@@ -16,7 +16,8 @@
 ;; along with web-call.Cc.  If not, see <https://www.gnu.org/licenses/>.
 
 ;; Everything in this file below this sentence except for the function nth
-;; was programmed by Alexander Sukhoverkhov (naryl.pandora@gmail.com).
+;; and the macro str-rm-last-char! was programmed by Alexander Sukhoverkhov
+;; (naryl.pandora@gmail.com).
 
 ;;;; shift-reset
 
@@ -205,7 +206,14 @@
 (define-event-handler dragleave-handler dragleave)
 (define-event-handler drop-handler drop)
 
-;;;; get-input
+;;;; get user input
 
 (define-macro (get-input)
   `(shift c (set! input-listener-cont c)))
+
+;;;; strings
+
+(define-macro (str-rm-last-char! str)
+  `(begin
+     (set! ,str (substring ,str 0 (- (string-length ,str) 1)))
+     ,str))
