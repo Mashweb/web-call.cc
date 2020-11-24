@@ -1,0 +1,5 @@
+# Allow all bots to crawl this website.
+User-agent: *
+Allow: /
+
+Sitemap: http://web-call.cc/sitemap.xml
