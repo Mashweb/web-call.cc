@@ -1,6 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
+  <meta name="description" content="Dynamic stylesheet demonstration">
+  <meta name="keywords" content="demo, proof of concept, constructed stylesheet, dynamic stylesheet, style cascade">
+  <meta name="author" content="Sam Foster for Sitepen, lightly edited by Tom Elam">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
   <script>
@@ -10,8 +15,8 @@
 
     gtag('config', 'UA-173606225-1');
   </script>
-  <title>Dynamic Stylesheets: Split Panel Demo</title>
-  <style type="text/css">
+  <title>web-call.cc | Dynamic Stylesheets</title>
+  <style>
     body {
 	font-family:"Lucida Grande","Verdana","Arial","Helvetica",sans-serif;
 	font-size:13px;
@@ -112,8 +117,8 @@
 	width: 70%;
     }
   </style>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js"></script>
-  <script type="text/javascript">
+  <script src="https://ajax.googleapis.com/ajax/libs/dojo/1.13.0/dojo/dojo.js"></script>
+  <script>
     dojo.require("dojo.dnd.move");
     dojo.require("dojo.string");
     dojo.require("dojox.html.styles");
@@ -290,10 +295,41 @@
 <body>
   <h1>Dynamic Stylesheet Demo</h1>
 
-  <p>Using a draggable nubbin, update dynamic stylesheet for 2 panels. 
-  The point is to keep the element style in the cascade.
-  The presets buttons replace the 'userProportion' class on the container with one of a few predefined
-  rule groups in the stylesheet</p>
+  <p>In this demo or proof of concept, the user can construct and manipulate a stylesheet dynamically.
+    She can do this by dragging the little blue, downward-pointing arrowhead to the left or right.
+    New rows can be added by pressing the plus ('+') sign at the right of the page.
+    No styles have to be copied to the DIV elements in the added rows
+    because the column style is kept in the cascade using the constructed stylesheet.
+    (In the Google Chrome web browser's Developer Tools, the styles of the DIVs having
+    class "column-1" or "column-2" are clearly labeled as being in a constructed stylesheet.)</p>
+
+  <p>The preset buttons replace the 'userProportion' class on the container with one of a few predefined
+    rule groups in the stylesheet.</p>
+
+  <p>The demo is more fully explained in
+    <a href="https://www.sitepen.com/blog/dynamic-stylesheets">an article by Sam Foster on Sitepen</a>,
+    where he presented it.</p>
+
+  <p>Dynamic stylesheets will be useful as part of the <a href="https://doc.mashweb.club/">Zen</a> technology.
+    If a user uses Zen technology to <a href="/">edit the DOM</a> of her a page on her website,
+    she could also modify the look of an element (even
+    <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements">custom elements</a>)
+    and then choose the specificity of the change, either specific to that element or applicable to the whole class.
+    The height and width of an element could be changed using a framework such as the
+    <a href="https://api.jqueryui.com/resizable/">jQuery UI Resizable plugin</a>.
+    The color and background color of an element could be changed using a
+    <a href="https://plugins.jquery.com/tag/colorpicker/">jQuery colorpicker plugin</a>.
+    Some <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes">HTML attributes</a>
+    (such as, perhaps, align, alt, autofocus, checked, class, href, id, label, list, src, title, value,
+    <em>and many more</em> could be set using functions specific to the particular attribute types.</p>
+  
+  <p>Currently, there is no prototype of the use of dynamic stylesheets using
+    <a href="https://www.biwascheme.org/">Biwascheme</a> with
+    <a href="https://doc.mashweb.club/experiments/seq_webapp_biwascheme/">Zen's sequential-programming technology
+    for web applications</a>.
+  </p>
+
+  <p>&nbsp;</p>
   
   <div class="controlsContainer">
     <button class="addRowsButton" onclick="dyncssDemo.addRow()" title="Add row">+</button>
@@ -314,7 +350,5 @@
       <br class="clear"/>
     </div>
   </div>
-  <p>Drag the little arrow to size the columns. You can use the + button to add rows</p>
-
 </body>
 </html>

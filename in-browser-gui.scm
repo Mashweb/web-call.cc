@@ -31,7 +31,7 @@
        (drop-effect #f)
        (unfinished #t))
     
-    (message "Press one of DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded area of the page. (Currently the bluish gray buttons are disabled.)")
+    (message "Press one of the DOM-edit-tool green buttons below to edit the part of the DOM in the gray-shaded area of the page. (Currently the bluish gray buttons are disabled.)")
     (let loop1a
 	()
       (with-handlers ((click-handler "#add")

@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#222127">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="Expires" content="Tue, 29 Dec 2020 04:00:00 GMT">
+    <meta http-equiv="Reply-to" content="tom@mashweb.club (Tom Elam)">
+    <meta name="description" content="Zen visual programming prototype demo">
+    <meta name="keywords"
+	  content="Zen, visual programming, alpha, prototype, demo, drag and drop, Biwascheme, Scheme language, sequential programming, UI, user interface">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
     <script>
@@ -10,13 +22,7 @@
       gtag('config', 'UA-173606225-1');
     </script>
 
-    <meta charset="utf-8">
-    <meta name="theme-color" content="#222127">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-
-    <title>web-call.cc</title>
+    <title>web-call.cc | Visual Programming</title>
 
     <!-- FIXME: <link href="website/css/screen.css" rel="stylesheet" type="text/css"> -->
     <link href="website/css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css"></script>
@@ -64,15 +70,41 @@
       </vaadin-tabs>
       
       <div class="content" style="max-width:560px; overflow: auto;">
-	<h2 style="margin:0.2em 0 0 0;">Demo #2: <a href="https://doc.mashweb.club/">Zen</a> visual programming</h2>
+	<h1 style="margin:0.2em 0 0 0;">Demo #2: <a href="https://doc.mashweb.club/">Zen</a> visual<br/>program editor</h1>
         <vaadin-details id="explanation">
           <div slot="summary"><span id="exstate"></span></div>
-	  Drag blocks into the light gray buffer to form a program. Click 'Run your program' to run the program.
-	  This demo uses a <em>broken</em> alpha prototype of the Zen visual program editor.
-	  It is being presented in this broken state so that it can be shared.
+	  <p>This demo shows a <em>broken and very incomplete</em> prototype of the Zen visual program editor.
+	    It is here in its present broken state so that it can be shared for comment.
+	    To try it out, drag blocks from the table of buttons into the light gray buffer to form a program.
+	    Some forms should take arguments.
+	    The equals (<code>=</code>) predicate form should take two or more arguments,
+	    but presently it will accept only one or two.
+	    Each button represents a Scheme language form or datum.
+	    Different forms take different numbers of arguments.
+	    Many forms take a variable number of arguments.
+	    <code>#t</code> and <code>#f</code> are datums (true and false in Scheme language).
+	    Click 'Run your program' to run the program.
+	    Any output will be shown in the JavaScript console.
+	    To understand what the Zen visual program editor is doing and how it will be developed,
+	    please refer to the embedded code, written in Scheme for the
+	    <a href="https://www.biwascheme.org/">Biwascheme</a> implementation of
+	    the <a href="https://schemers.org/">Scheme programming language</a>.</p>
+	  
+	  <p>The eventual development goal of the Zen visual program editor is to allow even a beginning programmer
+	  to create useful web applications by adding and interacting with program blocks.
+	    There were two inspirations for this:
+	    <ul>
+	      <li>the form diagramming of <a href="https://bluishcoder.co.nz/jsscheme/">jsScheme</a>, and</li>
+	      <li>the Snap! programming language for kids and adults.</li>
+	    </ul>
+	    In jsScheme, a function that just prints its argument is diagrammed like this:<br/>
+	    <img src="images/jsScheme-diagram.png" alt="Snap! programming language example"><br/>
+	    Here is an example program in Snap!:<br/>
+	    <img src="images/snap.png" width="300" alt="Snap! programming language example">
         </vaadin-details>
         <vaadin-details id="bsconsole">
           <div slot="summary"><span id="constate"></span></div>
+	  Please refer to <a href="https://www.biwascheme.org/">Biwascheme.org</a>.
 	  <div id="term"></div>
         </vaadin-details>
 
