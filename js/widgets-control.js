@@ -16,16 +16,20 @@ customElements.whenDefined('vaadin-details').then(function() {
 	});
 	details1.opened = null;
     }
-    
-    details2.addEventListener('opened-changed', function(e) {
-	document.getElementById('exstate').textContent = e.detail.value ? "Hide explanation" : "Show explanation";
-    });
-    details2.opened = null;
-    
-    bsconsole.addEventListener('opened-changed', function(e) {
-	document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "Show Biwascheme console";
-    });
-    bsconsole.opened = null;
+
+    if (details2) {
+	details2.addEventListener('opened-changed', function(e) {
+	    document.getElementById('exstate').textContent = e.detail.value ? "Hide explanation" : "Show explanation";
+	});
+	details2.opened = null;
+    }
+
+    if (bsconsole) {
+	bsconsole.addEventListener('opened-changed', function(e) {
+	    document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "Show Biwascheme console";
+	});
+	bsconsole.opened = null;
+    }
 });
 
 // Dojo Buttons

@@ -54,14 +54,22 @@
       <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar">&nbsp;&nbsp;web-call.cc</h2>
-      <vaadin-tabs selected="1" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+      <vaadin-tabs selected="3" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
-          <a href="index.html">Demo #1: live DOM editor</a>
+          <a href="index.html">The Zen web app framework</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list" selected></iron-icon>
-          Demo #2: programming
+          <a href="live-dom-editing.html">Demo #1: Live DOM editing</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: introduction to Zen sequential web app programming</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          Demo #3: visual program editor
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
@@ -70,7 +78,7 @@
       </vaadin-tabs>
       
       <div class="content" style="max-width:560px; overflow: auto;">
-	<h1 style="margin:0.2em 0 0 0;">Demo #2: <a href="https://doc.mashweb.club/">Zen</a> visual<br/>program editor</h1>
+	<h1 style="margin:0.2em 0 0 0;">Demo #3: <a href="https://doc.mashweb.club/">Zen</a> visual<br/>program editor</h1>
         <vaadin-details id="explanation">
           <div slot="summary"><span id="exstate"></span></div>
 	  <p>This demo shows a <em>broken and very incomplete</em> prototype of the Zen visual program editor.
