@@ -9,6 +9,8 @@ customElements.whenDefined('vaadin-details').then(function() {
     const details1 = document.querySelector('#definitions');
     const details2 = document.querySelector('#explanation');
     const bsconsole = document.querySelector('#bsconsole');
+    const simple_example = document.querySelector('#simple_example');
+    const calculator_example = document.querySelector('#calculator_example');
 
     if (details1) {
 	details1.addEventListener('opened-changed', function(e) {
@@ -26,9 +28,25 @@ customElements.whenDefined('vaadin-details').then(function() {
 
     if (bsconsole) {
 	bsconsole.addEventListener('opened-changed', function(e) {
-	    document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "Show Biwascheme console";
+	    document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "To show the Biwascheme console click here.";
 	});
 	bsconsole.opened = null;
+    }
+
+    if (simple_example) {
+	console.log('opened');
+	simple_example.addEventListener('opened-changed', function(e) {
+	    document.getElementById('simple_example_state').textContent = e.detail.value ? "Hide simple app" : "To try the simple app click here.";
+	});
+	simple_example.opened = null;
+    }
+
+    if (calculator_example) {
+	console.log('opened');
+	calculator_example.addEventListener('opened-changed', function(e) {
+	    document.getElementById('calculator_example_state').textContent = e.detail.value ? "Hide calculator app" : "To try the calculator app click here.";
+	});
+	calculator_example.opened = null;
     }
 });
 

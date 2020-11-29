@@ -2,13 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="theme-color" content="#222127">
-    <meta name="description" content="The Zen web application framework">
-    <meta name="keywords" content="Zen web framework, web application framework, asynchronous JavaScript, sequential programming">
+    <meta name="description" content="Zen live DOM editor">
+    <meta name="keywords" content="live DOM editing, live DOM editor, web framework">
     <meta name="author" content="Tom Elam">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="canonical" href="https://web-call.cc">
-    <link rel="home" href="https://web-call.cc">
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -63,15 +60,15 @@
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="sequentially-programmed-web-apps.html">Demo #2: introduction to Zen sequential web app programming</a>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="visual-programming.html">Demo #3: visual program editor</a>
+          <a href="visual-programming.html">Demo #3: Visual program editor</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="links-to-demos-and-zen-code-intro.html">Other experimental code</a>
+          <a href="other-experiments.html">Other experimental code</a>
         </vaadin-tab>
       </vaadin-tabs>
       
@@ -237,7 +234,7 @@
               downloaded at <a href="in-browser-gui.scm">in-browser-gui.scm</a>,
               <a href="browser-util.scm">browser-util.scm</a>, and
               <a href="mini-framework.scm">mini-framework.scm</a>.
-              There is <a href="links-to-demos-and-zen-code-intro.html">other experimental code here</a>.
+              There is <a href="other-experiments.html">other experimental code here</a>.
               This website can be cloned. See
               <a href="https://github.com/Mashweb/web-call.cc">the project
                 on GitHub</a>.</p>
@@ -246,13 +243,14 @@
           </div>
         </vaadin-details>
 
+	<vaadin-button class="nextbutton" onclick="location.href='sequentially-programmed-web-apps.html'">Next</vaadin-button>
+
       </div> <!-- class="content" -->
 
     </vaadin-app-layout>
     
-    <!-- <script src="js/biwascheme-0.6.9-min.js"></script> -->
-    <!-- Comment out the following 9 lines (down to "End of Biwascheme console code") for production. -->
     <script src="js/biwascheme-0.6.9-min.js"></script>
+    <!-- Comment out the following 8 lines (down to "End of Biwascheme console code") for production. -->
     <script src="website/js/jquery.mousewheel.min.js"></script>
     <script src="website/js/jquery.timers.min.js"></script>
     <script src="website/js/jquery.cookie.min.js"></script>

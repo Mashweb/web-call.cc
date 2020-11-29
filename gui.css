@@ -1,4 +1,4 @@
-@import "dojo-widgets.css";
+/* @import "dojo-widgets.css"; */
 
 h1 { margin-top:0.25em; margin-bottom:0.25em; }
 .draggables { padding:0.2em 0 0 0; border-top:0.4em solid white; }
@@ -11,7 +11,6 @@ h1 { margin-top:0.25em; margin-bottom:0.25em; }
 .lightorange { background-color:#ffe080; }
 .yellow { background-color:lightyellow; }
 .green { background-color:#40b040; }
-.lightgreen { background-color:#60d060; }
 .blue { background-color:#7c7cff; }
 .darkblue { background-color:#6868ff; }
 .lavender { background-color:#e080e0; }
@@ -19,7 +18,16 @@ h1 { margin-top:0.25em; margin-bottom:0.25em; }
 .gray { background-color:gray; }
 .dragged { border:0.1em solid lightgreen !important; }
 .dragover { border:0.2em solid red !important; }
-.greenforeground { color:#40b040; }
+.nextbutton {
+    background-color:#60d060;
+    color:#202020;
+    font-size: 2em;
+    height: calc(var(--lumo-button-size) * 2);
+    min-width: calc(var(--lumo-button-size) * 4);
+}
+.zen-navbar-heading {
+    margin-left: .5em;
+}
 div.inline { display:inline-flex; }
 p  { margin-top:0em; margin-bottom:0.5em; }
 button { width:8em; }
