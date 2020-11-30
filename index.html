@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="The Zen web application framework">
-    <meta name="keywords" content="Zen web framework, web application framework, asynchronous JavaScript, sequential programming">
+    <meta name="keywords" content="Zen web framework, web application framework, asynchronous JavaScript, indieweb, end-user programming, sequential programming, Scheme language, Scheme macro, syntactic extension, Biwascheme, Alexander Sukhoverkhov">
     <meta name="author" content="Tom Elam">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://web-call.cc">
@@ -33,15 +33,14 @@
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar" class="zen-navbar-heading">web-call.cc | Demos of Zen technology prototypes</h2>
 
-      <vaadin-tabs slot="drawer" orientation="vertical"
-		   theme="minimal" style="margin: 0 auto; flex: 1;">
+      <vaadin-tabs selected="0" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home" selected></iron-icon>
           The Zen web app framework
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="live-dom-editing.html">Demo #1: Live DOM editor</a>
+          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
@@ -53,7 +52,7 @@
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="other-experiments.html">Other experimental code</a>
+          <a href="other-experiments.html">Proofs of concept not using Scheme</a>
         </vaadin-tab>
       </vaadin-tabs>
       
@@ -63,7 +62,8 @@
 	<p><a href="https://doc.mashweb.club/">Zen</a> is a small framework being developed to help bring
 	  web application authoring to the masses.
 	  Perhaps it will become an important tool in the <a href="https://indieweb.org/">IndieWeb movement</a>.
-	  Three main principles make it different from other web application frameworks.</p>
+	  Three main principles make it different from other web application frameworks.
+	  This website is to demonstrate these principles in action.</p>
 	
 	<h2>First Principle: Allow non-technical users to program true web applications</h2>
 	  
@@ -72,19 +72,24 @@
 	  in the same context in which they are used&mdash;namely, in the web browser on the same website.
 	  It is relatively easy to write a Scheme program that diagrams and manipulates Scheme code
 	  under control of a non-technical person.
-	  The ease with which a non-technical user will be able to pick up this style of programming
-	  will depend upon providing good names and control structures, among other things.</p>
+	  Much of the ease with which a non-technical user will be able to pick up this style of programming
+	  will depend upon providing good names for things.</p>
 
 	<h2>Second Principle: Allow the programming language to be extended</h2>
 	
 	<p>The web applications will be programmed in the
 	  <a href="https://www.biwascheme.org/">Scheme programming language</a>,
-	  which can be syntactically extended, even extended with new control structures.</p>
+	  which can be syntactically extended, even extended with new control structures.
+	  A Scheme-language macro (unrelated to macros in languages like C),
+	  <code>with-handlers</code> was written by Alexander Sukhoverkhov (naryl.pandora@gmail.com),
+	  demonstrating a control structure added to the Biwascheme implementation of Scheme.
+	  An example of its use is given in the next section.
+	</p>
 
  	<h2>Third Principle: Fully support sequential programming</h2>
 
 	<p>The events that occur in a web page, from page loading to key input to mouse input
-	  to XMLHttpRequest data transfer, and more,
+	  to XMLHttpRequest data transfer and more,
 	  can be handled by <em>a single sequential process running in the page</em>.
 	  Here is Scheme-language code that will listen simultaneously for seven kinds of event
 	  and collect any data returned from the first event object:</p>
@@ -93,6 +98,8 @@
 ;; Zen's Scheme macro "with-handlers" sets up a set of event
 ;; handlers of any type and creates a block that automatically
 ;; removes the handlers when its execution completes.
+;; The macro with-handlers and associated code was written by
+;; Alexander Sukhoverkhov (naryl.pandora@gmail.com).
 (with-handlers ((dragover-handler "#target-area")
 		(dragleave-handler "#target-area")
                 (drop-handler "#target-area")
@@ -129,8 +136,10 @@
 	  operator in the Scheme programming language, <code>call/cc</code>,
 	  aka <code>call-with-current-continuation</code>, which imparts system-call-like features
 	  to user programs.
-	  mini-framework.scm makes the programming of a complex user interface (UI) simple.
-	  Programs written in this manner are straightforward, easy to read, and easy to write.</p>
+	  <code>mini-framework.scm</code> makes the programming of a complex user interface (UI) simple.
+	  Programs written in this manner are straightforward, easy to read, and easy to write.
+	  The hope behind Zen is that non-technical end users will be able to write useful web applications
+	  as easily as they write programs in the programming language BASIC.</p>
 
 	<h2>The Demos</h2>
 	
@@ -140,17 +149,20 @@
 	  None of them is complete.
 	  Follow the "Next" button at the bottom of each page or use the navigation panel at the left
 	  to visit each demo.
-	  <a href="http://mashweb.club/users/sign_up">Sign up</a> to be notified whenever
-	  a demo has been significantly improved, a new demo is added,
-	  or accounts on <a href="https://mashweb.club">Mashweb.Club</a> gain new features.
-	  This will probably happen at most a few times per year.
-	  The website <a href="https://mashweb.club/">Mashweb.Club</a> gives an overview of the insprirations
-	  and motivations for Zen.
-	  <a href="https://doc.mashweb.club/whitepaper/">The white paper there</a> goes into much more depth,
-	  although it is still a work in progress.
 	</p>
 
-	<vaadin-button class="nextbutton" onclick="location.href='live-dom-editing.html'">Next</vaadin-button>
+	<h2>Mashweb.Club</h2>
+
+	<p>The <a href="https://mashweb.club/">Mashweb.Club</a> website gives an overview of the insprirations
+	  and motivations for Zen.
+	  <a href="https://doc.mashweb.club/whitepaper/">The white paper there</a> goes into much more depth
+	  about Zen-related technologies, although the website is still a work in progress.
+	  <a href="http://mashweb.club/users/sign_up">Sign up</a> on <a href="https://mashweb.club/">Mashweb.Club</a>
+	  to be notified whenever a demo on <a href="https://web-call.cc">web-call.cc</a> has been added or improved
+	  or accounts on <a href="https://mashweb.club">Mashweb.Club</a> have gained new features.
+	  Such notifications will probably happen at most a few times per year.</p>
+
+	<vaadin-button class="nextbutton" onclick="location.href='live-dom-editor.html'">Next</vaadin-button>
 
       </div> <!-- class="content" -->
 

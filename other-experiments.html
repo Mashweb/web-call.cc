@@ -2,11 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="Links to prototype demos, and examples, and introduction to some Zen code">
-    <meta name="keywords" content="demos, examples, Zen, code">
+    <meta name="description" content="Experimental code not using Scheme">
+    <meta name="keywords" content="proofs of concept, Zen, code">
     <meta name="author" content="Tom Elam">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -15,105 +14,60 @@
 
       gtag('config', 'UA-173606225-1');
     </script>
-    <title>web-call/cc | What's on this website</title>
-    <link href="css/screen.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery.terminal.min.css" rel="stylesheet" type="text/css">
-    <link href="css/prism-coy.css" rel="stylesheet" type="text/css">
+
+    <title>web-call/cc | Other experimental code</title>
+
+    <link href="gui.css" rel="stylesheet" type="text/css">
   </head>
   <body><div style="width:800px;"><p></p><p></p></div>
-    <div id="content">
-      <h1>What's on this website</h1>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color"></style>
+    </custom-style>
+    
+    <vaadin-app-layout style="overflow: auto;">
+
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar" class="zen-navbar-heading">web-call.cc | Demos of Zen technology prototypes</h2>
+
+      <vaadin-tabs selected="4" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+        <vaadin-tab>
+          <iron-icon icon="vaadin:home"></iron-icon>
+          <a href="index.html">The Zen web app framework</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="visual-programming.html">Demo #3: Visual program editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          Other experimental code
+        </vaadin-tab>
+      </vaadin-tabs>
+
+      <div class="content" style="max-width:560px; overflow: auto;">
+        <h1 style="margin:0.2em 0em 0em 0em;">Experimental code not using Scheme</h1>
+
       <ul>
-	<li><a href=".">In-browser DOM editor using BiwaScheme</a></li>
-	<li><a href="visual-programming.html">Visual program editor</a></li>
-	<li><a href="sequentially-programmed-web-app.html">Examples of sequentially programmed web app using BiwaScheme</a></li>
 	<li><a href="mdn-drag-and-drop.html">Example ondragover and ondrop event handlers from MDN</a></li>
 	<li><a href="mdn-drag-and-drop-modd.html">Example ondragover and ondrop event handlers from MDN, modified</a></li>
 	<li><a href="mdn-drag-and-drop-mod-2.html">Example ondragover and ondrop event handlers from MDN, completely generalised</a></li>
 	<li><a href="mdn-drag-and-drop-copy.html">Example ondragover and ondrop event handlers from MDN, modified to copy instead of move</a></li>
 	<li><a href="dynamic-stylesheet-demo.html">Demonstration of a dynamic stylesheet</a></li>
-	<li><a href="other-experiments.html">Introduction to the main code behind this website (on this web page)</a></li>
       </ul>
-      <p></p>
-      <hr/>
-      <h3>Introduction to the main code behind this website</h3>
-      <p>Below are Scheme code and a BiwaScheme console,
-         and a few HTML elements just for demo tests.
-         The code demonstrates how this website makes BiwaScheme
-         interact with the DOM and the web browser console.
-         To evaluate (i.e. run) the code,
-         type it into the BiwaScheme console and terminate it with a RETURN
-         (or ENTER).
-         Open your browser's developer tools to see the JavaScript console
-         output and to see and interact with the page's structure
-         using the Scheme code.
-         To see all of the Scheme code you might need
-         to scroll it vertically and horizontally.
-      <div style="height:200px; overflow:auto;">
-      <pre>
-<code>(load "browser-util.scm")
 
-(define body (getelem1 "body"))
-(js-ref body "children") ;; => [object HTMLCollection]
-(js-ref body "childNodes") ;; => [object NodeList]
-(define children (js-child-nodes body))
-children ;; => ([object HTMLDivElement] [object Text] [object HTMLDivElement] ...)
-(js-ref (second children) "nodeName") ;; => "#text"
-(js-ref (second children) "tagName") ;; =>
-(define div (third children))
-(js-ref div "nodeName") ;; => "DIV"
-(js-ref div "tagName") ;; => "DIV"
-(console-dir div)
-
-(console-dir (car (js-child-nodes div)))
-(dom->string div)
-;; => "((DIV (id \"junk\") (style \"background-color:yellow;\")) ..."
-
-(js-array->list (js-ref body "childNodes"))
-;; => ([object Text] [object HTMLDivElement] [object Text] ...)
-(js-obj->alist (js-ref body "children"))
-;; => ((0 . [object HTMLDivElement]) (1 . [object HTMLDivElement]) ...)
-
-(node-name body) ;; => "BODY"
-(js-child-nodes body) ;; => ([object Text] [object HTMLParagraphElement] ...)
-(js-eval "for (const prop in Node) { console.log(`${prop}: ${Node[prop]}`); }")
-;; => [Prints Node type constants to the JS console; see https://mzl.la/2zcB5om]
-(js-eval "const body = document.body; for (const prop in body) { console.log(`${prop}: ${body[prop]}`); }")
-;; => [Prints the properties of the body element to the JS console]
-(define junk (getelem1 "#junk"))
-(element-attributes junk)
-=> (("id" "junk") ("style" "background-color:yellow;"))
-(define junk-str (dom->string junk))
-(display junk-str)
-(http-post-text "/doms" junk-str) ;; [Inserts the DOM into the Zen Database.]
-</code>
-      </pre>
-      </div>
-      <div style="padding: 20px;">
-      <!-- <div id="term" style="margin: 10px 15px 15px 0px; float:left; "></div> -->
-      <div id="term"></div>
-      </div>
-    </div>
-    <div style="clear:left;">
-    </div>
-    <div id="junk" style="background-color:yellow;">
-      <ol>
-        <li>One</li>
-        <li>Two</li>
-        <li>Three</li>
-      </ol>
-      <p></p>
-    </div>
-    <p id="paragraph">This is a paragraph.</p>
-    <script src="js/biwascheme-0.7.0-min.js"></script>
-    <script src="js/jquery.mousewheel.min.js"></script>
-    <script src="js/jquery.timers.min.js"></script>
-    <script src="js/jquery.cookie.min.js"></script>
-    <script src="js/jquery.terminal.min.js"></script>
-    <script src="js/prism.js"></script>
-    <script src="js/prism-scheme.js"></script>
-    <script src="js/jquery.terminal.prism.js"></script>
-    <script src="js/keyboard.js"></script>
-    <script src="js/biwascheme_terminal.js"></script>
+    </vaadin-app-layout>
+    
+    <script src="bundle.js"></script>
   </body>
 </html>
