@@ -11,26 +11,14 @@ and a code example showing the dynamic modification of a stylesheet.
 
 ### Building
 
-To build the main demo, you will need `node` and `npm`.
-It is suggested that you install them using
-[nvm](https://github.com/nvm-sh/nvm).
-Once you have recent, compatible versions of `node` and `npm`,
-edit index.js if you like,
-then run the following command in this directory
-using a suitable shell, such as Bash:
-```
-. build-demo-1.sh
-```
-
-### Rebuilding
-
-Edit index.js and rollup.config.js as necessary, then run `npx rollup --config` to regenerate `bundle.js`.
+At the moment, the only automated building of this project is via CodeKit.
+See codekitapp.com.
 
 ---
 
 ## Examples of Special ondragover and ondrop Event-Handler Code
 
-See [the full list of demos on this website](index2.html).
+See [the full list of demos on this website](other-experiments.html).
 
 ---
 
