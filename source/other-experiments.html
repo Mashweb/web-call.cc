@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Experimental code not using Scheme">
+    <meta name="keywords" content="proofs of concept, Zen, code">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-173606225-1');
+    </script>
+
+    <title>web-call/cc | Other experimental code</title>
+
+  </head>
+  <body><div style="width:800px;"><p></p><p></p></div>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color"></style>
+    </custom-style>
+    
+    <vaadin-app-layout style="overflow: auto;">
+
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
+
+      <vaadin-tabs selected="4" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+        <vaadin-tab>
+          <iron-icon icon="vaadin:home"></iron-icon>
+          <a href="index.html">The Zen web app framework</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="visual-programming.html">Demo #3: Visual program editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          Other experimental code
+        </vaadin-tab>
+      </vaadin-tabs>
+
+      <div class="content" style="max-width:560px; overflow: auto;">
+        <h1 style="margin:0.2em 0em 0em 0em;">Experimental code not using Scheme</h1>
+
+      <ul>
+	<li><a href="mdn-drag-and-drop.html">Example ondragover and ondrop event handlers from MDN</a></li>
+	<li><a href="mdn-drag-and-drop-modd.html">Example ondragover and ondrop event handlers from MDN, modified</a></li>
+	<li><a href="mdn-drag-and-drop-mod-2.html">Example ondragover and ondrop event handlers from MDN, completely generalised</a></li>
+	<li><a href="mdn-drag-and-drop-copy.html">Example ondragover and ondrop event handlers from MDN, modified to copy instead of move</a></li>
+	<li><a href="dynamic-stylesheet-demo.html">Demonstration of a dynamic stylesheet</a></li>
+      </ul>
+
+    </vaadin-app-layout>
+
+    <script src="javascripts/finder-vaadin-polymer.js" defer></script>
+    <script src="javascripts/index-scripts.js" defer></script>
+  </body>
+</html>
