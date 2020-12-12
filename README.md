@@ -5,14 +5,22 @@ source code and design documents for the [web-call.cc](web-call.cc) website,
 examples of special ondragover and ondrop event-handler code,
 and a code example showing the dynamic modification of a stylesheet.
 
----
-
-## The Main Demo--An In-Browser DOM Editor Using BiwaScheme
-
 ### Building
 
 At the moment, the only automated building of this project is via CodeKit.
 See codekitapp.com.
+
+---
+
+## Live, In-Browser DOM Editor Using BiwaScheme
+
+---
+
+## Zen Sequential Web App Programming
+
+---
+
+## Zen Visual Program Editor
 
 ---
 
