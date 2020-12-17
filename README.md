@@ -26,7 +26,7 @@ See codekitapp.com.
 
 ## Examples of Special ondragover and ondrop Event-Handler Code
 
-See [the full list of demos on this website](other-experiments.html).
+See [the full list of other demos on this website](other-experiments.html).
 
 ---
 
