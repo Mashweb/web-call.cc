@@ -1384,9 +1384,9 @@
 		"eSQ": 1,
 		"ft": 4096,
 		"hM": 0,
-		"oA": 2,
-		"oAP": "/build/README.md",
-		"oF": 1,
+		"oA": 0,
+		"oAP": "/build/README.html",
+		"oF": 0,
 		"oFM": 0,
 		"oS": 0,
 		"pHT": 0,
@@ -1813,6 +1813,14 @@
 		"hM": 1,
 		"oA": 0,
 		"oAP": "/build/sequentially-programmed-web-apps.html",
+		"oF": 0
+		},
+	"/source/sitemap.xml": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/sitemap.xml",
 		"oF": 0
 		},
 	"/source/stylesheets/css/assets/4320b561bf6b259b0082d83d4848daf9.ttf": {
