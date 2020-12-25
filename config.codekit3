@@ -1494,6 +1494,14 @@
 		"q": 100,
 		"rq": 75
 		},
+	"/source/index.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/index.html",
+		"oF": 0
+		},
 	"/source/javascripts/biwascheme-0.6.9.js": {
 		"bF": 0,
 		"ft": 64,
@@ -1953,7 +1961,7 @@
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "/source/images/zen.png",
 	"iconImageWasSetByUser": 1,
-	"lastBuiltDate": 629729034.08989799
+	"lastBuiltDate": 630593083.63726795
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
