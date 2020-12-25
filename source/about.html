@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="description" content="The Zen web application framework">
+    <meta name="description" content="Abount the Zen web application framework">
     <meta name="keywords" content="Zen web framework, web application framework, asynchronous JavaScript, indieweb, end-user programming, sequential programming, Scheme language, Scheme macro, syntactic extension, Biwascheme, Alexander Sukhoverkhov">
     <meta name="author" content="Tom Elam">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,14 +33,10 @@
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
 
-      <vaadin-tabs selected="0" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+      <vaadin-tabs selected="4" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
-          <iron-icon icon="vaadin:home" selected></iron-icon>
-          The Zen web app framework
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
+          <iron-icon icon="vaadin:home"></iron-icon>
+          <a href="index.html">Demo #1: DOM editor</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
@@ -52,12 +48,16 @@
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="other-experiments.html">Proofs of concept not using Scheme</a>
+          <a href="other-experiments.html">Other experimental code</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          <a href="about.html">About Zen & these demos</a>
         </vaadin-tab>
       </vaadin-tabs>
       
       <div class="content" style="max-width:560px; overflow: auto;">
-        <h1 style="margin:0.2em 0em 0em 0em;">The Zen web app framework</h1>
+        <h1 style="margin:0.2em 0em 0em 0em;">About the Zen web app framework</h1>
 
 	<p><a href="https://doc.mashweb.club/">Zen</a> is a small framework being developed to help bring
 	  web application authoring to the masses.
@@ -127,7 +127,7 @@
 	    </pre>
 	      </code>
 	<p>A component of Zen,
-	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/mini-framework.scm">mini-framework.scm</a>,
+	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/mini-framework.scm">mini-framework.scm</a>,
 	  makes it unnecessary to write
 	  <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing">callback
 	    or promise functions</a>.

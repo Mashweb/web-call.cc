@@ -1418,6 +1418,14 @@
 		"oAP": "/build/.bin/rollup",
 		"oF": 1
 		},
+	"/source/about.html": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 1,
+		"oA": 0,
+		"oAP": "/build/about.html",
+		"oF": 0
+		},
 	"/source/dynamic-stylesheet-demo.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -1485,14 +1493,6 @@
 		"ou": "lpckwebp-icon",
 		"q": 100,
 		"rq": 75
-		},
-	"/source/index.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 1,
-		"oA": 0,
-		"oAP": "/build/index.html",
-		"oF": 0
 		},
 	"/source/javascripts/biwascheme-0.6.9.js": {
 		"bF": 0,
@@ -1702,14 +1702,6 @@
 		"oF": 3,
 		"sC": 0,
 		"tS": 0
-		},
-	"/source/live-dom-editor.html": {
-		"cB": 0,
-		"ft": 8192,
-		"hM": 1,
-		"oA": 0,
-		"oAP": "/build/live-dom-editor.html",
-		"oF": 0
 		},
 	"/source/mdn-drag-and-drop-copy.html": {
 		"cB": 0,
@@ -1949,11 +1941,11 @@
 	},
 "projectAttributes": {
 	"creationDate": 628599088.37792206,
-	"displayValue": "test-web-call.cc-repo",
-	"displayValueWasSetByUser": 0,
+	"displayValue": "web-call.cc",
+	"displayValueWasSetByUser": 1,
 	"iconImageName": "/source/images/zen.png",
 	"iconImageWasSetByUser": 1,
-	"lastBuiltDate": 629327473.92148805
+	"lastBuiltDate": 629729034.08989799
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

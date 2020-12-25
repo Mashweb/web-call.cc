@@ -15,35 +15,35 @@ customElements.whenDefined('vaadin-details').then(function() {
     console.log("vaadin-details defined");
     if (details1) {
 	details1.addEventListener('opened-changed', function(e) {
-	    document.getElementById('defstate').textContent = e.detail.value ? "Hide definitions" : "Need some definitions? Click here.";
+	    document.getElementById('defstate').textContent = e.detail.value ? "Hide definitions." : "Need some definitions? Click here.";
 	});
 	details1.opened = null;
     }
 
     if (details2) {
 	details2.addEventListener('opened-changed', function(e) {
-	    document.getElementById('exstate').textContent = e.detail.value ? "Hide explanation" : "Show explanation";
+	    document.getElementById('exstate').textContent = e.detail.value ? "Hide explanation." : "Show explanation.";
 	});
 	details2.opened = null;
     }
 
     if (bsconsole) {
 	bsconsole.addEventListener('opened-changed', function(e) {
-	    document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console" : "To show the Biwascheme console click here.";
+	    document.getElementById('constate').textContent = e.detail.value ? "Hide Biwascheme console." : "To show the Biwascheme console click here.";
 	});
 	bsconsole.opened = null;
     }
 
     if (simple_example) {
 	simple_example.addEventListener('opened-changed', function(e) {
-	    document.getElementById('simple_example_state').textContent = e.detail.value ? "Hide simple app" : "To try the simple app click here.";
+	    document.getElementById('simple_example_state').textContent = e.detail.value ? "Hide simple app." : "To try the simple app click here.";
 	});
 	simple_example.opened = null;
     }
 
     if (calculator_example) {
 	calculator_example.addEventListener('opened-changed', function(e) {
-	    document.getElementById('calculator_example_state').textContent = e.detail.value ? "Hide calculator app" : "To try the calculator app click here.";
+	    document.getElementById('calculator_example_state').textContent = e.detail.value ? "Hide calculator app." : "To try the calculator app click here.";
 	});
 	calculator_example.opened = null;
     }

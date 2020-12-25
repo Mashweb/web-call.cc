@@ -31,14 +31,10 @@
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
 
-      <vaadin-tabs selected="4" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+      <vaadin-tabs selected="3" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
-          <a href="index.html">The Zen web app framework</a>
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
+          <a href="index.html">Demo #1: DOM editor</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
@@ -52,10 +48,19 @@
           <iron-icon icon="vaadin:list" selected></iron-icon>
           Other experimental code
         </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="about.html">About Zen & these demos</a>
+        </vaadin-tab>
       </vaadin-tabs>
 
       <div class="content" style="max-width:560px; overflow: auto;">
         <h1 style="margin:0.2em 0em 0em 0em;">Experimental code not using Scheme</h1>
+          Being an alpha prototype, the drag-and-drop demos
+          do not work in Explorer or mobile browsers.
+          The dynamic stylesheet demo <em>does</em> work in at least
+          one mobile browser.
+          It has not been tested in Explorer.
 
       <ul>
 	<li><a href="mdn-drag-and-drop.html">Example ondragover and ondrop event handlers from MDN</a></li>

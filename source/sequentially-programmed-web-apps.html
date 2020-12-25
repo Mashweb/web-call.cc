@@ -34,48 +34,41 @@
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
 
-      <vaadin-tabs selected="2" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
-        <vaadin-tab>
-          <iron-icon icon="vaadin:home"></iron-icon>
-          <a href="index.html">The Zen web app framework</a>
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="live-dom-editor.html">Demo #1: Live DOM editor</a>
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list" selected></iron-icon>
-          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="visual-programming.html">Demo #3: Visual program editor</a>
-        </vaadin-tab>
-        <vaadin-tab>
-          <iron-icon icon="vaadin:list"></iron-icon>
-          <a href="other-experiments.html">Other experimental code</a>
-        </vaadin-tab>
+      <vaadin-tabs selected="1" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:home"></iron-icon>
+	  <a href="index.html">Demo #1: DOM editor</a>
+	</vaadin-tab>
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:list" selected></iron-icon>
+	  <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
+	</vaadin-tab>
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:list"></iron-icon>
+	  <a href="visual-programming.html">Demo #3: Visual program editor</a>
+	</vaadin-tab>
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:list"></iron-icon>
+	  <a href="other-experiments.html">Other experimental code</a>
+	</vaadin-tab>
+	<vaadin-tab>
+	  <iron-icon icon="vaadin:list"></iron-icon>
+	  <a href="about.html">About the Zen web app framework and these demos</a>
+	</vaadin-tab>
       </vaadin-tabs>
       
       <h1 style="margin:0.2em 0em 0em 0em;">Demo #2: Introduction to Zen sequential web app programming</h1>
 
       <div class="content" style="max-width:560px; overflow: auto;">
 
-        <vaadin-details id="bsconsole">
-          <div slot="summary"><span id="constate"></span></div>
+	<vaadin-details id="bsconsole">
+	  <div slot="summary"><span id="constate"></span></div>
 	  Refer to <a href="https://www.biwascheme.org/">Biwascheme.org</a> to learn more about Biwascheme.
 	  <div id="term"></div>
-        </vaadin-details>
+	</vaadin-details>
 
-        <vaadin-details id="simple_example">
-          <div slot="summary"><span id="simple_example_state"></span></div>
-	  To try the application, open the Developer Tools of your web browser,
-	  then type the following command into the BiwaScheme console above, terminated by a RETURN:
-	  <p><code>(load "scheme/simple_seq_webapp.scm")</code></p>
-	  The program will terminate after receiving five events from any combination of:
-	  a click on Dev #1, a click on Div #2, a click on Button #1 followed by a key press,
-	  a click on Button #2 followed by a key press, or a 10-second timeout.
-	  Try giving the program those inputs in any order.
+	<vaadin-details id="simple_example">
+	  <div slot="summary"><span id="simple_example_state"></span></div>
 	  <div id="testarea" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; height:100px; width:425px;">
 	    Test Area<br/>
 	    <button id="button1" style="height:60px; width:100px;">Button #1</button>
@@ -87,13 +80,22 @@
 	      Div #2
 	    </div>
 	  </div>
+	  To try the application, open the Developer Tools of your web browser,
+	  then type the following command into the BiwaScheme console above, terminated by a RETURN:
+	  <p><code>(load "scheme/simple_seq_webapp.scm")</code></p>
+	  The program will terminate after receiving five events from any combination of:
+	  a click on Dev #1, a click on Div #2, a click on Button #1 followed by a key press,
+	  a click on Button #2 followed by a key press, or a 10-second timeout.
+	  Try giving the program those inputs in any order.
+          Being an alpha prototype, the demo still has bugs
+          and does not yet work in Explorer or mobile browsers.</p>
 	  Here is the main part of the app:<code>
 	    <pre>
 (with-handlers ((click-handler "#div1")
-                (click-handler "#div2")
-                (keydown-handler "#button1")
-                (keydown-handler "#button2")
-                (timeout-handler test-timeout 10000))
+		(click-handler "#div2")
+		(keydown-handler "#button1")
+		(keydown-handler "#button2")
+		(timeout-handler test-timeout 10000))
   (display (get-input))
   (display (get-input))
   (display (get-input))
@@ -102,49 +104,56 @@
 (display "Test finished.")</pre>
 	  </code>
 	  The full app is
-	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/simple_seq_webapp.scm">here</a>.
-        </vaadin-details>
+	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/simple_seq_webapp.scm">here</a>.
+	</vaadin-details>
 
-        <vaadin-details id="calculator_example">
-          <div slot="summary"><span id="calculator_example_state"></span></div>
-	  To try the calculator application, open the JavaScript console of of your web browser's
-	  Developer Tools, then type the following command into the BiwaScheme console above,
-	  terminated by a RETURN, but be patient while the caluculator button web component
-	  is loading, because this demo is not at all optimized.
-	  <p><code>(load "scheme/calculator.scm")</code></p>
-	  <p>Then click the calculator's purple keys in the test area and watch the results in the Biwascheme console.
-	    The calculator does addition, subtraction, multiplication, and division,
-	  printing the results in the Biwascheme console.<p>
+	<vaadin-details id="calculator_example">
+	  <div slot="summary"><span id="calculator_example_state"></span></div>
 	  <div id="testarea2" style="border:solid; background-color:lightgrey; padding:20px; margin: 21px 15px 15px 15px; height:auto; min-height:100px; width:200px;">
 	    Test Area<br/>
 	  </div>
+	  To try the calculator application,
+	  type the following command into the BiwaScheme console above,
+	  terminated by a RETURN.
+	  <p><code>(load "scheme/calculator.scm")</code></p>
+	  <p>Be ready to wait a ridiculous amount of time for the
+	  application to load, up to 15 seconds or more, 
+	  because this demo is not optimized.
+          (Being an alpha prototype, the demo still has bugs
+          and does not yet work in Explorer or mobile browsers.)
+	  The slow part is the loading of the caluculator button web component.
+	  The second time the application is loaded, it should load fast.</p>
+	  <p>Then click the calculator's purple keys in the test area and watch
+	    the results in the Biwascheme console.
+	    The calculator does addition, subtraction, multiplication,
+	    and division, printing the results in the Biwascheme console.</p>
 	  <p>Here is the main part of the app:</p><code>
 	    <pre>
 (with-handlers ((click-handler ".button"))
   (let* ((btn (js-ref (second (get-input)) "target"))
-         (text (js-ref btn "innerText")))
+	 (text (js-ref btn "innerText")))
     (case text
       (("+" "-" "*" "/")
        (when (not (= value2 0))
-         (set! value1 value2))
+	 (set! value1 value2))
        (set! value2 0)
        (set! op (string->symbol text)))
       (("=")
        (when op
-         (set! value1 ((eval op) value1 value2))
-         (set! value2 0)))
+	 (set! value1 ((eval op) value1 value2))
+	 (set! value2 0)))
       (else
        (set! value2 (+ (* value2 10) (string->number text)))))
     (if op
-        (format #t "~a ~a ~a~%" value1 (symbol->string op) value2)
-        (format #t "~a~%" value2))))</pre>
+	(format #t "~a ~a ~a~%" value1 (symbol->string op) value2)
+	(format #t "~a~%" value2))))</pre>
 	  </code>
 	  The full app is at
-	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/calculator.scm">calculator.scm</a>
+	  <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/calculator.scm">calculator.scm</a>
 	  
 
-	  The calculator program is slow to load but practically self explanatory.
-        </vaadin-details>
+	  The calculator program is practically self explanatory.
+	</vaadin-details>
 	
       </div> <!-- class="content" -->
 
@@ -161,8 +170,8 @@
     <script>
       var biwa;
       window.onload = function() {
-          var onError = function(e){ console.error(e); }
-          biwa = new BiwaScheme.Interpreter(onError);
+	  var onError = function(e){ console.error(e); }
+	  biwa = new BiwaScheme.Interpreter(onError);
       };
     </script>
   </body>
