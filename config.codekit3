@@ -23,6 +23,14 @@
 		"oAP": "/build/build",
 		"oF": 0
 		},
+	"/build.tgz": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 1,
+		"oAP": "/build/build.tgz",
+		"oF": 1
+		},
 	"/COPYING": {
 		"cB": 0,
 		"ft": 8192,
