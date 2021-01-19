@@ -1434,6 +1434,22 @@
 		"oAP": "/build/about.html",
 		"oF": 0
 		},
+	"/source/blog-app.html": {
+		"cB": 1,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/blog-app.html",
+		"oF": 0
+		},
+	"/source/blog-app.html~": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/blog-app.html~",
+		"oF": 0
+		},
 	"/source/dynamic-stylesheet-demo.html": {
 		"cB": 0,
 		"ft": 8192,
@@ -1759,6 +1775,14 @@
 		"oAP": "/build/other-experiments.html",
 		"oF": 0
 		},
+	"/source/scheme/blog-app.scm": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/scheme/blog-app.scm",
+		"oF": 0
+		},
 	"/source/scheme/browser-util.scm": {
 		"cB": 0,
 		"ft": 8192,
@@ -1783,6 +1807,22 @@
 		"oAP": "/build/scheme/config.scm",
 		"oF": 1
 		},
+	"/source/scheme/drag-and-drop.scm": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 2,
+		"oAP": "/build/scheme/drag-and-drop.scm",
+		"oF": 1
+		},
+	"/source/scheme/drag-and-drop.scm~": {
+		"cB": 0,
+		"ft": 8192,
+		"hM": 0,
+		"oA": 0,
+		"oAP": "/build/scheme/drag-and-drop.scm~",
+		"oF": 0
+		},
 	"/source/scheme/in-browser-gui.scm": {
 		"cB": 0,
 		"ft": 8192,
@@ -1795,9 +1835,9 @@
 		"cB": 0,
 		"ft": 8192,
 		"hM": 0,
-		"oA": 2,
+		"oA": 0,
 		"oAP": "/build/scheme/in-browser-program.scm",
-		"oF": 1
+		"oF": 0
 		},
 	"/source/scheme/mini-framework.scm": {
 		"cB": 0,
@@ -1931,10 +1971,10 @@
 		"aP": 1,
 		"bl": 0,
 		"ft": 16,
-		"ma": 1,
+		"ma": 0,
 		"oA": 0,
 		"oAP": "/build/stylesheets/css/screen.css",
-		"oF": 2,
+		"oF": 0,
 		"oS": 3
 		},
 	"/source/stylesheets/stylus/live-dom-editor.styl": {
@@ -1969,7 +2009,7 @@
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "/source/images/zen.png",
 	"iconImageWasSetByUser": 1,
-	"lastBuiltDate": 630593083.63726795
+	"lastBuiltDate": 632656765.98453903
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

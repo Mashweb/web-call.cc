@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#222127">
+    <meta name="description" content="Financial blog or dashboard">
+    <meta name="keywords" content="Zen, alpha, prototype, demo, drag and drop, Biwascheme, Scheme language, UI, user interface">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-173606225-1');
+    </script>
+
+    <title>web-call.cc | Demo: Financial Blog</title>
+
+    <link href="stylesheets/css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/prism-coy.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="stylesheets/css/gui.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/dojo-6.0.0.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color"></style>
+    </custom-style>
+    
+    <vaadin-app-layout style="overflow: auto;">
+
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
+
+      <vaadin-tabs selected="3" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+        <vaadin-tab>
+          <iron-icon icon="vaadin:home"></iron-icon>
+          <a href="index.html">Demo #1: DOM editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="visual-programming.html">Demo #3: Visual program editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list" selected></iron-icon>
+          Demo #4: Financial blog
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="other-experiments.html">Other experimental code</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="about.html">About the Zen web app framework and these demos</a>
+        </vaadin-tab>
+      </vaadin-tabs>
+      
+      <h1 style="margin:0.2em 0em 0em 0em;">Demo #4: Financial blog</h1>
+      <vaadin-details id="bsconsole">
+        <div slot="summary"><span id="constate"></span></div>
+	Please refer to <a href="https://www.biwascheme.org/">Biwascheme.org</a>.
+	<div id="term"></div>
+      </vaadin-details>
+      <div class="content" style="max-width:560px; overflow: auto;">
+
+        <vaadin-details id="explanation">
+          <div slot="summary"><span id="exstate"></span></div>
+	  <p>This small app uses a factoring of drag-and-drop code.
+	    So far there is only a function to use the dragstart event.
+	    Watch the JavaScript console for log messages.</p>
+        </vaadin-details>
+
+	<div style="padding:1em 0 1em 12.35em;">
+	  <dojo-button id="cancel">Save and activate</dojo-button>
+	</div>
+	<div id="from" style="padding:0.2em 0 0.2em 2.1em; background-color:lightblue;">
+	  Drag one of these elements:<br/>
+	  <div class="chart">S&P</div>
+	  <div class="chart">FTSE</div>
+	  <div class="chart">DAX</div>
+	  <div class="chart">Nikkei</div>
+	</div>
+
+	<vaadin-button class="nextbutton" onclick="location.href='other-experiments.html'">Next</vaadin-button>
+
+      </div> <!-- class="content" -->
+
+    </vaadin-app-layout>
+    
+    <script src="javascripts/in-browser-gui.js"></script>
+    <script src="javascripts/biwascheme-0.6.9.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="javascripts/finder-vaadin-polymer.js"></script>
+    <script src="javascripts/biwascheme_console-dojo-widgets-control.js"></script>
+    <script src="javascripts/custom-elements.min.js"></script>
+    <!--
+    <script src="javascripts/dojo/dojo-6.0.0.js"></script>
+    <script src="javascripts/dojo/button-6.0.0.js"></script>
+    <script src="javascripts/dojo/icon-6.0.0.js"></script>
+    -->
+    <script>
+      var biwa;
+      window.onload = function() {
+          var onError = function(e){ console.error(e); }
+          biwa = new BiwaScheme.Interpreter(onError);
+      biwa.evaluate('(format #t "Hello, world!")\
+                     (format #t "Loading Scheme program...")\
+                     (load "scheme/drag-and-drop.scm")',
+                        function(result) { console.log('Scheme loaded.'); });
+          //$('#term').width('560'); // FIXME: This should be calculated.
+          $('#term').width('800'); // FIXME: This should be calculated.
+          $('#term').height('400'); // FIXME: This should be calculated.
+      };
+    </script>
+  </body>
+</html>

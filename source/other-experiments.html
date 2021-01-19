@@ -17,6 +17,8 @@
 
     <title>web-call/cc | Other experimental code</title>
 
+    <link href="stylesheets/css/gui.css" rel="stylesheet" type="text/css">
+
   </head>
   <body><div style="width:800px;"><p></p><p></p></div>
     <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
@@ -31,7 +33,7 @@
       <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
       <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
 
-      <vaadin-tabs selected="3" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+      <vaadin-tabs selected="4" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
         <vaadin-tab>
           <iron-icon icon="vaadin:home"></iron-icon>
           <a href="index.html">Demo #1: DOM editor</a>
@@ -43,6 +45,10 @@
         <vaadin-tab>
           <iron-icon icon="vaadin:list"></iron-icon>
           <a href="visual-programming.html">Demo #3: Visual program editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="blog-app.html">Demo #4: Financial blog</a>
         </vaadin-tab>
         <vaadin-tab>
           <iron-icon icon="vaadin:list" selected></iron-icon>
@@ -69,6 +75,8 @@
 	<li><a href="mdn-drag-and-drop-copy.html">Example ondragover and ondrop event handlers from MDN, modified to copy instead of move</a></li>
 	<li><a href="dynamic-stylesheet-demo.html">Demonstration of a dynamic stylesheet</a></li>
       </ul>
+
+      <vaadin-button class="nextbutton" onclick="location.href='about.html'">About</vaadin-button>
 
     </vaadin-app-layout>
 
