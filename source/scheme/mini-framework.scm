@@ -128,10 +128,10 @@
       (remove-handlers handlers)
     (fn)))
 
-(define-macro (with-handlers-1 handlers . body)
+(define-macro (with-handlers handlers . body)
   `(call-with-handlers ',handlers (lambda () ,@body)))
 
-(define-macro (with-handlers handlers . body)
+(define-macro (with-handlers-1 handlers . body)
   `(call-with-handlers ,handlers (lambda () ,@body)))
 
 (define (setup-handlers handlers)
@@ -220,4 +220,3 @@
   `(begin
      (set! ,str (substring ,str 0 (- (string-length ,str) 1)))
      ,str))
-

@@ -88,9 +88,18 @@
 	  <div class="chart">DAX</div>
 	  <div class="chart">Nikkei</div>
 	</div>
+	<div id="to" style="padding:0.2em 0 0.2em 2.1em; background-color:lightblue;">
+	  <hr style="background-color: black;"/>
+	  To this area.
+	  <div class="chart">A</div>
+	  <div class="chart">B</div>
+	  <div class="chart">C</div>
+	</div>
 
+	<p></p>
 	<vaadin-button class="nextbutton" onclick="location.href='other-experiments.html'">Next</vaadin-button>
-
+	<p>Copyright &#169; 2020, 2021, Thomas Elam, <a href="https://Mashweb.club">Mashweb.Club</a>. All rights reserved.</p>
+	
       </div> <!-- class="content" -->
 
     </vaadin-app-layout>
@@ -111,11 +120,10 @@
       window.onload = function() {
           var onError = function(e){ console.error(e); }
           biwa = new BiwaScheme.Interpreter(onError);
-      biwa.evaluate('(format #t "Hello, world!")\
-                     (format #t "Loading Scheme program...")\
-                     (load "scheme/drag-and-drop.scm")',
+          biwa.evaluate('(format #t "Hello, world!")\
+                         (format #t "Loading Scheme program ...")\
+                         (load "scheme/drag-and-drop.scm")',
                         function(result) { console.log('Scheme loaded.'); });
-          //$('#term').width('560'); // FIXME: This should be calculated.
           $('#term').width('800'); // FIXME: This should be calculated.
           $('#term').height('400'); // FIXME: This should be calculated.
       };
