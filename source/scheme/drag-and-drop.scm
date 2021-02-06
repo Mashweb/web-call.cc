@@ -17,98 +17,88 @@
 
 (load "scheme/browser-util.scm")
 
+(define (set-draggability draggables-selector draggability-on)
+  (map (lambda (element)
+	 (element-write-attribute! element "draggable" draggability-on))
+       (js-array->list (js-invoke (getelem draggables-selector) "toArray"))))
+
 ;; Start a drag-and-drop operation and return the dragstart target.
 ;; Return #f if the operation is cancelled.
 (define (dragstart from-dom draggables-selector cancel-selector)
   (let ((input #f)
 	(jq-event #f) ;; An event in jQueryland
-	(event-type #f)
-	(dragstart-target #f))
-    (format #t "(dragstart ~a ~a ~a)" from-dom draggables-selector cancel-selector)
-    (map (lambda (element)
-    	   (element-write-attribute! element "draggable" "true"))
-    	 (js-array->list (js-invoke (getelem draggables-selector) "toArray")))
+	(dragged #f)
+	(selector #f))
+    (set-draggability draggables-selector "true")
     (with-handlers-1 `((,'click-handler ,cancel-selector)
 		       (,'dragstart-handler ,from-dom))
       (set! input (get-input)))
-    (format #t "Got input => ~a" input)
-    ;;(map (lambda (element)
-    ;;	   (element-write-attribute! element "draggable" "false"))
-    ;;	 (js-array->list (js-invoke (getelem draggables-selector) "toArray")))
-    (set! event-type (js-ref (first input) "name"))
-    (format #t "event-type => ~a" event-type)
-    (if (eqv? event-type "dragstart")
+    (set-draggability draggables-selector "false")    
+    (if (eqv? (js-ref (first input) "name") "dragstart") ;; event type
 	(begin
 	  (set! jq-event (second input)) ;; The generic parts of an event.
-	  (js-ref (second input) "srcElement")) ;; The dragstart target.
+	  (set! dragged (js-ref jq-event "target"))
+	  (set! selector (js-call% "finder" dragged))
+	  (format #t "selector => ~a" selector)
+	  (js-invoke (get-data-transfer-obj jq-event) "setData" "text/plain" selector)
+	  (element-add-class-name! dragged "dragged")
+	  dragged)
 	#f))) ;; #f indicates the drag operation was cancelled.
 
 ;; Start a drag-and-drop operation and return the dragstart target.
 ;; Return #f if the operation is cancelled.
-(define (drop to-dom)
+(define (drop dragged to-dom)
   (let ((input #f)
 	(jq-event #f) ;; An event in jQueryland
-	(event-type #f)
 	(dragover-target #f)
-	(unfinished #t))
-    (format #t "(drop ~a)" to-dom)
-    ;;(with-handlers-1 `((,click-handler ,cancel-selector))
-    ;;(with-handlers ((click-handler "#cancel"))
-    ;;(with-handlers ((dragover-handler ".chart"))
-    ;;(with-handlers ((dragover-handler ,draggables-selector)) ;;Doesn't work.
-    ;;(with-handlers ((dragover-handler "#from"))
-    
-    (map (lambda (element)
-    	   (element-write-attribute! element "draggable" "true"))
-    	 (js-array->list (js-invoke (getelem ".chart") "toArray")))
-
-    (format #t "Mapped draggable elements")
-
-    ;;(while unfinished
-	   ;;(begin
-    (format #t "Top of loop")
-    (with-handlers (;;(dragstart-handler "#to")
-		    (dragover-handler "#to")
-		    (dragleave-handler "#to")
-		    (drop-handler "#to"))
-      (format #t "Inside with-handlers form")
-      (set! input (get-input)))
-    (format #t "Got input => ~a" input)
-    (set! jq-event (second input))
-    (set! event-type (js-ref (first input) "name"))
-    (format #t "jq-event => ~a; event-type => ~a" jq-event event-type)))
-#|    (case event-type
-      (("dragstart")
-       (set! dragged (js-ref jquery-event "target"))
-       (console-log (format #f "dragged tagName => ~a" (js-ref dragged "tagName")))
-       (set! selector (js-call% "finder" dragged))
-       (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
-       (element-add-class-name! dragged "dragged"))
-      (("dragover")
-       (js-invoke jquery-event "preventDefault")
-       (js-invoke jquery-event "stopPropagation")
-       (set! dragover-target (js-ref jquery-event "srcElement"))
-       (element-add-class-name! dragover-target "dragover")
-       (js-set! (get-data-transfer-obj jquery-event) "dropEffect" drop-effect))
-      (("dragleave")
-       (set! dragover-target (js-ref jquery-event "target"))
-       (element-remove-class-name! dragover-target "dragover"))
-      (("drop")
-       (js-invoke jquery-event "preventDefault")
-       (format #t "Dropped."))
-       (set! unfinished #f))))
-|#
+	(unfinished #t)
+	(original-event #f)
+	(left 0)
+	(top 0))
+    (while unfinished
+      (begin
+	(with-handlers ((dragover-handler "#to") ; FIXME: See https://web.dev/drag-and-drop/
+			(dragleave-handler "#to")
+			(drop-handler "#to")
+			(dragend-handler "body"))
+	  (set! input (get-input)))
+	(set! jq-event (second input))
+	(case (js-ref (first input) "name") ;; event type
+	  (("dragover")
+	   (js-invoke jq-event "preventDefault")
+	   (js-invoke jq-event "stopPropagation")
+	   (set! dragover-target (js-ref jq-event "srcElement"))
+	   (element-add-class-name! dragover-target "dragover")
+	   (js-set! (get-data-transfer-obj jq-event) "dropEffect" "copy"))
+	  (("dragleave")
+	   (set! dragover-target (js-ref jq-event "target"))
+	   (element-remove-class-name! dragover-target "dragover"))
+	  (("dragend")
+	   (element-remove-class-name! dragged "dragged"))
+	  (("drop")
+	   (js-invoke jq-event "preventDefault")
+	   (element-remove-class-name! dragover-target "dragover")
+	   (set! unfinished #f)
+	   (set! original-event (get-original-event jq-event))
+	   (set! left (js-ref original-event "pageX"))
+	   (set! top (js-ref original-event "pageY"))
+	   (set! unfinished #f)))))
+    (list (js-ref jq-event "target") left top))) ;; Drop target; left and top placement
 
 (define (add-charts)
-  (let ((dragstart-target (dragstart "#from" ".chart" "#cancel"))
-	(drop-target #f))
-    (format #t "dragstart-target => ~a" dragstart-target)
-    (if (not (eqv? dragstart-target #f))
+  (let* ((dragged (dragstart "#from" ".chart" "#cancel"))
+	 (drop-result #f)
+	 (to (getelem1 "#to")))
+    (if (not (eqv? dragged #f))
 	(begin
-	  (drop "#to"))
+	  (set! drop-result (drop dragged "#to"))
+	  (element-remove-class-name! dragged "dragged")
+	  ;;(js-invoke (first drop-result) "appendChild" (js-call% "cloneDOM" dragged))
+	  (js-invoke to "appendChild" (js-call% "cloneDOM" dragged))
+	  #t)
 	#f)))
 
 (define (main)
-  (console-log "Hello, world!"))
+  (while (add-charts)))
 
-(format #t "Ready.")
+(reset (main))

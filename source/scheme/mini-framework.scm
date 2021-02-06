@@ -207,6 +207,7 @@
 (define-event-handler dragstart-handler dragstart)
 (define-event-handler dragover-handler dragover)
 (define-event-handler dragleave-handler dragleave)
+(define-event-handler dragend-handler dragend)
 (define-event-handler drop-handler drop)
 
 ;;;; get user input

@@ -321,7 +321,12 @@
 (define (append-to-inner-html! elem str)
   (js-set! elem "innerHTML" (string-append (js-ref elem "innerHTML") str " ")))
 
+;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
+;; unmassaged by jQuery.
+(define (get-original-event jquery-event)
+  (js-ref jquery-event "originalEvent"))
+
 ;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
 (define (get-data-transfer-obj jquery-event)
   ;; FIXME: Is it really necessary to dereference twice?
-  (js-ref (js-ref jquery-event "originalEvent") "dataTransfer"))
+  (js-ref (get-original-event jquery-event) "dataTransfer"))
