@@ -39,7 +39,7 @@
     "jquery-mousewheel": "^3.1.13",
     "jquery.cookie": "^1.4.1",
     "jquery.terminal": "^2.20.1",
-    "prismjs": "^1.22.0",
+    "prismjs": "^1.23.0",
     "rollup": "^2.34.0",
     "terminal-prism": "^0.2.0"
   },
