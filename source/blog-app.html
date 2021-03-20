@@ -122,10 +122,12 @@
           biwa = new BiwaScheme.Interpreter(onError);
           biwa.evaluate('(format #t "Hello, world!")\
                          (format #t "Loading Scheme program ...")\
-                         (load "scheme/drag-and-drop.scm")',
+                         (load "scheme/drag-and-drop.scm")\
+                         (format #t "Loaded")\
+                         (reset (main))',
                         function(result) { console.log('Scheme loaded.'); });
           $('#term').width('800'); // FIXME: This should be calculated.
-          $('#term').height('400'); // FIXME: This should be calculated.
+          $('#term').height('220'); // 400 works well. FIXME: This should be calculated.
       };
     </script>
   </body>

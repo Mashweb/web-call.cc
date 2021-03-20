@@ -31,6 +31,36 @@
 (define (console-group-end)
   (js-call% "console.groupEnd"))
 
+;;;; EVENTS
+
+;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
+;; unmassaged by jQuery.
+(define (get-original-event jquery-event)
+  (js-ref jquery-event "originalEvent"))
+
+;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
+(define (get-data-transfer-obj jquery-event)
+  ;; FIXME: Is it really necessary to dereference twice?
+  (js-ref (get-original-event jquery-event) "dataTransfer"))
+
+(define (prevent-default jq-event)
+  (js-invoke jq-event "preventDefault"))
+
+(define (stop-propagation jq-event)
+  (js-invoke jq-event "stopPropagation"))
+
+(define (src-element jq-event)
+  (js-ref jq-event "srcElement"))
+
+(define (target jq-event)
+  (js-ref jq-event "target"))
+
+(define (page-x jq-event)
+  (js-ref (js-ref jq-event "originalEvent") "pageX"))
+
+(define (page-y jq-event)
+  (js-ref (js-ref jq-event "originalEvent") "pageY"))
+
 ;;;; AJAX
 
 (js-eval "define_libfunc('http-post-text', 2, 2, function(ar){
@@ -309,6 +339,8 @@
 (define (clear-prompt! textarea)
   (js-set! textarea "value" (substring (js-ref textarea "value") 0 1)))
 
+;;;; DOM mutation
+
 (define (append-html! elem str)
   (js-call% "appendHTML" elem str))
 
@@ -321,12 +353,5 @@
 (define (append-to-inner-html! elem str)
   (js-set! elem "innerHTML" (string-append (js-ref elem "innerHTML") str " ")))
 
-;; originalEvent is referenced by a jQuery event. It is what it says: the original event,
-;; unmassaged by jQuery.
-(define (get-original-event jquery-event)
-  (js-ref jquery-event "originalEvent"))
-
-;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
-(define (get-data-transfer-obj jquery-event)
-  ;; FIXME: Is it really necessary to dereference twice?
-  (js-ref (get-original-event jquery-event) "dataTransfer"))
+(define (append-child child to)
+  (js-invoke to "appendChild" child))

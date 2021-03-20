@@ -17,6 +17,7 @@
 
 (load "scheme/browser-util.scm")
 
+;; draggability-on should be either "true" or "false".
 (define (set-draggability draggables-selector draggability-on)
   (map (lambda (element)
 	 (element-write-attribute! element "draggable" draggability-on))
@@ -37,18 +38,18 @@
     (if (eqv? (js-ref (first input) "name") "dragstart") ;; event type
 	(begin
 	  (set! jq-event (second input)) ;; The generic parts of an event.
-	  (set! dragged (js-ref jq-event "target"))
+	  (set! dragged (target jq-event))
 	  (set! selector (js-call% "finder" dragged))
-	  (format #t "selector => ~a" selector)
 	  (js-invoke (get-data-transfer-obj jq-event) "setData" "text/plain" selector)
 	  (element-add-class-name! dragged "dragged")
 	  dragged)
 	#f))) ;; #f indicates the drag operation was cancelled.
 
-;; Start a drag-and-drop operation and return the dragstart target.
-;; Return #f if the operation is cancelled.
+;; Finish a drag-and-drop operation and return the drop target and its left and top coordinates.
+;; Return #f if the operation is cancelled. FIXME: Check the return value for a cancellation.
 (define (drop dragged to-dom)
-  (let ((input #f)
+  (let ((to (getelem1 "#to"))
+	(input #f)
 	(jq-event #f) ;; An event in jQueryland
 	(dragover-target #f)
 	(unfinished #t)
@@ -65,23 +66,23 @@
 	(set! jq-event (second input))
 	(case (js-ref (first input) "name") ;; event type
 	  (("dragover")
-	   (js-invoke jq-event "preventDefault")
-	   (js-invoke jq-event "stopPropagation")
-	   (set! dragover-target (js-ref jq-event "srcElement"))
-	   (element-add-class-name! dragover-target "dragover")
+	   (prevent-default jq-event)
+	   (stop-propagation jq-event)
+	   (set! dragover-target (src-element jq-event))
+	   ;;(element-add-class-name! dragover-target "dragover")
+	   (element-add-class-name! to "dragover")
 	   (js-set! (get-data-transfer-obj jq-event) "dropEffect" "copy"))
 	  (("dragleave")
-	   (set! dragover-target (js-ref jq-event "target"))
+	   (set! dragover-target (target jq-event))
 	   (element-remove-class-name! dragover-target "dragover"))
 	  (("dragend")
 	   (element-remove-class-name! dragged "dragged"))
 	  (("drop")
-	   (js-invoke jq-event "preventDefault")
-	   (element-remove-class-name! dragover-target "dragover")
-	   (set! unfinished #f)
-	   (set! original-event (get-original-event jq-event))
-	   (set! left (js-ref original-event "pageX"))
-	   (set! top (js-ref original-event "pageY"))
+	   (prevent-default jq-event)
+	   ;;(element-remove-class-name! dragover-target "dragover")
+	   (element-remove-class-name! to "dragover")
+	   (set! left (page-x jq-event))
+	   (set! top (page-y jq-event))
 	   (set! unfinished #f)))))
     (list (js-ref jq-event "target") left top))) ;; Drop target; left and top placement
 
@@ -93,12 +94,10 @@
 	(begin
 	  (set! drop-result (drop dragged "#to"))
 	  (element-remove-class-name! dragged "dragged")
-	  ;;(js-invoke (first drop-result) "appendChild" (js-call% "cloneDOM" dragged))
-	  (js-invoke to "appendChild" (js-call% "cloneDOM" dragged))
+	  ;;(js-invoke to "appendChild" (clone-dom dragged))
+	  (append-child (clone-dom dragged) to)
 	  #t)
 	#f)))
 
 (define (main)
   (while (add-charts)))
-
-(reset (main))
