@@ -111,7 +111,7 @@
       window.onload = function() {
           var onError = function(e){ console.error(e); }
           biwa = new BiwaScheme.Interpreter(onError);
-          biwa.evaluate('(load "scheme/in-browser-gui.scm")\
+          biwa.evaluate('(load "scheme/tab-container.scm")\
                          (js-call% "setDraggability" (getelem1 "#draggables") "true")\
                          (reset (test))',
                         function(result) { console.log('Scheme loaded.'); });
