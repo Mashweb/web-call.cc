@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="The Zen web application framework and the Zen live DOM editor">
+    <meta name="keywords" content="Zen web framework, web application framework, asynchronous JavaScript, indieweb, end-user programming, sequential programming, Scheme language, Scheme macro, syntactic extension, Biwascheme, Alexander Sukhoverkhov">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="canonical" href="https://web-call.cc">
+    <link rel="home" href="https://web-call.cc">
+
+    <meta name="theme-color" content="#222127">
+    <meta name="keywords" content="live DOM editing, live DOM editor, web framework, web components, custom elements, Vaadin web components, Dojo web components">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-173606225-1');
+    </script>
+
+    <title>web-call.cc | Zen & Demo #1: live DOM editor</title>
+
+    <link href="stylesheets/css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/prism-coy.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/gui.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/dojo-6.0.0.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <!-- Apply typography and color theme modules globally from `vaadin-lumo-styles` -->
+    <custom-style>
+      <style include="lumo-typography lumo-color"></style>
+    </custom-style>
+    
+    <vaadin-app-layout style="overflow: auto;">
+
+      <vaadin-drawer-toggle slot="navbar"></vaadin-drawer-toggle>
+
+      <img slot="navbar" src="images/zen.png" alt="Zen Logo" width="32" height="32" referrerpolicy="no-referrer">
+      <h2 slot="navbar" class="zen-navbar-heading">Demos of Zen technology prototypes</h2>
+
+      <vaadin-tabs selected="0" slot="drawer" orientation="vertical" theme="minimal" style="margin: 0 auto; flex: 1;">
+        <vaadin-tab>
+          <iron-icon icon="vaadin:home" selected></iron-icon>
+          Demo #1: DOM editor
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="sequentially-programmed-web-apps.html">Demo #2: Introduction to Zen sequential web app programming</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="visual-programming.html">Demo #3: Visual program editor</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="blog-app.html">Demo #4: Financial blog</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="other-experiments.html">Other experimental code</a>
+        </vaadin-tab>
+        <vaadin-tab>
+          <iron-icon icon="vaadin:list"></iron-icon>
+          <a href="about.html">About the Zen web app framework and these demos</a>
+        </vaadin-tab>
+      </vaadin-tabs>
+      
+      <div class="content" style="max-width:560px; overflow: auto;">
+	<h1 style="margin:0.2em 0em 0em 0em;">Demo #1: <a href="https://doc.mashweb.club/">Zen</a> live DOM editor</h1>
+
+	<p><em>Brief background:</em> <a href="https://doc.mashweb.club/">Zen</a> is a small framework being developed to help bring
+	  web application authoring to the masses.
+	  Perhaps someday it will become an important tool in the <a href="https://indieweb.org/">IndieWeb movement</a>.  
+          For more information, visit the <a href="about.html">About</a> page.
+          <em>This demo:</em> Follow the instructions below in green
+          letters (beginning "Press one of ...").
+          Being an alpha prototype, the demo still has bugs
+          and does not yet work in Explorer or mobile browsers.</p>
+
+        <vaadin-details id="definitions">
+          <div slot="summary"><span id="defstate"></span></div>
+          <dl>
+            <dt><i><b>What is a DOM?</b></i></dt> <dd>When a web page is loaded, the browser creates a Document Object
+              Model (DOM) of the page. The DOM is basically just a tree of text objects
+              and <em>element</em> objects
+              like DIVs (divisions of the page), paragraphs, headers, articles, sections,
+              blockquotes, links, lists, interactive components (like buttons and forms),
+              and many more. The DOM defines the structure of the page by defining
+              which of the page's elements are inside, i.e. <em>nested within,</em>
+              which other page elements.</dd>
+            <dt><i><b>What is a live DOM editor?</b></i></dt> <dd>A live DOM editor is a program or
+              application in a web page that changes the relative positions,
+              and possibly attributes and properties, of DOM elements <i>on the fly</i>,
+              that is, without requiring the page to be refreshed or updated from the web server.
+              A useful live DOM editor should also probably be able to add and delete DOM elements.
+              A useful DOM editor will likely be able to persist these changes
+              by saving them locally or on the web server.</dd>
+            <dt><i><b>What is this demo of live DOM editing?</b></i></dt> <dd>This page,
+              containing the alpha prototype of the <a href="https://doc.mashweb.club/">Zen</a> live DOM editor,
+	      is a demonstration of a
+              <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/in-browser-gui.scm">
+                very clear and simple way</a> to program a complex GUI
+              (graphical user interface). Being an alpha prototype, it still has bugs
+              and does not yet work in Explorer or mobile browsers. In case you do
+              not find the operation of this DOM editor to be obvious, there are
+              instructions at the bottom of the page.</dd>
+          </dl>
+        </vaadin-details>
+
+        <vaadin-details id="bsconsole">
+          <div slot="summary"><span id="constate"></span></div>
+	  Please refer to <a href="https://www.biwascheme.org/">Biwascheme.org</a>.
+	  <div id="term"></div>
+        </vaadin-details>
+
+        <div id="message"></div>
+        <div id="error"></div>
+        <div id="tools">
+          <button id="add" class="ghosted">Add-insert</button>
+          <!-- The following id was changed from "copy" because that id is used by an included library. -->
+          <button id="copyx" style="background-color:lightgreen">Copy-insert</button>
+          <button id="copy-before" style="background-color:lightgreen">Copy-before</button>
+          <button id="paste" class="ghosted">Paste-insert</button>
+          <button id="move" style="background-color:lightgreen">Move-insert</button>
+          <button id="move-before" style="background-color:lightgreen">Move-before</button>
+          <button id="delete" class="ghosted">Delete</button>
+          <button id="undo" class="ghosted">Undo</button>
+          <button id="redo" class="ghosted">Redo</button>
+          <button id="save" class="ghosted">Save</button>
+        </div>
+
+        <div id="draggables" class="canvas">
+          <div class="ex">Native HTML Elements
+            <div class="ex pink" id="block1">Block 1
+              <div class="ex lightorange" id="block1a">Block1a</div>
+              <div class="ex yellow" id="block1b">Block1b</div>
+            </div>
+            <div class="ex inline red" id="inline1">Inline 1</div>
+            <div class="ex inline orange" id="inline2">Inline 2</div>
+            <div class="ex inline blue" id="inline3">Inline 3
+              <div class="ex inline lavender" id="inline3a">Inline 3a</div>
+            </div>
+            <div class="ex green" id="block2">Block 2
+              <div class="ex inline darkblue" id="inline2a">Inline 2a</div>
+              <div class="ex inline fuscia" id="inline2b">Inline 2b</div>
+            </div>
+            <div class="ex gray" id="block3">Block 3</div>
+          </div>
+          <div class="ex"><a href="https://vaadin.com/components/vaadin-list-box">Vaadin List Box Custom Elements</a>
+            <vaadin-list-box selected="0">
+              <vaadin-item class="vblock">Option one</vaadin-item>
+              <vaadin-item class="vblock">Option two</vaadin-item>
+              <vaadin-item class="vblock">Option three</vaadin-item>
+            </vaadin-list-box>
+          </div>
+          <div class="ex"><a href="https://vaadin.com/components/vaadin-ordered-layout">Vaadin Ordered Layout Custom Elements</a>, Horizontal
+            <vaadin-horizontal-layout>
+              <div class="vblock">Item 1</div>
+              <div class="vblock">Item 2</div>
+              <div class="vblock">Item 3</div>
+            </vaadin-horizontal-layout>
+          </div>
+          <div class="ex"><a href="https://vaadin.com/components/vaadin-ordered-layout">Vaadin Ordered Layout Custom Elements</a>, Vertical
+            <vaadin-vertical-layout>
+              <div class="vblock">Item A</div>
+              <div class="vblock">Item B</div>
+              <div class="vblock">Item C</div>
+            </vaadin-vertical-layout>
+          </div>
+          <div class="ex"><a href="https://github.com/dojo/widgets">Dojo Button Custom Elements</a><br/>
+            <dojo-button class="ce-layout">Basic Button</dojo-button>
+            <dojo-button class="ce-layout">Icon Button <dojo-icon type="searchIcon"></dojo-icon></dojo-button>
+            <dojo-button class="ce-layout" id="dojoEnabledPopupButton">Popup</dojo-button>
+            <dojo-button class="ce-layout" id="dojoEnabledToggleButton">Toggle</dojo-button><br/>
+            <dojo-button class="ce-layout" id="dojoDisabledBasicButton">Disabled Basic Button</dojo-button>
+            <dojo-button class="ce-layout" id="dojoDisabledIconButton">Disabled Icon Button <dojo-icon type="searchIcon"></dojo-icon></dojo-button>
+            <dojo-button class="ce-layout" id="dojoDisabledPopupButton">Disabled Popup</dojo-button>
+            <dojo-button class="ce-layout" id="dojoDisabledToggleButton">Disabled Toggle</dojo-button>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoCheckedCheckbox" label="Checked checkbox"></dojo-checkbox>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledCheckedCheckbox" label="Disabled checked checkbox"></dojo-checkbox>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledUnCheckedCheckbox" label="Disabled unchecked checkbox"></dojo-checkbox>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoCheckedToggle" mode="toggle" label="Checked Toggle"></dojo-checkbox>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledCheckedToggle" mode="toggle" label="Disabled checked Toggle"></dojo-checkbox>
+            <dojo-checkbox class="ce-layout ce-block" id="dojoDisabledUnCheckedToggle" mode="toggle" label="Disabled unchecked Toggle"></dojo-checkbox>
+            <dojo-radio class="ce-layout ce-block" id="dojoRadioOne" value="radioGroupOne" label="Radio one"></dojo-radio>
+            <dojo-radio class="ce-layout ce-block" id="dojoRadioTwo" value="radioGroupOne" label="Radio two"></dojo-radio>
+            <dojo-radio class="ce-layout ce-block" id="dojoDisabledUnCheckedRadio" label="Disabled unchecked Radio"></dojo-radio>
+          </div>
+        </div>
+
+        <vaadin-details id="explanation">
+          <div slot="summary"><span id="exstate"></span></div>
+
+          <div id="explainer">
+            <h3>How to use this prototype DOM editor</h3>
+            <p>This DOM editor prompts you in large green text.
+              It will instruct you to choose a tool.
+              Currently, "Copy-insert", "Copy-before", "Move-insert", and "Move-before"
+              are the only tools that work.
+              Clicking on any other tool will produce the message
+              "Unimplemented operation."
+              Currently there is a bug that prevents elements contained
+              in a custom element from being copied.</p>
+            The program will eventually implement 4 rules for insertions and moves:
+            <ol>
+              <li>Branches of the DOM will be designatable as draggable
+                and other branches of the DOM will be designatable as not draggable.
+                However, currently just one branch can be designated as draggable
+                at startup. That branch currently comprises the elements
+                in the large gray block.</li>
+              <li>Branches of the DOM will be designatable as valid drop targets
+                and other branches of the DOM will be designatable as not valid
+                drop targets.</li>
+              <li>The HTML Content Model places restrictions upon what elements
+                are allowed to be nested inside which other elements.
+                The program will implement rules to enforce these
+                restrcitions.
+                (Refer to the relevant sections of
+                <a href="https://bit.ly/whatwg-content-models">whatwg.org</a>
+                and <a href="https://bit.ly/w3-content-models">w3.org</a>.
+                A good but simple
+                <a href="https://clearlydecoded.com/html-content-models">explanation</a>
+                can be found on ClearlyDecoded.com.)</li>
+              <li>An element cannot be moved into itself, nor into a descendent of itself.
+                For example, if a "Move-insert" operation is attempted
+                and  an element around for awhile then dropped at its original position,
+                the operation is invalid.
+                Likewise, if a "Move-before" operation is attempted and an element
+                is dropped on its own child element or its child's child element,
+                the operation is invalid.
+                Invalid operations will produce no change to the DOM structure.</li>
+            </ol>
+            <p>So far, only the 4th rule is implemented. The 1st rule is partially
+              implemented. The demo will be improved as time permits.</p>
+            <p>The <a href="https://www.biwascheme.org/">BiwaScheme</a> code can be
+              downloaded at <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/in-browser-gui.scm">in-browser-gui.scm</a>,
+              <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/browser-util.scm">browser-util.scm</a>, and
+              <a href="https://raw.githubusercontent.com/Mashweb/web-call.cc/master/source/scheme/mini-framework.scm">mini-framework.scm</a>.
+              There is <a href="other-experiments.html">other experimental code here</a>.
+              This website can be cloned. See
+              <a href="https://github.com/Mashweb/web-call.cc">the project
+                on GitHub</a>.</p>
+            <p>If you like this project or want to see more about it,
+              please visit <a href="https://Mashweb.Club">Mashweb.Club</a>.</p>
+          </div>
+        </vaadin-details>
+
+	<vaadin-button class="nextbutton" onclick="location.href='sequentially-programmed-web-apps.html'">Next</vaadin-button>
+	<p>Copyright &#169; 2020, 2021, Thomas Elam, <a href="https://Mashweb.club">Mashweb.Club</a>. All rights reserved.</p>
+
+      </div> <!-- class="content" -->
+
+    </vaadin-app-layout>
+
+    <script src="javascripts/in-browser-gui.js"></script>
+    <script src="javascripts/biwascheme-0.6.9.js"></script>
+    <script src="javascripts/finder-vaadin-polymer.js"></script>
+    <script src="javascripts/biwascheme_console-dojo-widgets-control.js"></script>
+    <script src="javascripts/custom-elements.min.js"></script>
+    <script>
+      var biwa;
+      window.onload = function() {
+          var onError = function(e){ console.error(e); }
+          biwa = new BiwaScheme.Interpreter(onError);
+          biwa.evaluate('(load "scheme/in-browser-gui.scm")\
+                         (js-call% "setDraggability" (getelem1 "#draggables") "true")\
+                         (reset (test))',
+                        function(result) { console.log('Scheme loaded.'); });
+      };
+    </script>
+  </body>
+</html>
