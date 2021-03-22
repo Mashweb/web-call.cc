@@ -89,10 +89,20 @@
 
     <div id="message"></div>
     <div id="error"></div>
-    <div id="tools">TODO</div>
+    <div id="tools">
+      <button id="add">Add a new tab</button>
+    </div>
 
-    <div id="draggables" class="canvas">TODO</div>
+    <div id="tab-container" class="canvas">
+      <vaadin-tabs selected="0">
+        <vaadin-tab id="starter-tab">1</vaadin-tab>
+      </vaadin-tabs>
 
+      <div id="subpages">
+        <p id="starter-subpage">Created at load time</p>
+      </div>
+
+    </div>
 
     <vaadin-button class="nextbutton" onclick="location.href='other-experiments.html'">Next</vaadin-button>
 	<p>Copyright &#169; 2020, 2021, Thomas Elam, <a href="https://Mashweb.club">Mashweb.Club</a>. All rights reserved.</p>
@@ -112,8 +122,7 @@
           var onError = function(e){ console.error(e); }
           biwa = new BiwaScheme.Interpreter(onError);
           biwa.evaluate('(load "scheme/tab-container.scm")\
-                         (js-call% "setDraggability" (getelem1 "#draggables") "true")\
-                         (reset (test))',
+                         (reset (run))',
                         function(result) { console.log('Scheme loaded.'); });
       };
     </script>

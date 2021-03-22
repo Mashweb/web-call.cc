@@ -1,4 +1,4 @@
-; Copyright (C) 2021 Thomas Elam, Daniel Koning
+; Copyright (C) 2021 Daniel Koning
 ;
 ; This file is part of web-call.cc.
 ;
@@ -16,130 +16,135 @@
 ; along with web-call.cc.  If not, see <https://www.gnu.org/licenses/>.
 
 (load "scheme/browser-util.scm")
-(load "scheme/config.scm")
+;; Should config.scm be loaded as well in every new Scheme file, in case it
+;; eventually comes to include something of universal import (so to speak)?
 
+
+;;;; Extensions to the framework
+
+(define (getelems selector)
+  ;; Oddly, this works even for the value #f that is returned when getelem finds
+  ;; nothing. That doesn't seem like the Scheme way to me, but what do I know.
+  (js-array->list (getelem selector)))
+
+
+;;;; Convenience functions
+
+;; Write to the designated box.
 (define (message str)
-  (js-set! (getelem1 "#message") "innerHTML"
-           (string-append "<span class='message'>" str "</span>")))
+  (set-inner-html! (getelem1 "#message")
+                   (string-append "<span class='message'>" str "</span>")))
 
-(define (test)
-  (let loop1
-      ((op #f)
-       (selector #f)
-       (drop-effect #f)
-       (unfinished #t))
-    
-    (message "Tab container placeholder message.")
-    (let loop1a
-        ()
-      (with-handlers ((click-handler "#add")
-                      (click-handler "#copyx")
-                      (click-handler "#copy-before")
-                      (click-handler "#paste")
-                      (click-handler "#move")
-                      (click-handler "#move-before")
-                      (click-handler "#delete")
-                      (click-handler "#undo")
-                      (click-handler "#redo")
-                      (click-handler "#save"))
-        (let* ((input (get-input))
-               (event-type (js-ref (first input) "name"))
-               (jquery-event (second input)))
-          (set! op (js-ref (js-ref jquery-event "currentTarget") "innerText"))
-          (case op
-            (("Copy-insert")
-             (set! drop-effect "copy")
-             (set! op "copy"))
-            (("Copy-before")
-             (set! drop-effect "copy")
-             (set! op "copybefore"))
-            (("Move-insert")
-             (set! drop-effect "move")
-             (set! op "move"))
-            (("Move-before")
-             (set! drop-effect "move")
-             (set! op "movebefore"))
-            (("Save")
-             (http-post-text (string-append zen-db "/doms")
-                             (dom->string (getelem1 "div#draggables"))))
-            (else
-             (message "Unimplemented operation. Please press a different DOM-edit-tool button.")
-             (loop1a))))))
+(define (date-as-string date-obj)
+  (js-invoke date-obj "toString"))
 
-    (message "Now try dragging and dropping an HTML element.")
+(define (current-date-as-string)
+  ;; Maybe a format different from the default would be nicer.
+  (date-as-string (js-new "Date")))
 
-    (while unfinished
-      (with-handlers ((dragstart-handler "#draggables")
-                      (dragover-handler "#draggables")
-                      (dragleave-handler "#draggables")
-                      (drop-handler "#draggables"))
-        (let* ((input (get-input))
-               (event-type (js-ref (first input) "name"))
-               (jquery-event (second input)) ;; The generic parts of an event.
-               (dragged #f)
-               (dragover-target #f)
-               (dragleave-target #f))
-          (case event-type
-            (("dragstart")
-             (set! dragged (js-ref jquery-event "target"))
-             (console-log (format #f "dragged tagName => ~a" (js-ref dragged "tagName")))
-             (set! selector (js-call% "finder" dragged))
-             (js-invoke (get-data-transfer-obj jquery-event) "setData" "text/plain" selector)
-             (element-add-class-name! dragged "dragged"))
-            (("dragover")
-             (js-invoke jquery-event "preventDefault")
-             (js-invoke jquery-event "stopPropagation")
-             (set! dragover-target (js-ref jquery-event "srcElement"))
-             (element-add-class-name! dragover-target "dragover")
-             ;; Assume op is "Copy" or "Move".
-             (js-set! (get-data-transfer-obj jquery-event) "dropEffect" drop-effect))
-            (("dragleave")
-             (set! dragover-target (js-ref jquery-event "target"))
-             (element-remove-class-name! dragover-target "dragover"))
-            (("drop")
-             (js-invoke jquery-event "preventDefault")
-             (unless (perform-operation op jquery-event)
-               (loop1a))
-             (message (format #f "~a operation complete." op))
-             (set! unfinished #f))))))
-    (loop1)))
 
-;; dataTransfer is part of a dragstart event, but not part of a generic jQuery event.
-(define (get-data-transfer-obj jquery-event)
-  ;; FIXME: Is it really necessary to dereference twice?
-  (js-ref (get-original-event jquery-event) "dataTransfer"))
+;;;; DOM communication
 
-(define (perform-operation op jq-ev)
-  (let* ((target (js-ref jq-ev "target"))
-         (dragged-selector (js-invoke (get-data-transfer-obj jq-ev) "getData" "text/plain"))
-         (dragged (getelem1 dragged-selector))
-         ;;(parent (js-ref target "parentNode"))
-         (parent (js-ref (js-call% "findTrueTarget" target) "parentNode")) ;; TODO: Check whether this is correct.
-         (is-custom-element #f)
-         (tagName ""))
-    (console-log (format #f "perform-operation ~a" op))
-    (element-remove-class-name! dragged "dragged")
-    (element-remove-class-name! target "dragover")
-    (console-log (format #f "dragged-selector => ~a" dragged-selector))
-    (case op
-      (("copy")
-       (console-log "copy")
-       (js-invoke target "appendChild" (js-call% "cloneDOM" dragged)))
-      (("copybefore")
-       (begin
-         ;;(console-dir (js-call% "cloneDOM" dragged))
-         ;;(console-log "called console-dir")
-         (console-log "parent:")
-         (console-dir parent)
-         (console-log "target:")
-         (console-dir target)
-         (js-invoke parent "insertBefore" (js-call% "cloneDOM" dragged) (js-call% "findTrueTarget" target))
-         ))
-      (("move")
-       (if (js-invoke dragged "contains" target)
-           (alert "Invalid operation: dragged element contains itself.")
-           (js-invoke target "appendChild" dragged)))
-      (("movebefore")
-       (if (js-invoke dragged "contains" parent)
-           (alert "Invalid operation: dragged element contains itself.")
-           (js-invoke parent "insertBefore" dragged target))))))
+;; To clarify: a "tab" in vaadin is only the labeled button-like element which
+;; is clicked to trigger something else.
+(define (all-tabs)
+  (getelems "#tab-container vaadin-tabs vaadin-tab"))
+
+;; In this case, what it triggers is the display of a so-called "subpage" in the
+;; div beneath the tab bar.
+(define (all-subpages)
+  (getelems "#subpages p"))
+
+(define (selected-tab)
+  (or
+   (find (lambda (tab)
+          (equal? (element-read-attribute tab "aria-selected") "true"))
+         (all-tabs))
+   (console-error "Somehow there's no selected tab. How?")))
+
+
+;;;; Internal logic associating each tab with the subpage it's meant to reveal
+;;;; when the user clicks it
+
+(define tab-subpage-pairs (list
+               (cons (getelem1 "#starter-tab")
+                     (getelem1 "#starter-subpage"))))
+
+(define (new-tab-and-subpage key)
+  (let* ((date (current-date-as-string))
+         (tab (element-new
+               (list "vaadin-tab" key)))
+         (subpage (element-new
+                (list "p" (format "Created at ~a" date)))))
+    (push! (cons tab subpage) tab-subpage-pairs)
+    (list tab subpage)))
+
+(define (subpage-for-tab tab)
+  (let ((pair (assq tab tab-subpage-pairs)))
+    (if pair
+        (cdr pair)
+        (console-error
+         "Somehow the tab-subpage association list got corrupted."))))
+
+
+;;;; Event handlers
+
+;; Add a new tab; assign it a default name based on the order in which it was
+;; added.
+(define add-tab
+  ;; This function doesn't really HAVE to close around a lexical variable, but
+  ;; that seems a good way of illustrating the concept in a demo.
+  (let ((tab-count 1))
+    (lambda ()
+      (set! tab-count (+ 1 tab-count))
+
+      (let*
+          ((tab-bar (getelem1 "#tab-container vaadin-tabs"))
+           (subpage-holder (getelem1 "#subpages"))
+           (key (format "~a" tab-count))
+           (tab-and-subpage (new-tab-and-subpage key))
+           ;; We could really use some kind of destructuring macro.
+           (tab (first tab-and-subpage))
+           (subpage (second tab-and-subpage)))
+
+        (append-child tab tab-bar)
+
+        (element-hide! subpage)
+        (append-child subpage subpage-holder)
+
+        (message (format "Congratulations. You just created tab ~a." key))))))
+
+
+;; Determine which is the active tab; display the associated subpage, and only
+;; that subpage (clearing any that was already showing).
+(define (update-displayed-subpage)
+  (map element-hide! (all-subpages))
+
+  (let* ((tab (selected-tab))
+         (subpage (subpage-for-tab tab)))
+    (element-show! subpage)
+
+    (message "Good job. You just clicked the tab bar.")))
+
+
+;;;; The top-level loop registering handlers
+
+(define (run)
+  (message "Click the button to add a tab.")
+
+  ;; This might as well just go on forever.
+  (while #t
+    (with-handlers ((click-handler "#add")
+                    (click-handler "#tab-container"))
+
+      (let* ((input (get-input))
+             (jquery-event (second input))
+             (target (js-ref jquery-event "currentTarget"))
+             (target-id (js-ref target "id")))
+
+        (case target-id
+          (("add") (add-tab))
+          ;; Really, this one should only fire when the user clicks an actual
+          ;; tab, rather than just the background behind or around them; but I
+          ;; haven't come up with an elegant way to do that yet.
+          (("tab-container") (update-displayed-subpage)))))))

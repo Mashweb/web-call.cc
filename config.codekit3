@@ -1451,13 +1451,13 @@
     "\/source\/about.html" : {
       "cB" : 0,
       "ft" : 8192,
-      "hM" : 0,
+      "hM" : 1,
       "oA" : 0,
       "oAP" : "\/build\/about.html",
       "oF" : 0
     },
     "\/source\/blog-app.html" : {
-      "cB" : 0,
+      "cB" : 1,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 0,
@@ -1784,7 +1784,7 @@
     "\/source\/other-experiments.html" : {
       "cB" : 0,
       "ft" : 8192,
-      "hM" : 0,
+      "hM" : 1,
       "oA" : 0,
       "oAP" : "\/build\/other-experiments.html",
       "oF" : 0
@@ -1872,7 +1872,7 @@
     "\/source\/sequentially-programmed-web-apps.html" : {
       "cB" : 0,
       "ft" : 8192,
-      "hM" : 0,
+      "hM" : 1,
       "oA" : 0,
       "oAP" : "\/build\/sequentially-programmed-web-apps.html",
       "oF" : 0
@@ -2027,10 +2027,10 @@
     "\/source\/visual-programming.html" : {
       "cB" : 0,
       "ft" : 8192,
-      "hM" : 0,
-      "oA" : 0,
+      "hM" : 1,
+      "oA" : 2,
       "oAP" : "\/build\/visual-programming.html",
-      "oF" : 0
+      "oF" : 1
     }
   },
   "hooks" : [
@@ -2045,7 +2045,7 @@
     "displayValueWasSetByUser" : 1,
     "iconImageName" : "\/source\/images\/zen.png",
     "iconImageWasSetByUser" : 1,
-    "lastBuiltDate" : 638054819.26053095
+    "lastBuiltDate" : 638069484.29596305
   },
   "projectSettings" : {
     "abortBuildOnError" : 1,
