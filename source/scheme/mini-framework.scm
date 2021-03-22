@@ -28,7 +28,7 @@
   `(*shift (lambda (,arg) ,@prog)))
 
 (define (*meta-continuation* v)
-  (error "You forgot the top-level reset..."))
+  (console-error "You forgot the top-level reset..."))
 
 (define (*abort thunk)
   (let ((v (thunk)))
@@ -62,7 +62,7 @@
 ;; Courtesy Sean Eshbaugh: https://bit.ly/2BRWvIN
 (define (nth n l)
   (if (or (> n (length l)) (< n 0))
-    (error "Index out of bounds.")
+    (console-error "Index out of bounds.")
     (if (eq? n 0)
       (car l)
       (nth (- n 1) (cdr l)))))
