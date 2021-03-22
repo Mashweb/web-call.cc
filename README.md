@@ -11,7 +11,7 @@ At the moment, the only automated building of this project is via CodeKit.
 See codekitapp.com.
 Before building, open CodeKit's view of the npm package directory by clicking
 on the cloud icon at the left side of the application and, at the right side,
-click 'Intall from Package.json'.
+click 'Install from Package.json'.
 
 ---
 
