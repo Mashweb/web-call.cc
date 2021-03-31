@@ -6340,6 +6340,14 @@
       "rFN" : 0,
       "uCM" : 0
     },
+    "\/doc\/git-crypt-key" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/build\/doc\/git-crypt-key",
+      "oF" : 0
+    },
     "\/doc\/gui_ops.md" : {
       "cB" : 0,
       "cS" : 0,
@@ -8144,6 +8152,14 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/build\/scheme\/in-browser-program.scm",
+      "oF" : 0
+    },
+    "\/source\/scheme\/mini-framework.scm" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/build\/scheme\/mini-framework.scm",
       "oF" : 0
     },
     "\/source\/scheme\/simple_seq_webapp.scm" : {
