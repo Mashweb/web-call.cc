@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#222127">
+    <meta name="description" content="Financial blog or dashboard">
+    <meta name="keywords" content="Zen, alpha, prototype, demo, drag and drop, Biwascheme, Scheme language, UI, user interface">
+    <meta name="author" content="Tom Elam">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-173606225-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-173606225-1');
+    </script>
+
+    <title>web-call.cc | Demo: Financial Blog</title>
+
+    <link href="stylesheets/css/jquery.terminal-2.3.0.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/prism-coy.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="stylesheets/css/gui.css" rel="stylesheet" type="text/css">
+    <link href="stylesheets/css/dojo-6.0.0.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    
+    <script src="javascripts/in-browser-gui.js"></script>
+    <script src="javascripts/biwascheme-0.6.9.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="javascripts/finder-vaadin-polymer.js"></script>
+    <script src="javascripts/biwascheme_console-dojo-widgets-control.js"></script>
+    <script src="javascripts/custom-elements.min.js"></script>
+    <script>
+      var biwa;
+      window.onload = function() {
+          var onError = function(e){ console.error(e); }
+          biwa = new BiwaScheme.Interpreter(onError);
+          biwa.evaluate('(format #t "Hello, world!")\
+                         (format #t "Loading Scheme program ...")\
+                         (load "scheme/drag-and-drop.scm")\
+                         (format #t "Loaded")\
+                         (reset (main))',
+                        function(result) { console.log('Scheme loaded.'); });
+          $('#term').width('800'); // FIXME: This should be calculated.
+          $('#term').height('220'); // 400 works well. FIXME: This should be calculated.
+      };
+    </script>
+  </body>
+</html>
