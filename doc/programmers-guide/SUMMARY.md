@@ -1,7 +1,7 @@
 # Table of contents
 
 * [SUMMARY.md](README.md)
-* [Preface](preface.md)
+* [Preface](doc/programmers-guide/prefacs.md)
 * [Introduction](untitled.md)
 * [Alan's-Zen-Highlighter-Concept](alans-zen-highlighter-concept.md)
 * [Asynchronous-JavaScript](asynchronous-javascript.md)
