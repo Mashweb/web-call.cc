@@ -1,6 +1,6 @@
 # Table of contents
 
-* [SUMMARY.md](README.md)
+* [About this book](README.md)
 * [About this book](about-this-book.md)
 * [Preface](preface.md)
 * [Introduction](untitled.md)
