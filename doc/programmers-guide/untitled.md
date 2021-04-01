@@ -32,3 +32,5 @@ Virtually every part of Zen involves intricately designed user interaction. This
 
 ## Part 6: Example Web Apps Built with Zen
 
+## Part 7: Outside Tools To Help Build Zen
+
