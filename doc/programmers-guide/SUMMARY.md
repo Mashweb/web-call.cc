@@ -13,4 +13,5 @@
 * [Using-a-gamepad-with-Zen](using-a-gamepad-with-zen.md)
 * [Zen-user-intereactions](zen-user-intereactions.md)
 * [Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances](zen-widgets-their-creation-manipulation-and-affordances.md)
+* [Part 2: Goals and Possible Goals of Zen](part-2-goals-and-possible-goals-of-zen.md)
 
