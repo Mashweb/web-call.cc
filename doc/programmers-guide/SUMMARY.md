@@ -1,7 +1,6 @@
 # Table of contents
 
 * [About this book](README.md)
-* [About this book](about-this-book.md)
 * [Preface](preface.md)
 * [Introduction](untitled.md)
 * [Alan's-Zen-Highlighter-Concept](alans-zen-highlighter-concept.md)
