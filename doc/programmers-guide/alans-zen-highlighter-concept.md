@@ -2,9 +2,11 @@
 
 ## Highlighter Concept
 
-Updates: 3/26/2021
+Updates: 4/1/2021
 
 Tom says: There are a lot of tasks embedded in building the Zen Highlighter, so let's break this down.
+
+Let's put this into the Zen Programmer's Guide.
 
 ## Key ideas
 
