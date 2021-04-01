@@ -6,7 +6,7 @@ description: Table of Contents
 
 ## Table of Contents
 
-### \[Preface\]\(mashweb/preface\)
+### \[Preface\]\(preface\)
 
 
 
