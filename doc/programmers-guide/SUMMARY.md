@@ -8,7 +8,7 @@
 * [Part 2: Goals \(and Possible Goals\) of Zen](part-2-goals-of-zen/README.md)
   * [The plan for Alpha Zen](part-2-goals-of-zen/the-plan-for-alpha-zen.md)
 * [Part 3: The Key to Zen: A Nano Framework for Sequential Programming](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/README.md)
-  * [Scheme-Interpreters-in-JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript/README.md)
+  * [Scheme Interpreters in JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript/README.md)
     * [Asynchronous-JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript/asynchronous-javascript.md)
 * [Part 4: Web Page Structure](part-4-web-page-structure/README.md)
   * [Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances](part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances.md)

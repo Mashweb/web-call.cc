@@ -1,4 +1,4 @@
-# Scheme-Interpreters-in-JavaScript
+# Scheme Interpreters in JavaScript
 
 ## Some possibly good lists of Scheme interpreters in JavaScript:
 
