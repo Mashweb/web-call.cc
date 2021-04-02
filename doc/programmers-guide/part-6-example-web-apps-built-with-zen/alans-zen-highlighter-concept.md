@@ -60,9 +60,9 @@ Tom comments:
 
 Tom says:
 
-The Dojo Toolkit might provide more fodder for ideas. See [https://github.com/Mashweb/web-call.cc/wiki/Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances](https://github.com/Mashweb/web-call.cc/wiki/Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances).
+The Dojo Toolkit might provide more fodder for ideas. See [Zen Widgets: Their Creation, Manipulation, and Affordances](https://tomelam.gitbook.io/mashweb/part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances).
 
-I have begun editing a wiki page that will help us adapt and adopt some of your ideas quickly: [Zen user intereactions](https://github.com/Mashweb/web-call.cc/wiki/Zen-user-intereactions).
+I have begun editing a wiki page that will help us adapt and adopt some of your ideas quickly: [Zen user interactions](https://tomelam.gitbook.io/mashweb/part-5-user-interactions-and-the-html5-apis/zen-user-intereactions).
 
 Note that it is easy to "embed" videos in a Zen web page. \(See [how easy it is to "embed" a YouTube video in a GitHub wiki](https://stackoverflow.com/a/16079387), for example.\) That is actually something I would like to do, because I find prominent people are often interviewed for the news.
 
