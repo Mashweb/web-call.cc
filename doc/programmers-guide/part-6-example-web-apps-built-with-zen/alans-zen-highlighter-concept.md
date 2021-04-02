@@ -1,4 +1,4 @@
-# Alan's-Zen-Highlighter-Concept
+# Alan's Zen Highlighter Concept
 
 ## Highlighter Concept
 
