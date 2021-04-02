@@ -1,4 +1,4 @@
-# Zen Elevator Pitches
+# Zen-elevator-pitches
 
 Please refer to [web-call.cc](https://web-call.cc/) and [Mashweb.Club](https://mashweb.club/) for more on Zen.
 
@@ -8,7 +8,7 @@ Please refer to [web-call.cc](https://web-call.cc/) and [Mashweb.Club](https://m
 
 "As I say in my white paper, 'Since, with Zen, deploying and sharing a new application could be as simple as clicking a Share or Deploy button, self-organizing user communities might develop altogether novel applications.' Remember, some people prefer exclusivity to ubiquity. This is how communities like the Well, Clubhouse, and Parler gained some limited but influential popularity, still survive, still grow, and gradually become more influential.
 
-"What I have discovered is that it is extremely easy \(relative to callbacks, promises, async/await programming\) to program user interfaces sequentially. I have created a mini framework that comprises an interpreter running inside of \(or on top of\) JavaScript that implements a flexible control operator \(actual syntax\) to support event-driven programming. My early experiments using this control operator can be found on [web-call.cc](https://web-call.cc). Additional background for understanding sequential web programming is on this page on Mashweb.Club.
+"What I have discovered is that it is extremely easy \(relative to callbacks, promises, async/await programming\) to program user interfaces sequentially. I have created a mini framework that comprises an interpreter running inside of \(or on top of\) JavaScript that implements a flexible control operator \(actual syntax\) to support event-driven programming. My early experiments using this control operator can be found on [https://web-call.cc](https://web-call.cc). Additional background for understanding sequential web programming is on this page on Mashweb.Club.
 
 "Typical modern user interactions are most likely impoverished because it is very difficult and expensive to create intricate interactions with many desirable affordances. The complexity will be unmanageable if event handling is programmed with callbacks, promises, and async/await, without anything more like the human processes that they must emulate."
 
