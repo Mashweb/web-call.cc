@@ -11,6 +11,12 @@ The following Dojo Toolkit widgets might be useful for creating Zen web apps:
 3. [StackContainer](https://dojotoolkit.org/documentation/tutorials/1.10/dijit_layout/demo/stackContainerAppLayout.html)
 4. [many others](https://dojotoolkit.org/documentation/#widgets) described in the documentation
 
+Here are some complex examples to show what Dojo Toolkit widgets can do:
+
+1. [An enhanced grid](http://demos.dojotoolkit.org/demos/grid/demo.html)
+2. [A mockup of a complex web app](http://demos.dojotoolkit.org/demos/mail/demo.html)
+3. [CSS3 animation](http://demos.dojotoolkit.org/demos/css3/demo.html)
+
 This page will be added to as the author has time.
 
 
