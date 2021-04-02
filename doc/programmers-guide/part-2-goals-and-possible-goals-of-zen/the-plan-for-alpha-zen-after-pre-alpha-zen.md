@@ -1,13 +1,6 @@
----
-description: >-
-  Currently we have a pre-alpha Zen. It has some capabilities that a complete
-  demonstration version (Alpha Zen) should have. We need a plan to develop the
-  pre-alpha Zen to the Alpha Zen. This is it.
----
+# The-plan-for-Alpha-Zen-\(after-Pre-Alpha-Zen\)
 
-# The plan for Alpha Zen
-
-Here are the salient points about Alpha Zen:
+Here are the salient features of Alpha Zen \(after Pre-Alpha Zen\):
 
 1. Code from [web-call.cc](https://web-call.cc/) will be cherry-picked and installed on [Mashweb.Club](https://mashweb.club/).  web-call.cc is for experimenting and providing early glimpses of the Zen framework.
 2. Poor, innocent nontechnical visitors will be the target audience of the homepage and a section of Mashweb.Club.  A section of Mashweb.Club with a target audience of programmers will be clearly marked "Advanced".  The purpose of Mashweb.Club will be to inspire interest in using and further developing the Zen framework.
