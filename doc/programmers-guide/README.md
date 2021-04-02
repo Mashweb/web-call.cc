@@ -6,10 +6,10 @@ description: The purpose of this book and related documentation.
 
 This [_Guide_](https://tomelam.gitbook.io/mashweb/) is meant to be a complete guide to the Zen web framework and the Mashweb community concept. Since it is hosted by [GitBook.com](https://www.gitbook.com/) on their [free Community plan](https://www.gitbook.com/pricing), it must be \(can only be\) edited by its owner, although [pull requests](https://github.com/Mashweb/web-call.cc/pulls) can be issued by others. Its audience is programmers and web developers. It is meant to draw together into one document all such diverse sources of digital information as exist to help programmers and web developers use, extend, and further develop the framework. Some of it should be comprehensible to many non programmers and non web developers who have only a general knowledge of computers and the web.
 
-The main "diverse sources of digital information" mentioned above that preceded this book are:
+The main "diverse sources of digital information" mentioned above that preceded this [_Guide_](https://tomelam.gitbook.io/mashweb/) are:
 
 1. [the website Mashweb.Club built with Ruby on Rails](https://mashweb.club), with an estimated 1,500 registered users, which is meant to be an attractive and gentle introduction to Mashweb and Zen that many people might enjoy,
-2. [a white paper](https://doc.mashweb.club/whitepaper/) hosted on Mashweb.Club,
+2. [a white paper](https://doc.mashweb.club/whitepaper/) hosted on [Mashweb.Club](https://mashweb.club/),
 3. [a blog site](https://tomelam.blogspot.com/) that discusses some of the problems exploiting the web to the fullest,
 4. [a website](https://web-call.cc) that is basically just a set of statically served demos,
 5. [an old, unmaintained personal website](http://tomelam.com),
@@ -19,7 +19,7 @@ The main "diverse sources of digital information" mentioned above that preceded 
 
 7. the [web-call.cc wiki](https://github.com/Mashweb/web-call.cc/wiki), which can be edited by Mashweb team members.
 
-Parts of this [_Guide_](https://tomelam.gitbook.io/mashweb/) will replace [the blog site](https://tomelam.blogspot.com/) \(\#3\) and [the personal website](http://tomelam.com/) \(\#5\) and those websites will be deprecated. Eventually, when [Alpha Zen](https://tomelam.gitbook.io/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen) is released, [Mashweb.Club](https://mashweb.club) will host it and be completely revamped. At the same time, [the white paper](https://doc.mashweb.club/whitepaper/) will be moved into this [_Guide_](https://tomelam.gitbook.io/mashweb/), which will  be released along with [Alpha Zen](https://tomelam.gitbook.io/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen).
+[The white paper](https://doc.mashweb.club/whitepaper/) \(\#2\), [the blog site](https://tomelam.blogspot.com/) \(\#3\), and [the personal website](http://tomelam.com/) \(\#5\) will be replaced by this [_Guide_](https://tomelam.gitbook.io/mashweb/) and be deprecated. Eventually [Alpha Zen](https://tomelam.gitbook.io/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen) and this [_Guide_](https://tomelam.gitbook.io/mashweb/) will be released together and hosted on a completely revamped [Mashweb.Club](https://mashweb.club).
 
 Documenting Zen through through a [GitBook](https://www.gitbook.com/) might have these potential benefits:
 
