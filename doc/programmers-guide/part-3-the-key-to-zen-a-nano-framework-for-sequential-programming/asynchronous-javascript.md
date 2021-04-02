@@ -7,7 +7,7 @@ description: >-
 
 # Notes on Asynchronous JavaScript
 
-Here I will keep links and key points related to asynchronous JavaScript.
+Here we will keep links and key points related to asynchronous JavaScript.
 
 ## RxJS
 

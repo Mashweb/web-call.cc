@@ -11,7 +11,7 @@
   * [Scheme Interpreters in JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript.md)
   * [Notes on Asynchronous JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/asynchronous-javascript.md)
 * [Part 4: Web Page Structure](part-4-web-page-structure/README.md)
-  * [Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances](part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances.md)
+  * [Zen Widgets: Their Creation, Manipulation, and Affordances](part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances.md)
 * [Part 5: User Interactions and the HTML5 APIs](part-5-user-interactions-and-the-html5-apis/README.md)
   * [Zen-user-intereactions](part-5-user-interactions-and-the-html5-apis/zen-user-intereactions.md)
   * [Using-a-gamepad-with-Zen](part-5-user-interactions-and-the-html5-apis/using-a-gamepad-with-zen.md)
