@@ -5,7 +5,7 @@ description: >-
   pre-alpha Zen to the Alpha Zen. This is it.
 ---
 
-# The plan for Alpha Zen
+# The Plan for Alpha Zen
 
 Here are the salient points about Alpha Zen:
 

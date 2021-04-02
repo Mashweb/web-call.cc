@@ -6,7 +6,7 @@
 * [Part 1: The Motivation Behind Zen and Mashweb](part-1-the-motivation-behind-zen-and-mashweb/README.md)
   * [Zen Elevator Pitches](part-1-the-motivation-behind-zen-and-mashweb/zen-elevator-pitches.md)
 * [Part 2: Goals \(and Possible Goals\) of Zen](part-2-goals-of-zen/README.md)
-  * [The plan for Alpha Zen](part-2-goals-of-zen/the-plan-for-alpha-zen.md)
+  * [The Plan for Alpha Zen](part-2-goals-of-zen/the-plan-for-alpha-zen.md)
 * [Part 3: The Key to Zen: A Nano Framework for Sequential Programming](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/README.md)
   * [Scheme Interpreters in JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript.md)
   * [Notes on Asynchronous JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/asynchronous-javascript.md)

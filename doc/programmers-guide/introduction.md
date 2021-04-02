@@ -22,7 +22,7 @@ See also the [Zen Elevator Pitches](https://app.gitbook.com/@tomelam/s/mashweb/p
 
 Motivations and goals are not the same thing. When will Zen be complete? Or when will a _version_ of it really exist? The answer is: when its goals have been met.
 
-In reality, though, Zen has a graded set of _possible_ goals, some imminently achievable and some just remotely believable. Part 2 will break this down.
+In reality, though, Zen has a graded set of _possible_ goals, some imminently achievable and some just remotely believable. Part 2 will break this down. See The Plan for Alpha Zen.
 
 ## Part 3: The Key to Zen: A Nano Framework for Sequential Programming
 
