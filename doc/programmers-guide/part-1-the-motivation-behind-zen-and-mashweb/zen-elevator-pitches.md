@@ -1,4 +1,4 @@
-# Zen-elevator-pitches
+# Zen Elevator Pitches
 
 Please refer to [web-call.cc](https://web-call.cc/) and [Mashweb.Club](https://mashweb.club/) for more on Zen.
 
