@@ -4,5 +4,3 @@ Motivations and goals are not the same thing. When will Zen be complete? Or when
 
 In reality, though, Zen has a graded set of _possible_ goals, some imminently achievable and some just remotely believable. Part 2 will break this down. See [The Plan for Alpha Zen](https://app.gitbook.com/@tomelam/s/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen).
 
-See The Plan for Alpha Zen.
-
