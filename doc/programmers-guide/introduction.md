@@ -4,7 +4,7 @@ description: There are seven parts to this book. Here they are described.
 
 # Introduction
 
-1. [Part 1](https://app.gitbook.com/@tomelam/s/mashweb/part-1-the-motivation-behind-zen-and-mashweb) of this [_Guide_](https://tomelam.gitbook.io/mashweb/) explains how and why its author began to experiment with ideas related to the simple, easy creation of web pages and web applications.
+1. [Part 1](part-1-the-motivation-behind-zen-and-mashweb/) of this [_Guide_](https://tomelam.gitbook.io/mashweb/) explains how and why its author began to experiment with ideas related to the simple, easy creation of web pages and web applications.
 2. [Part 2](https://app.gitbook.com/@tomelam/s/mashweb/part-2-goals-of-zen) lays out the goals and possible goals for Zen and Mashweb.
 3. [Part 3](https://app.gitbook.com/@tomelam/s/mashweb/part-3-the-key-to-zen-a-nano-framework-for-sequential-programming) documents the nano framework at the heart of Zen.
 4. [Part 4](https://app.gitbook.com/@tomelam/s/mashweb/part-4-web-page-structure) documents the plan, of unproven viability, for the construction of web page structures.
