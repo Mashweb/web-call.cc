@@ -6,7 +6,7 @@ Updates: 4/1/2021
 
 Tom says: There are a lot of tasks embedded in building the Zen Highlighter, so let's break this down.
 
-Let's put this into the Zen Programmer's Guide.
+Let's put this into the [Guide to the Zen Web App Framework and Mashweb...](https://tomelam.gitbook.io/mashweb/).
 
 ## Key ideas
 
@@ -16,19 +16,13 @@ Let's put this into the Zen Programmer's Guide.
 4. Search understands the DOM structure, not just plain text
 5. Can augment with domain-specific search capabilities, e.g. chemistry, biology, computer science
 
-Tom says:
+Tom comments:
 
-## 1: Good, but there is a Google operator "site:xyz.com these are my search terms", which most non-technical users probably don't know about. Still, the Zen Highlighter should be dog food for us, not for an undefined, un-"monetized" "crowd in the cloud". The Zen Highlighter should be something that _I_ would want to use \(mostly because I'm paying for it\).
-
-## 2: See my point for key idea \#1.
-
-## 3: Interesting, but how long would it take to program that? My budget is very limited.
-
-## 4: How could this be used?
-
-## 5: This sounds too difficult to implement without a lot of foregoing development. I want something useful very soon, based upon easy programming \(not visual programming such as \[Demo \#3: Zen visual
-
-program editor\]\([https://web-call.cc/visual-programming.html](https://web-call.cc/visual-programming.html)\)\).
+1. Good, but there is a Google operator "site:xyz.com these are my search terms", which most non-technical users probably don't know about. Still, the Zen Highlighter should be dog food for us, not for an undefined, un-"monetized" "crowd in the cloud". The Zen Highlighter should be something that _I_ would want to use \(mostly because I'm paying for it\).
+2. See my point for key idea \#1.
+3. Interesting, but how long would it take to program that? My budget is very limited.
+4. How could this be used?
+5. This sounds too difficult to implement without a lot of foregoing development. I want something useful very soon, based upon easy programming \(not visual programming such as [https://web-call.cc/visual-programming.html](https://web-call.cc/visual-programming.html)\).
 
 ## Scenario
 
