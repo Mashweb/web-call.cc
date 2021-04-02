@@ -16,7 +16,7 @@ The author had previously used the UCW \(UnCommon Web\) framework that used Comm
 
 A parallel motivation for building Zen is the author's frustrations and dissatisfaction with web browsers, websites, and utilities for study in the world's new library, the web. These frustrations and dissatisfactions are described in the [author's blog site](https://tomelam.blogspot.com/).
 
-See also the Zen elevator pitches.
+See also the [Zen Elevator Pitches](https://app.gitbook.com/@tomelam/s/mashweb/part-1-the-motivation-behind-zen-and-mashweb/zen-elevator-pitches).
 
 ## Part 2: Goals and Possible Goals of Zen
 
