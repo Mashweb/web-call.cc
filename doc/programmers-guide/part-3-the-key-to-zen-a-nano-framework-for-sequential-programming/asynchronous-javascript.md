@@ -1,6 +1,13 @@
-# Asynchronous-JavaScript
+---
+description: >-
+  Most significant web applications use JavaScript features and frameworks to
+  handle user interaction state. It is important to understand how they do it so
+  that Zen's sequential model can be defended.
+---
 
-Here I will dump links and key points related to asynchronous JavaScript.
+# Notes on Asynchronous JavaScript
+
+Here I will keep links and key points related to asynchronous JavaScript.
 
 ## RxJS
 
