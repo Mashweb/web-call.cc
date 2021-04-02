@@ -6,7 +6,7 @@ Updates: 4/1/2021
 
 Tom says: There are a lot of tasks embedded in building the Zen Highlighter, so let's break this down.
 
-Let's put this into the [Guide to the Zen Web App Framework and Mashweb...](https://tomelam.gitbook.io/mashweb/).
+Let's put this into the [Guide](https://tomelam.gitbook.io/mashweb/).
 
 ## Key ideas
 
