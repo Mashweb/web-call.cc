@@ -1,4 +1,4 @@
-# Using a Gamepad with Zen
+# Using-a-gamepad-with-Zen
 
 Let's imagine what a cheap \(USD 25 - 65 on Amazon.com for a decent one\) game controller could do for Zen's UX.
 

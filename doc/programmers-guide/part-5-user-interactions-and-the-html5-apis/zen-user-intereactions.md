@@ -1,4 +1,4 @@
-# Zen User Intereactions
+# Zen-user-intereactions
 
 I envision that there will be various levels and classes of Zen user interaction. I will try to list them in this wiki page.
 

@@ -1,4 +1,4 @@
-# Alan's Zen Highlighter Concept
+# Alan's-Zen-Highlighter-Concept
 
 ## Highlighter Concept
 
@@ -6,7 +6,7 @@ Updates: 4/1/2021
 
 Tom says: There are a lot of tasks embedded in building the Zen Highlighter, so let's break this down.
 
-Let's put this into the [Guide](https://tomelam.gitbook.io/mashweb/).
+Let's put this into the Zen Programmer's Guide.
 
 ## Key ideas
 
@@ -16,13 +16,19 @@ Let's put this into the [Guide](https://tomelam.gitbook.io/mashweb/).
 4. Search understands the DOM structure, not just plain text
 5. Can augment with domain-specific search capabilities, e.g. chemistry, biology, computer science
 
-Tom comments:
+Tom says:
 
-1. Good, but there is a Google operator "site:xyz.com these are my search terms", which most non-technical users probably don't know about. Still, the Zen Highlighter should be dog food for us, not for an undefined, un-"monetized" "crowd in the cloud". The Zen Highlighter should be something that _I_ would want to use \(mostly because I'm paying for it\).
-2. See my point for key idea \#1.
-3. Interesting, but how long would it take to program that? My budget is very limited.
-4. How could this be used?
-5. This sounds too difficult to implement without a lot of foregoing development. I want something useful very soon, based upon easy programming \(not visual programming such as [https://web-call.cc/visual-programming.html](https://web-call.cc/visual-programming.html)\).
+## 1: Good, but there is a Google operator "site:xyz.com these are my search terms", which most non-technical users probably don't know about. Still, the Zen Highlighter should be dog food for us, not for an undefined, un-"monetized" "crowd in the cloud". The Zen Highlighter should be something that _I_ would want to use \(mostly because I'm paying for it\).
+
+## 2: See my point for key idea \#1.
+
+## 3: Interesting, but how long would it take to program that? My budget is very limited.
+
+## 4: How could this be used?
+
+## 5: This sounds too difficult to implement without a lot of foregoing development. I want something useful very soon, based upon easy programming \(not visual programming such as \[Demo \#3: Zen visual
+
+program editor\]\([https://web-call.cc/visual-programming.html](https://web-call.cc/visual-programming.html)\)\).
 
 ## Scenario
 
@@ -60,9 +66,9 @@ Tom comments:
 
 Tom says:
 
-The Dojo Toolkit might provide more fodder for ideas. See [Zen Widgets: Their Creation, Manipulation, and Affordances](https://tomelam.gitbook.io/mashweb/part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances).
+The Dojo Toolkit might provide more fodder for ideas. See [https://github.com/Mashweb/web-call.cc/wiki/Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances](https://github.com/Mashweb/web-call.cc/wiki/Zen-Widgets:-Their-Creation,-Manipulation,-and-Affordances).
 
-I have begun editing a wiki page that will help us adapt and adopt some of your ideas quickly: [Zen user interactions](https://tomelam.gitbook.io/mashweb/part-5-user-interactions-and-the-html5-apis/zen-user-intereactions).
+I have begun editing a wiki page that will help us adapt and adopt some of your ideas quickly: [Zen user intereactions](https://github.com/Mashweb/web-call.cc/wiki/Zen-user-intereactions).
 
 Note that it is easy to "embed" videos in a Zen web page. \(See [how easy it is to "embed" a YouTube video in a GitHub wiki](https://stackoverflow.com/a/16079387), for example.\) That is actually something I would like to do, because I find prominent people are often interviewed for the news.
 
