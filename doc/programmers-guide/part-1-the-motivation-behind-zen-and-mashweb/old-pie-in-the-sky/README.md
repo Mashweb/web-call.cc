@@ -5,5 +5,5 @@ description: >-
   the web. Some of these ideas are stored here.
 ---
 
-# Old Pie-in-the-Sky
+# Old Pie in the Sky
 

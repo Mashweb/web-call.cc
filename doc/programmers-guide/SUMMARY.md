@@ -4,7 +4,7 @@
 * [Preface](preface.md)
 * [Introduction](introduction.md)
 * [Part 1: The Motivation Behind Zen and Mashweb](part-1-the-motivation-behind-zen-and-mashweb/README.md)
-  * [Old Pie-in-the-Sky](part-1-the-motivation-behind-zen-and-mashweb/old-pie-in-the-sky/README.md)
+  * [Old Pie in the Sky](part-1-the-motivation-behind-zen-and-mashweb/old-pie-in-the-sky/README.md)
     * [Zen Project \#1: A Web Site and a New Technology to Help People Scale the Web](part-1-the-motivation-behind-zen-and-mashweb/old-pie-in-the-sky/zen-project-1-a-web-site-and-a-new-technology-to-help-people-scale-the-web.md)
     * [Zen: First Principles](part-1-the-motivation-behind-zen-and-mashweb/old-pie-in-the-sky/zen-first-principles.md)
     * [Zen: What Is It Most About?](part-1-the-motivation-behind-zen-and-mashweb/old-pie-in-the-sky/zen-what-is-it-most-about.md)
