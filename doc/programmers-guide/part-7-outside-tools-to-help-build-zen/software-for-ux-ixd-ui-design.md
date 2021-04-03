@@ -1,4 +1,4 @@
-# Software-for-UX-IxD-UI-design
+# Software for UX/IxD/UI design
 
 1. Sketch
 2. InVision Studio
