@@ -1,4 +1,4 @@
-# Zen: What Is It &lt;i&gt;Most&lt;/i&gt; About?
+# Zen: What Is It Most About?
 
  I get asked a lot what Zen is really. Most of its proposed features are listed in this blog's first two articles, [Zen: First Principles](http://tomelam.blogspot.com/2010/10/ajax-zen-first-principles.html) and [Zen Project \#1: A Web Site and a New Technology to Help People Scale the Web](http://tomelam.blogspot.com/2010/09/project-web-site-and-new-technology-to.html). But this article is an attempt to describe the bare essence of Zen, once and for all.
 
