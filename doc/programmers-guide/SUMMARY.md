@@ -6,6 +6,7 @@
 * [Part 1: The Motivation Behind Zen and Mashweb](part-1-the-motivation-behind-zen-and-mashweb/README.md)
   * [Zen Project \#1: A Web Site and a New Technology to Help People Scale the Web](part-1-the-motivation-behind-zen-and-mashweb/zen-project-1-a-web-site-and-a-new-technology-to-help-people-scale-the-web.md)
   * [Zen: First Principles](part-1-the-motivation-behind-zen-and-mashweb/untitled.md)
+  * [Zen: What Is It &lt;i&gt;Most&lt;/i&gt; About?](part-1-the-motivation-behind-zen-and-mashweb/untitled-1.md)
   * [Zen Elevator Pitches](part-1-the-motivation-behind-zen-and-mashweb/zen-elevator-pitches.md)
 * [Part 2: Goals \(and Possible Goals\) of Zen](part-2-goals-of-zen/README.md)
   * [The Plan for Alpha Zen](part-2-goals-of-zen/the-plan-for-alpha-zen.md)
@@ -22,5 +23,4 @@
   * [Alan's Zen Highlighter Concept](part-6-example-web-apps-built-with-zen/alans-zen-highlighter-concept.md)
 * [Part 7: Outside Tools To Help Build Zen](part-7-outside-tools-to-help-build-zen/README.md)
   * [Software for UX/IxD/UI design](part-7-outside-tools-to-help-build-zen/software-for-ux-ixd-ui-design.md)
-* [Zen: What Is It &lt;i&gt;Most&lt;/i&gt; About?](untitled.md)
 
