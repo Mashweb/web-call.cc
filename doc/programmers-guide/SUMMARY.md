@@ -24,4 +24,5 @@
   * [Alan's Zen Highlighter Concept](part-6-example-web-apps-built-with-zen/alans-zen-highlighter-concept.md)
 * [Part 7: Outside Tools To Help Build Zen](part-7-outside-tools-to-help-build-zen/README.md)
   * [Software for UX/IxD/UI design](part-7-outside-tools-to-help-build-zen/software-for-ux-ixd-ui-design.md)
+* [Part 8: Tricks To Augment Zen's Basic Functions](part-8-tricks-to-augment-zens-basic-functions.md)
 
