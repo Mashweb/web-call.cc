@@ -15,3 +15,7 @@ The web server that serves Zen web pages can do such things as spawn a headless 
 
 The `<iframe>` HTML tag allows a web page to be embedded in another web page, but due to the [clickjacking](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#click-jacking) problem, most web servers send [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) HTTP response headers with the web pages they serve to prevent the embedding of those web pages in other web pages. Google Chrome \(and probably other web browsers\) has [an extension](https://chrome.google.com/webstore/detail/ignore-x-frame-headers/gleekbfjekiniecknbkamfmkohkpodhe) to ignore these response headers, thus allowing any web page to be embedded. This extension should be used cautiously to avoid clickjacking attacks. This [100-second video](https://youtu.be/66rioWH60Ec) shows how to install and use the Chrome extension.
 
+## Some JavaScript tricks
+
+[Here's](https://www.geeksforgeeks.org/how-to-take-screenshot-of-a-div-using-javascript/) a trick to take a snapshot of part of a web page and [here's](http://demo.xpertdeveloper.com/html5-screenshot/) a trick to take a snapshot of a full web page. Unfortunately, the snapshots cannot include a  web page embedded in an `<iframe>` element.
+
