@@ -1,8 +1,8 @@
 ---
 description: >-
-  The capabilities of client side JavaScript (or Scheme in JavaScript in the web
-  browser) can be augmented through (1) the web server that serves Zen web pages
-  and (2) web browser extensions (plugins).
+  The capabilities of a Zen web page can be augmented through (1) the web server
+  that serves Zen web pages, (2) web browser extensions (plugins), and (3) some
+  fancy JavaScript and web services.
 ---
 
 # Part 8: Tricks To Augment Zen's Basic Functions
