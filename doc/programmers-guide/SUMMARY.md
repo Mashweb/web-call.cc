@@ -25,5 +25,4 @@
 * [Part 7: Outside Tools To Help Build Zen](part-7-outside-tools-to-help-build-zen/README.md)
   * [Software for UX/IxD/UI design](part-7-outside-tools-to-help-build-zen/software-for-ux-ixd-ui-design.md)
 * [Part 8: Tricks To Augment Zen's Basic Functions](part-8-tricks-to-augment-zens-basic-functions.md)
-* [Part 9: Using](part-9-using.md)
 
