@@ -1,7 +1,3 @@
----
-description: Alan's Zen Highlighter is yet to be built. This page describes the concept.
----
-
 # Alan's Zen Highlighter Concept
 
 ## Highlighter Concept

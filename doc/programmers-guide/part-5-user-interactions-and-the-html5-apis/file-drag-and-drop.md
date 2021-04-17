@@ -4,3 +4,5 @@ Web browsers use the same general API, [the HTML Drag and Drop API](https://deve
 
 The [Zen live DOM editor demo](https://web-call.cc/) responds to file dragging and dropping, but crashes because it receives input that causes an unhandled exception, which can be seen if the browser's JavaScript console is opened.
 
+[Demo \#4](https://web-call.cc/blog-app.html) on [web-call.cc](https://web-call.cc), a so-called "financial blog," has cleaner, simpler code to manage a drag and drop operation.
+
