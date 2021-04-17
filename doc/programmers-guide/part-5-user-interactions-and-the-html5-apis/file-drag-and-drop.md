@@ -6,5 +6,5 @@ The [Zen live DOM editor demo](https://web-call.cc/) responds to file dragging a
 
 [Demo \#4](https://web-call.cc/blog-app.html) on [web-call.cc](https://web-call.cc), a so-called "financial blog," has cleaner, simpler code to manage a drag and drop operation, but it is still buggy and it is not meant to handle file drag and drop. If one of the draggable elements is dragged and dropped outside the drop zone, the operation is cancelled and cannot be rebegun.
 
-Note: drag and drop can be programmed without the special HT[ML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API), using just mouse events. There can, in some cases, be a good reason for this. See the article ["Drag'n'Drop with mouse events"](https://javascript.info/mouse-drag-and-drop) on [javascript.info](https://javascript.info).
+Note: drag and drop can be programmed without the special [HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API), using just mouse events. There can, in some cases, be a good reason for this. See the article ["Drag'n'Drop with mouse events"](https://javascript.info/mouse-drag-and-drop) on [javascript.info](https://javascript.info).
 
