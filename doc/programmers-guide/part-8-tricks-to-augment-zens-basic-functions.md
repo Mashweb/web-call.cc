@@ -17,9 +17,5 @@ The `<iframe>` HTML tag allows a web page to be embedded in another web page, bu
 
 ## Some JavaScript tricks
 
-[Here's](https://www.geeksforgeeks.org/how-to-take-screenshot-of-a-div-using-javascript/) a trick to take a snapshot of part of a web page and [here's](http://demo.xpertdeveloper.com/html5-screenshot/) a trick to take a snapshot of a full web page. Note that the snapshots cannot include a web page embedded in an `<iframe>` element.
-
-## A feature in Chrome 90 to create links to highlighted text in a web page
-
-[A short article](https://www.theverge.com/2021/4/17/22389519/google-feature-chrome-90-highlighted-links) on The Verge describes this new, interesting feature of Google Chrome.
+[Here's](https://www.geeksforgeeks.org/how-to-take-screenshot-of-a-div-using-javascript/) a trick to take a snapshot of part of a web page and [here's](http://demo.xpertdeveloper.com/html5-screenshot/) a trick to take a snapshot of a full web page. Note that the snapshots cannot include a  web page embedded in an `<iframe>` element.
 
