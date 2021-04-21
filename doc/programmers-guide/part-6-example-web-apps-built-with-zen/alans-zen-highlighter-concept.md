@@ -1,7 +1,3 @@
----
-description: Alan's Zen Highlighter is yet to be built. This page describes the concept.
----
-
 # Alan's Zen Highlighter Concept
 
 ## Highlighter Concept
@@ -71,6 +67,4 @@ I have begun editing a wiki page that will help us adapt and adopt some of your 
 Note that it is easy to "embed" videos in a Zen web page. \(See [how easy it is to "embed" a YouTube video in a GitHub wiki](https://stackoverflow.com/a/16079387), for example.\) That is actually something I would like to do, because I find prominent people are often interviewed for the news.
 
 I will work on your ideas some more later today, Alan. You have come up with a lot of good ideas. I don't want to shoot them down. Let's see how we can develop them quickly so they can help tech savvy people like us. ;-\) -Tom
-
-\[Added April 21, 2021 by Tom\] Google Chrome has a new feature described in [a short article](https://www.theverge.com/2021/4/17/22389519/google-feature-chrome-90-highlighted-links) on The Verge: the ability to link to a highlighted text in a web page. This could be an adjunct to Alan's ideas for the Zen Highlighter.
 
