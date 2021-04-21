@@ -11,6 +11,8 @@ description: There are seven parts to this book. Here they are described.
 5. [Part 5](https://tomelam.gitbook.io/mashweb/part-5-user-interactions-and-the-html5-apis) documents the user interaction code that Zen provides to simplify the programming of web apps. Mainly these are protocols for interacting with the HTML5 APIs such as [the HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API) and [the Clipboard API](https://developer.mozilla.org/en-US/docs/Web/API/Clipboard_API).
 6. [Part 6](https://tomelam.gitbook.io/mashweb/part-6-example-web-apps-built-with-zen) presents some example web apps such as what a semiskilled web developer might create with [Alpha Zen](https://tomelam.gitbook.io/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen).
 7. [Part 7](https://tomelam.gitbook.io/mashweb/part-7-outside-tools-to-help-build-zen) presents outside tools to facilitate the design and programming of Zen and [Mashweb.Club](https://mashweb.club).
+8. [Part 8](https://tomelam.gitbook.io/mashweb/part-8-tricks-to-augment-zens-basic-functions) collects some tricks to turbocharge Zen.
+9. [Part 9](https://tomelam.gitbook.io/mashweb/part-9-project-management) shows how the development of Zen and Mashweb is organized.
 
 
 
