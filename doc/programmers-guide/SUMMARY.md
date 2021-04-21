@@ -20,6 +20,7 @@
   * [Zen User Intereactions](part-5-user-interactions-and-the-html5-apis/zen-user-intereactions.md)
   * [HTML Drag and Drop, Including File Drag and Drop](part-5-user-interactions-and-the-html5-apis/file-drag-and-drop.md)
   * [Using a Gamepad with Zen](part-5-user-interactions-and-the-html5-apis/using-a-gamepad-with-zen.md)
+  * [Front-End Components](part-5-user-interactions-and-the-html5-apis/front-end-components.md)
 * [Part 6: Example Web Apps Built with Zen](part-6-example-web-apps-built-with-zen/README.md)
   * [Alan's Zen Highlighter Concept](part-6-example-web-apps-built-with-zen/alans-zen-highlighter-concept.md)
 * [Part 7: Outside Tools To Help Build Zen](part-7-outside-tools-to-help-build-zen/README.md)
