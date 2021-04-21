@@ -26,6 +26,7 @@ Here is a list of basic HTML Drag and Drop API tutorials and how-tos:
 5. Here is [a version of drag and drop](https://www.quirksmode.org/js/dragdrop.html) that doesn't use the HTML Drag and Drop API, on quirksmode.org.
 6. The very old article ["Beneath The Surface"](http://ln.hixie.ch/?start=1115899732) on ln.hixie.ch explains many stumbling blocks to interpreting the API.
 7. The old article ["On HTML5 Drag and Drop"](http://tolmasky.com/2009/08/16/on-html-5-drag-and-drop/) on tolmasky.com introduces the HTML Drag and Drop API with an emphasis on how the API extends drag operations to the computer's native drag system and clipboard, thus allowing the user to share data between different web apps and even other desktop apps.
+8. The article ["The Ultimate Guide to Drag and Drop Image Uploading with Pure JavaScript"](https://soshace.com/the-ultimate-guide-to-drag-and-drop-image-uploading-with-pure-javascript/) looks like it might be a pretty good tutorial for various kinds of image handling in drag and drop interactions.
 
 
 
