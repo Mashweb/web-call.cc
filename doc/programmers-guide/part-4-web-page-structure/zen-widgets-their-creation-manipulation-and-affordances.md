@@ -17,6 +17,8 @@ Here are some complex examples to show what Dojo Toolkit widgets can do:
 2. [A mockup of a complex web app](http://demos.dojotoolkit.org/demos/mail/demo.html)
 3. [CSS3 animation](http://demos.dojotoolkit.org/demos/css3/demo.html)
 
+See also [Front-End Components](https://tomelam.gitbook.io/mashweb/part-5-user-interactions-and-the-html5-apis/front-end-components).
+
 ## CSS Encapsulation with a Shadow DOM
 
 An important simplification envisioned for Zen is simple style scoping. The tutorial ["CSS Encapsulation with Shadow DOM"](https://vaadin.com/learn/tutorials/css-encapsulation-with-shadow-dom) on vaadin.com describes how this can be done by using CSS encapsulation. This tutorial describes "the browser's very own solution to CSS encapsulation". When the creation of the shadow DOM is done automatically by a library that creates Custom Elements, this encapsulation is very simple. This is a major argument for the use of Custom Elements for most of the web page creation and web page editing in Zen. 
