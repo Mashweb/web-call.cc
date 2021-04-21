@@ -1,4 +1,10 @@
-# File Drag and Drop
+---
+description: >-
+  The HTML APIs enable many kinds of drag and drop interactions such as dragging
+  and dropping HTML elements, or files, or
+---
+
+# HTML Drag and Drop, Including File Drag and Drop
 
 Web browsers use the same general API, [the HTML Drag and Drop API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API), for dragging files onto a web page that they use to drag HTML elements in a web page, but they use [different parts of the API](https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop).
 

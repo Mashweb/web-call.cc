@@ -18,7 +18,7 @@
   * [Zen Widgets: Their Creation, Manipulation, and Affordances](part-4-web-page-structure/zen-widgets-their-creation-manipulation-and-affordances.md)
 * [Part 5: User Interactions and the HTML5 APIs](part-5-user-interactions-and-the-html5-apis/README.md)
   * [Zen User Intereactions](part-5-user-interactions-and-the-html5-apis/zen-user-intereactions.md)
-  * [File Drag and Drop](part-5-user-interactions-and-the-html5-apis/file-drag-and-drop.md)
+  * [HTML Drag and Drop, Including File Drag and Drop](part-5-user-interactions-and-the-html5-apis/file-drag-and-drop.md)
   * [Using a Gamepad with Zen](part-5-user-interactions-and-the-html5-apis/using-a-gamepad-with-zen.md)
 * [Part 6: Example Web Apps Built with Zen](part-6-example-web-apps-built-with-zen/README.md)
   * [Alan's Zen Highlighter Concept](part-6-example-web-apps-built-with-zen/alans-zen-highlighter-concept.md)
