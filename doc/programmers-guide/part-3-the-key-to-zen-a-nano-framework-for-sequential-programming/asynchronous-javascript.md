@@ -9,14 +9,6 @@ description: >-
 
 Here we will keep links and key points related to asynchronous JavaScript.
 
-## A Schemer's viewpoint on asynchronous JavaScript to handle user interaction state
-
-The paper ["Whalesong: Running Racket in the Browser"](https://cs.brown.edu/~sk/Publications/Papers/Published/yk-whalesong-racket-browser/paper.pdf) appeared in the Journal of the ACM in 2013. Its abstract read as follows:
-
-### Abstract
-
-JavaScript is the language of the ubiquitous Web, but it only poorly supports event-driven functional programs due to its single-threaded, asynchronous nature and lack of rich control flow operators. We present Whalesong, a compiler from Racket that generates JavaScript code that masks these problems. We discuss the implementation strategy using delimited continuations, an interface to the DOM, and an FFI for adapting JavaScript libraries to add new platform-dependent reactive features. In the process, we also describe extensions to Racket’s functional event-driven programming model. We also briefly discuss the implementation details.
-
 ## RxJS
 
 > What is RxJS? RxJS is the reactive extensions library for JavaScript. It's a library for reactive programming using Observables, to make it easier to compose asynchronous or callback-based code. RxJS 6 is a rewrite of Reactive-Extensions/RxJS with better performance, better modularity, better debuggable call stacks, while staying mostly backwards compatible, with some breaking changes that reduce the API surface. Version 7 is currently in public beta, but is currently used by Google in production. To learn more about RxJS, please come to the conference or visit the documentation at rxjs.dev.
