@@ -31,6 +31,6 @@ See [https://www.pivotaltracker.com/n/projects/70151](https://www.pivotaltracker
 
 Some facilities for quick sharing of demos and prototypes:
 
-1. No-IP.com and [alternatives](https://www.g2.com/products/no-ip-com/competitors/alternatives)
+1. No-IP.com and [alternatives](https://www.g2.com/products/no-ip-com/competitors/alternatives) \(or go directly to [a comparison of the top 5](https://www.g2.com/compare/amazon-route-53-vs-cloudflare-dns-vs-cloudns-vs-google-cloud-dns)\)
 2. [ngrok.com](https://ngrok.com/)
 
