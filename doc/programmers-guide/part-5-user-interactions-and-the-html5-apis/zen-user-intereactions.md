@@ -40,5 +40,7 @@ Note that [the full list of HTML5 APIs](https://developer.mozilla.org/en-US/docs
 
 ## Zen's Adaptations of Raw HTML APIs
 
-Sometimes it will be helpful to either \(1\) intimately interact with low-level HTML APIs like JavaScript.info's 
+Sometimes it will be helpful either \(1\) to interact intimately with low-level HTML APIs like JavaScript.info's ["Drag'n'Drop with mouse events"](https://javascript.info/mouse-drag-and-drop) does or \(2\) to create a [synthetic event](https://developer.mozilla.org/en-US/docs/Web/Events/Creating_and_triggering_events) to force the urgent handling of a situation that has built up through a series of low priority native events. Such adaptations of "raw" HTML APIs will explored in this section. An example of Zen's use of a synthetic event might be [task \#488](https://www.pivotaltracker.com/story/show/177874488) described in [Zen's PivotalTracker project](https://www.pivotaltracker.com/n/projects/70151).
+
+\[To be developed\]
 
