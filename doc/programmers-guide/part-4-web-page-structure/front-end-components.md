@@ -1,7 +1,7 @@
 ---
 description: >-
   This page lists some worthwhile online resources on web input elements and
-  widgets.
+  widgets and other front-end components.
 ---
 
 # Front-End Components
