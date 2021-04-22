@@ -27,7 +27,10 @@ See [https://github.com/Mashweb/web-call.cc/wiki](https://github.com/Mashweb/web
 
 See [https://www.pivotaltracker.com/n/projects/70151](https://www.pivotaltracker.com/n/projects/70151) .
 
+## Quick Sharing
 
+Some facilities for quick sharing of demos and prototypes:
 
-
+1. No-IP.com and [alternatives](https://www.g2.com/products/no-ip-com/competitors/alternatives)
+2. [ngrok.com](https://ngrok.com/)
 
