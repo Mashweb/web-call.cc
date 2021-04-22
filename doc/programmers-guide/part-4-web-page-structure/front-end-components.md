@@ -33,5 +33,7 @@ The following are listed to round out this overview of the Vaadin framework:
 
 My disappointment with [Dojo 7](https://dojo.io/) \(and [possibly all versions of Dojo later than version 1.x](https://dojo.io/blog/dojo2-0-0-release)\) was that I found that examples of dragging and dropping an HTML element could not be extended to Dojo 7's widgets properly. Those examples do not work for Dojo 7 widgets because the element that a `dragstart` event actually targets when the mouse is clicked over a Dojo 7 widget is not the outer HTML element, but its child. Perhaps the older version of Dojo, called [the Dojo Toolkit](https://dojotoolkit.org/) will not have this problem. I have not tested it with my [live DOM editor](https://web-call.cc/) or my [refactored drag and drop code](https://web-call.cc/blog-app.html).
 
+## Accessible front-end components
 
+Smashing Magazine has a great, long article from March 2021, ["A Complete Guide To Accessible Front-End Components"](https://www.smashingmagazine.com/2021/03/complete-guide-accessible-front-end-components/).
 
