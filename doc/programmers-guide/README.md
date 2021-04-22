@@ -1,5 +1,7 @@
 ---
-description: The purpose of this book and related documentation.
+description: >-
+  The purpose of this book and related documentation. You should probably skip
+  this.
 ---
 
 # About this book
