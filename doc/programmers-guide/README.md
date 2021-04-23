@@ -4,7 +4,7 @@ description: The purpose of this book and related documentation.
 
 # About this book
 
-This [_Guide_](https://tomelam.gitbook.io/mashweb/) is meant to be a complete guide to the Zen web framework and the Mashweb community concept. Since it is hosted by [GitBook.com](https://www.gitbook.com/) on their [free Community plan](https://www.gitbook.com/pricing), it must be \(can only be\) edited by its owner, although [pull requests](https://github.com/Mashweb/web-call.cc/pulls) can be issued by others. Its audience is programmers and web developers. It is meant to draw together into one document all such diverse sources of digital information as exist to help programmers and web developers use, extend, and further develop the framework. Some of it should be comprehensible to many non programmers and non web developers who have only a general knowledge of computers and the web.
+This [_Guide_](https://tomelam.gitbook.io/mashweb/) is meant to be a complete guide to the Zen web framework and the Mashweb community concept. Since it is hosted by [GitBook.com](https://www.gitbook.com/) on their [free Community plan](https://www.gitbook.com/pricing), it must be \(can only be\) edited by its owner, although [pull requests](https://github.com/Mashweb/web-call.cc/pulls) can be issued by others. Its audience is programmers and web developers. Some of it should be comprehensible to many non programmers and non web developers who have only a general knowledge of computers and the web.
 
 The main "diverse sources of digital information" mentioned above that preceded this [_Guide_](https://tomelam.gitbook.io/mashweb/) are:
 
