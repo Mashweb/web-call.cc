@@ -35,7 +35,7 @@ The main "diverse sources of digital information" mentioned above that preceded 
 
 [The white paper](https://doc.mashweb.club/whitepaper/) \(\#2\), [the blog site](https://tomelam.blogspot.com/) \(\#3\), and [the personal website](http://tomelam.com/) \(\#4\) will be replaced by this [_Guide_](https://tomelam.gitbook.io/mashweb/) and be deprecated. Eventually [Alpha Zen](https://tomelam.gitbook.io/mashweb/part-2-goals-of-zen/the-plan-for-alpha-zen) and this [_Guide_](https://tomelam.gitbook.io/mashweb/) will be released together and hosted on a completely revamped [Mashweb.Club](https://mashweb.club) \(\#1\).
 
-Tom Elam, April 2, 2021
+Tom Elam, April 2, 2021, updated April 23, 2021
 
 
 
