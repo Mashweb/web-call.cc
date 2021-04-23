@@ -1,5 +1,5 @@
 ---
-description: There are seven parts to this book. Here they are described.
+description: There are nine parts to this book. Here they are described.
 ---
 
 # Introduction
