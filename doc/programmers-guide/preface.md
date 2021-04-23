@@ -1,5 +1,7 @@
 ---
-description: Why this book came into being. Its purpose. Why it was created as a GitBook.
+description: >-
+  Why this book came into being. Its purpose. Why it was created as a GitBook.
+  You may choose to skip this section or just skim it.
 ---
 
 # Preface
