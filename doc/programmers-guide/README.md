@@ -1,5 +1,7 @@
 ---
-description: The purpose of this book and related documentation.
+description: >-
+  The purpose of this book and related documentation and a blurb about Zen and
+  Mashweb.
 ---
 
 # About this book
