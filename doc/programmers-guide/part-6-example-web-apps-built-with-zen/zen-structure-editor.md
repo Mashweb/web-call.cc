@@ -1,4 +1,4 @@
-# Zen Structure Editor
+# Zen Web Page Construction
 
 ## The theory
 
