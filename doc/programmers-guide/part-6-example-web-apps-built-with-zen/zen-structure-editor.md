@@ -1,4 +1,4 @@
-# Zen Web Page Construction
+# Zen Web Page Editor
 
 ## The theory
 
