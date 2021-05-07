@@ -80,12 +80,12 @@ We could get around this by carefully exposing the JS `eval` through `##inline-h
 > [![@danielkoning](https://avatars.githubusercontent.com/u/49599680?s=60&u=ef452801fdfb6778d6481510b72990627373f87c&v=4)](https://github.com/danielkoning)**danielkoning on 2 Apr** 
 >
 > None of this is taken directly from the Gambit docs, except for certain ./configure options and the sequence of targets that you pass to 'make' while building the Gambit core \(1. none, 2. 'modules', 3. 'check'\). Those you can read more about in the base directory's INSTALL.txt.
-
+>
 > The rest comes from my reading of Gambit's code and makefiles, along with some knowledge about autotools I've picked up over time. And while the compiler to JavaScript has been in development for a while, 'contrib/try/' is so new that it doesn't even have docs to speak of. So I can't really cite anything except to suggest looking through the code that this post guides you in using.
 >
 > As for the browser "Emacs," it's impressive \(if light on features\), but it doesn't tell us much about the viability of using Gambit for such applications. Rather, the in-browser editor is a third-party vanilla JS app which provides an interface to a textual Gambit REPL. Gambit isn't handling anything here that has to do with the web app per se.
->
->  [![@tomelam](https://avatars.githubusercontent.com/u/355891?s=60&v=4)](https://github.com/tomelam)**tomelam on 3 Apr**
+
+> [![@tomelam](https://avatars.githubusercontent.com/u/355891?s=60&v=4)](https://github.com/tomelam)**tomelam on 3 Apr**
 >
 > Thanks. That's quite useful.
 
