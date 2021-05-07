@@ -93,5 +93,5 @@ We could get around this by carefully exposing the JS `eval` through `##inline-h
 
 On the Mac, `gcc` is `clang` by default. `Homebrew` is a good way to install GNU's `gcc`. Daniel's above post describes how to use it. It can also be added to the command path so that `CC=[/your/path/to/gcc]` would be unnecessary.
 
-More information about the installation can be found in [the discussion](https://github.com/orgs/Mashweb/teams/pre-alpha-zen/discussions/8) that Daniel started.
+More information about the installation can be found in [the discussion](https://github.com/orgs/Mashweb/teams/pre-alpha-zen/discussions/7) that Daniel started.
 
