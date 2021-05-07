@@ -4,7 +4,7 @@ description: >-
   (https://github.com/orgs/Mashweb/teams/pre-alpha-zen). -Tom Elam
 ---
 
-# Biwa to Gambit: the rationale
+# BiwaScheme to Gambit: the rationale
 
 After comparing the many options listed on the wiki and elsewhere, my conclusion is that Gambit is by far the most promising alternative Scheme to start with. \(To give more background on why it's necessary to find an alternative to Biwa, I'll be posting an addendum soon.\)
 
