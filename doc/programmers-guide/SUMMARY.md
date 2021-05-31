@@ -14,7 +14,7 @@
   * [The Plan for Alpha Zen](part-2-goals-of-zen/the-plan-for-alpha-zen.md)
 * [Part 3: The Key to Zen: A Nano Framework for Sequential Programming](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/README.md)
   * [Scheme Interpreters in JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript.md)
-  * [BiwaScheme to Gambit: the rationale](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/biwa-to-gambit-the-rationale.md)
+  * [Gambit Scheme](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/biwa-to-gambit-the-rationale.md)
   * [Notes on Asynchronous JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/asynchronous-javascript.md)
 * [Part 4: Web Page Structure](part-4-web-page-structure/README.md)
   * [Styles](part-4-web-page-structure/styles.md)
