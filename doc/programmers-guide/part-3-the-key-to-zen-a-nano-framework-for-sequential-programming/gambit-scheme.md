@@ -154,8 +154,6 @@ find /nix/ -name 'libgambit.so' -exec du -h {} \;
 
 > Marc Feeley @feeley May 28 18:02 @tomelam … For your use it might be simplest to just take the VM.min.js.gz file “as is” and to write the rest of your app as a module that is loaded by the runtime system using `load` or `import` or `eval`. What programming language features are needed by your app?
 
-\[I think this might not work for me because I want the initial load of every web page on my web server to include at least a partial Scheme REPL, meaning a subset of Scheme enough to do some reading, evaluation, and printing of Scheme code.\]
-
 > Marc Feeley @feeley May 28 19:57 @tomelam To get you started, here is how to compile a minimal web app to Scheme… First you should build Gambit with:
 
 ```text
