@@ -98,7 +98,7 @@ On the Mac, `gcc` is `clang` by default. `Homebrew` is a good way to install GNU
 
 More information about the installation can be found in [the discussion](https://github.com/orgs/Mashweb/teams/pre-alpha-zen/discussions/7) that Daniel started.
 
-### Optimizing Gambit on JavaScript for Size
+## Optimizing Gambit on JavaScript for Size
 
 I had a [conversation](https://gitter.im/gambit/gambit?at=60aec5ced0f55b33ba0e588e) about reducing the size of Gambit on JavaScript so that a web page can load it faster, mainly with Marc Feeley, the creator of Gambit, and Marc Crampsie. Here are the main points of that conversation.
 
