@@ -100,7 +100,7 @@ More information about the installation can be found in [the discussion](https:/
 
 ## Optimizing Gambit on JavaScript for Size
 
-I had a [conversation](https://gitter.im/gambit/gambit?at=60aec5ced0f55b33ba0e588e) about reducing the size of Gambit on JavaScript so that a web page can load it faster, mainly with Marc Feeley, the creator of Gambit, and Marc Crampsie. Here are the main points of that conversation.
+I had a [conversation](https://gitter.im/gambit/gambit?at=60aec5ced0f55b33ba0e588e) about reducing the size of Gambit on JavaScript so that a web page can load it faster, mainly with Marc Feeley, the creator of Gambit, and Drew Crampsie. Here are the main points of that conversation.
 
 > Tom Elam @tomelam 03:33 @feeley I haven't studied the building of the online Gambit REPL \([https://github.com/gambit/gambit/tree/master/contrib/try](https://github.com/gambit/gambit/tree/master/contrib/try)\) but I wonder if you could point me to a way to reduce the built size of the JavaScript for that. It was over 11 MB when I built it. Is there a part of it \(say, without some of the SRFI code or some of the math code\) that can be built by redefining some make or shell variable? Something like that? I'd like to have an online Gambit REPL in just 1 or 1.5 MB of JavaScript. ... Redefining a make target would be a good option, too, if it wouldn't make the build process fail.
 >
