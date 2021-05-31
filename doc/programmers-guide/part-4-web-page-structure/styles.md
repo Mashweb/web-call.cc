@@ -10,7 +10,7 @@ description: >-
 
 css-tricks.com posted an article ["CSS is Awesome"](https://css-tricks.com/css-is-awesome/) \(probably after Tantek Çelik's write up in the [CSS Basic User Interface Module Level 4 first public working draft](https://www.w3.org/TR/2015/WD-css-ui-4-20150922/)\). For a little quiz to see if you understand the overflow problems of CSS, look [here](https://css-tricks.com/which-css-is-awesome-makes-the-most-sense-if-you-dont-know-css-well/). The nerdy joke is presented on T-shirts, coffee mugs, and websites:
 
-![](../.gitbook/assets/css-is-awesome.jpeg)
+![](../.gitbook/assets/css-is-awesome%20%281%29.jpeg)
 
 While [some people](https://uxdesign.cc/why-do-most-developers-hate-css-63c92bce36ed) might not have a problem with CSS, it is obvious many people do. The css-tricks post lists the problems and their solutions \(or workarounds\), but there are other simple solutions \(some perhaps better described as workarounds\) to the big problems of web styles: 
 
