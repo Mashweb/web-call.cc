@@ -1,7 +1,8 @@
 ---
 description: >-
   Here I've copied Daniel Koning's post from the Pre-Alpha Zen forum
-  (https://github.com/orgs/Mashweb/teams/pre-alpha-zen). -Tom Elam
+  (https://github.com/orgs/Mashweb/teams/pre-alpha-zen). I've also copied hints
+  and instructions on optimizations. -Tom Elam
 ---
 
 # BiwaScheme to Gambit: the rationale
