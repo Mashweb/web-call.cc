@@ -15,6 +15,7 @@
 * [Part 3: The Key to Zen: A Nano Framework for Sequential Programming](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/README.md)
   * [Scheme Interpreters in JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/scheme-interpreters-in-javascript.md)
   * [Gambit Scheme](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/gambit-scheme.md)
+  * [Synchronization of JavaScript Events](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/synchronization-of-javascript-events.md)
   * [Notes on Asynchronous JavaScript](part-3-the-key-to-zen-a-nano-framework-for-sequential-programming/asynchronous-javascript.md)
 * [Part 4: Web Page Structure](part-4-web-page-structure/README.md)
   * [Styles](part-4-web-page-structure/styles.md)
