@@ -12,7 +12,7 @@ and a code example showing the dynamic modification of a stylesheet.
 To build the main demo:
 
 1. Download [CodeKit](https://codekitapp.com/),
-which requires MacOS 10.13.
+which requires MacOS 10.13+.
 Spend the 15 minutes or less to learn the basics of it.
 
 2. Clone web-call.cc and load it into CodeKit.
