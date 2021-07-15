@@ -11,7 +11,7 @@ and a code example showing the dynamic modification of a stylesheet.
 
 To build the main demo:
 
-1. Download CodeKit](https://codekitapp.com/),
+1. Download [CodeKit](https://codekitapp.com/),
 which requires MacOS 10.13.
 Spend the 15 minutes or less to learn the basics of it.
 
@@ -26,12 +26,6 @@ of your web server like Apache.
 The web server only needs to serve static pages.
 
 6. Browse the website.
-
----
-
-## Examples of Special ondragover and ondrop Event-Handler Code
-
-See [the list of main demos on this website](index.html).
 
 ---
 
