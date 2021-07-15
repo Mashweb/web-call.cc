@@ -7,30 +7,31 @@ and a code example showing the dynamic modification of a stylesheet.
 
 ---
 
-## The Main Demo--An In-Browser DOM Editor Using BiwaScheme
+## Building
 
-### Building
+To build the main demo:
 
-To build the main demo, you will need `node` and `npm`.
-It is suggested that you install them using
-[nvm](https://github.com/nvm-sh/nvm).
-Once you have recent, compatible versions of `node` and `npm`,
-edit index.js if you like,
-then run the following command in this directory
-using a suitable shell, such as Bash:
-```
-. build-demo-1.sh
-```
+1. Download CodeKit](https://codekitapp.com/),
+which requires MacOS 10.13.
+Spend the 15 minutes or less to learn the basics of it.
 
-### Rebuilding
+2. Clone web-call.cc and load it into CodeKit.
 
-Edit index.js and rollup.config.js as necessary, then run `npx rollup --config` to regenerate `bundle.js`.
+3. Load the npm packages from the cloud.
+
+4. Build the project.
+
+5. Put the build/ directory under the document root
+of your web server like Apache.
+The web server only needs to serve static pages.
+
+6. Browse the website.
 
 ---
 
 ## Examples of Special ondragover and ondrop Event-Handler Code
 
-See [the full list of demos on this website](index2.html).
+See [the list of main demos on this website](index.html).
 
 ---
 
