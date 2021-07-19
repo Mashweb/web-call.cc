@@ -1,8 +1,8 @@
 ---
 description: >-
   I had a conversation about reducing the size of Gambit on JavaScript so that a
-  web page can load it faster, mainly with Prof. Marc Feeley, the creator of
-  Gambit, and Drew Crampsie. Here are the main p
+  web page can load it faster, mainly with Prof. Marc Feeley and Drew Crampsie.
+  Here are the main points.
 ---
 
 # Optimizing Gambit on JavaScript for Size
