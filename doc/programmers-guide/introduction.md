@@ -13,7 +13,7 @@ description: There are nine parts to this book. Here they are described.
 7. [Part 7](https://tomelam.gitbook.io/mashweb/part-7-outside-tools-to-help-build-zen) presents outside tools to facilitate the design and programming of Zen and [Mashweb.Club](https://mashweb.club).
 8. [Part 8](https://tomelam.gitbook.io/mashweb/part-8-tricks-to-augment-zens-basic-functions) collects some tricks to turbocharge Zen.
 9. [Part 9](https://tomelam.gitbook.io/mashweb/part-9-project-management) shows how the development of Zen and Mashweb is organized.
-10. Part 10 presents a status report on Zen. This part will change as Zen is developed.
+10. [Part 10](https://tomelam.gitbook.io/mashweb/part-10-zen-status-report) presents a status report on Zen. This part will change as Zen is developed.
 
 
 
