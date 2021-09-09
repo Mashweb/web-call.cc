@@ -33,4 +33,5 @@
   * [Software for UX/IxD/UI design](part-7-outside-tools-to-help-build-zen/software-for-ux-ixd-ui-design.md)
 * [Part 8: Tricks To Augment Zen's Basic Functions](part-8-tricks-to-augment-zens-basic-functions.md)
 * [Part 9: Project management](part-9-project-management.md)
+* [Part 10: Zen Status Report](part-10-zen-status-report.md)
 
