@@ -55,10 +55,10 @@ Gulp Module: Null
 Description: Would be copied as is
 
 
-### jpeg and other image optimizations
+### jpeg and other image formats optimizations
 
 Gulp Module: https://www.npmjs.com/package/gulp-imagemin
-
+Configuration: As specified in config.codekit3
 
 ### eslint
 
