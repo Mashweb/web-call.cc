@@ -1,24 +1,43 @@
+const { Transform } = require('stream')
 const path = require('path')
 
 const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const codekit = require('gulp-codekit')
+const include = require('gulp-codekit')
 const glob = require('glob')
 const rimraf = require('rimraf')
 const webpackStream = require('webpack-stream')
-const { parallel } = require('gulp')
 const mergeStream = require('merge-stream')
+const GulpUglify = require('gulp-uglify')
+
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
 const SOURCE_DIRECTORY = path.join(__dirname, 'source')
-
 
 function clean (cb) {
     rimraf.sync(BUILD_DIRECTORY)
     cb()
 }
+
+function getGulpIncludeStream () {
+    return include({ 
+        includePaths: [
+            path.join(__dirname, 'node_modules'),
+            path.join(SOURCE_DIRECTORY, 'javascripts')
+        ],
+        extensions: 'js',
+        hardFail: true,
+        separateInputs: true,
+    })
+
+}
+
+
+const webpackEnabledFiles = [
+    'finder-vaadin-polymer.js',
+]
 
 function stylusTask () {    
     return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.styl'), { base: '.' })
@@ -47,19 +66,35 @@ function copy () {
         .pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
 }
 
-function bundleJS () {
+
+function bundleNonWebpackJS () {
+    return gulp.src(path.join(SOURCE_DIRECTORY, `**/biwa*widgets*control*.js`), { base: '.', dirMode: false })
+    .pipe(getGulpIncludeStream())
+    .pipe(new Transform({
+        readableObjectMode: true,
+        writableObjectMode: true,
+        transform: (chunk, enc, callback) => {
+            chunk.contents = chunk.contents.toString()
+            callback(null, {})
+
+        }
+    }))
+    .pipe(GulpUglify({
+        compress: {
+            dead_code: false
+        },
+    }))
+    .pipe(gulp.dest(BUILD_DIRECTORY, { overwrite: true }))
+}
+
+function bundleWebpackJS () {
     const stream = mergeStream()
 
-    glob('source/**/*.js', function (error, files) {
+    glob(path.join(SOURCE_DIRECTORY, `**/+(${webpackEnabledFiles.join('|')}|*.module.js)`), function (error, files) {
         if (error) {
             throw error;
         }
-
-        const ignoredFiles = [
-            'biwascheme_terminal.js',
-            'biwascheme-0.6.9.js',
-        ]
-
+        
         for (const input of files) {
             const inputParsedPath = path.parse(input)
             const inputFileName = inputParsedPath.name + inputParsedPath.ext
@@ -67,10 +102,6 @@ function bundleJS () {
             const finalParsedPath = path.parse(finalPath)
 
             const fs = require('fs')
-
-            if (ignoredFiles.some(filename => inputFileName === filename)) {
-                continue
-            }
 
             try {
                 if (fs.existsSync(finalPath)) {
@@ -80,14 +111,21 @@ function bundleJS () {
             }
 
             const wbp = gulp.src(input)
-                .pipe(codekit())
+                .pipe(getGulpIncludeStream())
+                .pipe(new Transform({
+                    readableObjectMode: true,
+                    writableObjectMode: false, 
+                    transform: (chunk, enc, callback) => callback(null, chunk.contents)
+                }))
                 .pipe(webpackStream({
                     target: 'web',
-                    mode: 'development',
+                    mode: 'production',
+
                     output: {
                         filename: finalParsedPath.name + finalParsedPath.ext,
                         path: '/'
                     },
+                    
                     module: {
                         rules: [
                           {
@@ -99,9 +137,14 @@ function bundleJS () {
                                 presets: ['@babel/preset-env']
                               }
                             }
-                          }
-                        ]
-                      }                      
+                          },
+                        ],
+                      },
+                      
+                      optimization: {
+                          sideEffects: false,
+                          minimize: false
+                      }
                 }))
                 .pipe(gulp.dest(finalParsedPath.dir))
 
@@ -112,20 +155,23 @@ function bundleJS () {
     return stream
 }
 
+const bundleJS = gulp.series(
+    bundleNonWebpackJS,
+    // bundleWebpackJS,
+)
 
 const styles = gulp.parallel(
     stylusTask,
     postCssTask
 )
 
+exports.bundleJS = bundleJS
 exports.images = images
 exports.copy = copy
-exports.bundleJS = bundleJS
-
 exports.bundle = gulp.series(
     clean,
     copy,
-    parallel(
+    gulp.parallel(
         bundleJS,
         styles,
         images,
