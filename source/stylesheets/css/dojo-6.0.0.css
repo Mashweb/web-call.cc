@@ -2356,9 +2356,9 @@
 @font-face {
   font-family: 'dojo2BaseTheme';
   src:
-    url(assets/4320b561bf6b259b0082d83d4848daf9.ttf) format('truetype'),
-    url(assets/a302b51c64828d7c0aaf95c1cfa4daad.woff) format('woff'),
-    url(assets/79b71beaafd0e1d0897d414fa6b1f796.svg#dojo2) format('svg');
+	url(assets/4320b561bf6b259b0082d83d4848daf9.ttf) format('truetype'),
+	url(assets/a302b51c64828d7c0aaf95c1cfa4daad.woff) format('woff'),
+	url(assets/79b71beaafd0e1d0897d414fa6b1f796.svg#dojo2) format('svg');
   font-weight: normal;
   font-style: normal;
 }
