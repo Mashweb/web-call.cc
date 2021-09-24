@@ -4,17 +4,11 @@ const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const uglify = require('gulp-uglify')
 const codekit = require('gulp-codekit')
-const rollup = require('rollup-stream')
 const glob = require('glob')
-const babel = require('@rollup/plugin-babel')
-const source = require('vinyl-source-stream')
-const sourcemaps = require('gulp-sourcemaps')
 const rimraf = require('rimraf')
 const webpackStream = require('webpack-stream')
 const { parallel } = require('gulp')
-const stream = require('stream')
 const mergeStream = require('merge-stream')
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
@@ -27,43 +21,30 @@ function clean (cb) {
 }
 
 function stylusTask () {    
-    const { source, build } = getSourceAndBuildDirectories('stylesheets/stylus')
-
-    return gulp
-        .src(path.join(source, '*.styl'))
+    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.styl'))
         .pipe(stylus())
-        .pipe(gulp.dest(build))
+        .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 function postCssTask () {
-    const { source, build } = getSourceAndBuildDirectories('stylesheets')
-    
-    return gulp.src(path.join(build, '*.css'))
+    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.css'), { base: '.' })
         .pipe(postcss([autoprefixer()]))
-        .pipe(gulp.dest(build))
+        .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 
 async function images () {
     const imagemin = await import('gulp-imagemin')
     
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.png'))
+    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.png'), {base: '.'})
         .pipe(imagemin.default())
-        .pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
+        .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 
 function copy () {
     return gulp.src(path.join(SOURCE_DIRECTORY, '**/*'))
         .pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
-}
-
-
-function getSourceAndBuildDirectories (relativeDirectory) {
-    return {
-        source: path.join(SOURCE_DIRECTORY, relativeDirectory),
-        build: path.join(BUILD_DIRECTORY, relativeDirectory)
-    }
 }
 
 function bundleJS () {
@@ -73,18 +54,21 @@ function bundleJS () {
         if (error) {
             throw error;
         }
-        
-        const tasks = []
-        
+
+        const ignoredFiles = [
+            'biwascheme_terminal.js',
+            'biwascheme-0.6.9.js',
+        ]
 
         for (const input of files) {
             const inputParsedPath = path.parse(input)
-            const finalPath = path.join(BUILD_DIRECTORY, 'javascripts', inputParsedPath.name + '.js')
+            const inputFileName = inputParsedPath.name + inputParsedPath.ext
+            const finalPath = path.join(BUILD_DIRECTORY, 'javascripts', inputFileName)
             const finalParsedPath = path.parse(finalPath)
-            
+
             const fs = require('fs')
 
-            if (input.indexOf('biwa') !== -1) {
+            if (ignoredFiles.some(filename => inputFileName === filename)) {
                 continue
             }
 
@@ -96,14 +80,27 @@ function bundleJS () {
             }
 
             const wbp = gulp.src(input)
-                .pipe(codekit())
                 .pipe(webpackStream({
                     target: 'web',
-                    mode: 'production',
+                    mode: 'development',
                     output: {
                         filename: finalParsedPath.name + finalParsedPath.ext,
                         path: '/'
-                    }
+                    },
+                    module: {
+                        rules: [
+                          {
+                            test: /\.m?js$/,
+                            exclude: /(node_modules|bower_components)/,
+                            use: {
+                              loader: 'babel-loader',
+                              options: {
+                                presets: ['@babel/preset-env']
+                              }
+                            }
+                          }
+                        ]
+                      }                      
                 }))
                 .pipe(gulp.dest(finalParsedPath.dir))
 
