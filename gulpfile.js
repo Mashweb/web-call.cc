@@ -1,15 +1,21 @@
 const path = require('path')
-const fancylog = require('fancy-log')
-
 
 const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const parcel = require('gulp-parcel')
-
-
+const uglify = require('gulp-uglify')
+const codekit = require('gulp-codekit')
+const rollup = require('rollup-stream')
+const glob = require('glob')
+const babel = require('@rollup/plugin-babel')
+const source = require('vinyl-source-stream')
+const sourcemaps = require('gulp-sourcemaps')
 const rimraf = require('rimraf')
+const webpackStream = require('webpack-stream')
+const { parallel } = require('gulp')
+const stream = require('stream')
+const mergeStream = require('merge-stream')
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
 const SOURCE_DIRECTORY = path.join(__dirname, 'source')
@@ -32,7 +38,7 @@ function stylusTask () {
 function postCssTask () {
     const { source, build } = getSourceAndBuildDirectories('stylesheets')
     
-    return gulp.src(path.join(source, '*.css'))
+    return gulp.src(path.join(build, '*.css'))
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest(build))
 }
@@ -40,11 +46,10 @@ function postCssTask () {
 
 async function images () {
     const imagemin = await import('gulp-imagemin')
-    const { source, build } = getSourceAndBuildDirectories('images')
-
-    return gulp.src(path.join(source, '*.png'))
+    
+    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.png'))
         .pipe(imagemin.default())
-        .pipe(gulp.dest(path.join(build)))
+        .pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
 }
 
 
@@ -61,15 +66,54 @@ function getSourceAndBuildDirectories (relativeDirectory) {
     }
 }
 
+function bundleJS () {
+    const stream = mergeStream()
 
-async function parcelTask () {
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.html'), { read: false })
-        .pipe(parcel({
-            outDir: BUILD_DIRECTORY,
-            publicURL: './',
-        }))
-        .pipe(gulp.dest(BUILD_DIRECTORY))
+    glob('source/**/*.js', function (error, files) {
+        if (error) {
+            throw error;
+        }
+        
+        const tasks = []
+        
+
+        for (const input of files) {
+            const inputParsedPath = path.parse(input)
+            const finalPath = path.join(BUILD_DIRECTORY, 'javascripts', inputParsedPath.name + '.js')
+            const finalParsedPath = path.parse(finalPath)
+            
+            const fs = require('fs')
+
+            if (input.indexOf('biwa') !== -1) {
+                continue
+            }
+
+            try {
+                if (fs.existsSync(finalPath)) {
+                    fs.unlinkSync(finalPath)
+                }
+            } catch (error) {
+            }
+
+            const wbp = gulp.src(input)
+                .pipe(codekit())
+                .pipe(webpackStream({
+                    target: 'web',
+                    mode: 'production',
+                    output: {
+                        filename: finalParsedPath.name + finalParsedPath.ext,
+                        path: '/'
+                    }
+                }))
+                .pipe(gulp.dest(finalParsedPath.dir))
+
+            stream.add(wbp)
+        }
+    })
+
+    return stream
 }
+
 
 const styles = gulp.parallel(
     stylusTask,
@@ -78,13 +122,14 @@ const styles = gulp.parallel(
 
 exports.images = images
 exports.copy = copy
-exports.parcelTask = parcelTask
-exports.styles = styles
+exports.bundleJS = bundleJS
 
 exports.bundle = gulp.series(
     clean,
     copy,
-    styles,
-    images,
-    parcelTask,
+    parallel(
+        bundleJS,
+        styles,
+        images,
+    )
 )
