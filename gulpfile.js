@@ -5,7 +5,6 @@ const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const include = require('gulp-include')
 const glob = require('glob')
 const rimraf = require('rimraf')
 const webpackStream = require('webpack-stream')
@@ -13,6 +12,7 @@ const mergeStream = require('merge-stream')
 const GulpUglify = require('gulp-uglify')
 const sourcemaps = require('gulp-sourcemaps')
 const fs = require('fs')
+const GulpCodeKit = require('gulp-codekit-extended')
 const GulpCleanCss = require('gulp-clean-css')
 
 
@@ -37,7 +37,7 @@ function bufferGulpIncludeContents () {
 }
 
 function getGulpIncludeStream () {
-    return include({ 
+    return GulpCodeKit({ 
         includePaths: [
             path.join(__dirname, 'node_modules'),
             path.join(__dirname, 'node_modules', '@vaadin'),
@@ -57,6 +57,7 @@ function resolveSrcGlob (...globs) {
 
 const webpackEnabledFiles = [
     'finder-vaadin-polymer.js',
+    'vaadin-polymer.js'
 ]
 
 function stylusTask () {    

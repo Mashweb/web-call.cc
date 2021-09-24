@@ -3,7 +3,14 @@
 This document is about gulpfile.js and guidelines on how to make further 
 changes.
 
-CodeKit is still here, and Gulp right now is being provided as an open, cross-platform alternate for compilation. 
+## About CodeKit Configuration
+
+CodeKit configuration is being replaced with Gulpfile.
+
+All the current CodeKit files are still within the repo but with new names. All the CodeKit related files will have .codekit extension at the end.
+
+
+## Gulp Tasks for different formats
 
 Below, you'll find description of how different file types are processed and the corresponding tasks for them
 
