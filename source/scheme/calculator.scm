@@ -20,6 +20,7 @@
 
 ;; Everything in this file below this sentence
 ;; was programmed by Alexander Sukhoverkhov (naryl.pandora@gmail.com).
+;; exponential button added by Alan Vayda
 
 ;; Function for adding an mwc-button to the page.
 (define (add-calculator-button label)
@@ -36,6 +37,7 @@
   (add-calculator-button "-")
   (add-calculator-button "*")
   (add-calculator-button "/")
+  (add-calculator-button "^")
   (add-calculator-button "="))
 
 ;;;; New functional interface (no macros)
@@ -66,6 +68,11 @@
            (set! value1 value2))
          (set! value2 0)
          (set! op (string->symbol text)))
+        (("^")
+         (when (not (= value2 0))
+           (set! value1 value2))
+         (set! value2 0)
+         (set! op (string->symbol "expt")))
         (("=")
          (when op
            (set! value1 ((eval op) value1 value2))
