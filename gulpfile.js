@@ -84,9 +84,12 @@ async function images () {
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
+function copySourceDirectory() {
+    return resolveSrcGlob("**/*").pipe(gulp.dest(BUILD_DIRECTORY))
+}
 
-function copy () {
-    return resolveSrcGlob("**/*").pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
+function copyRobots () {
+    return gulp.src('./robots.txt').pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 
@@ -114,12 +117,9 @@ function bundleWebpackJS () {
             const finalPath = path.join(BUILD_DIRECTORY, 'javascripts', inputFileName)
             const finalParsedPath = path.parse(finalPath)
 
-            try {
-                if (fs.existsSync(finalPath)) {
-                    fs.unlinkSync(finalPath)
-                }
-            } catch (error) {
-            }
+            if (fs.existsSync(finalPath)) {
+                fs.unlinkSync(finalPath)
+            } 
 
             const wbp = gulp.src(input)
                 .pipe(getGulpIncludeStream())
@@ -170,6 +170,11 @@ const bundleJS = gulp.series(
 const styles = gulp.parallel(
     stylusTask,
     postCssTask
+)
+
+const copy = gulp.parallel(
+    copyRobots,
+    copySourceDirectory
 )
 
 exports.clean = clean
