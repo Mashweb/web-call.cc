@@ -37,7 +37,6 @@
     "@vaadin/vaadin-ordered-layout": "^1.4.0",
     "@vaadin/vaadin-tabs": "^3.2.0",
     "@zaoqi/biwascheme": "^0.6.9-4-ecbc0c5c4fd8b90aa64bfbf0214483220e71eea1",
-    "gulp-codekit-extended": "^0.1.5",
     "jquery-mousewheel": "^3.1.13",
     "jquery.cookie": "^1.4.1",
     "jquery.terminal": "^2.20.1",
@@ -65,8 +64,6 @@
     "gulp-uglify": "^3.0.2",
     "merge-stream": "^2.0.0",
     "rimraf": "*",
-    "rollup-stream": "*",
-    "vinyl": "^2.2.1",
     "webpack-stream": "^7.0.0"
   },
   "version": "1.0.0"

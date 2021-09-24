@@ -1,7 +1,6 @@
 const { Transform } = require('stream')
 const path = require('path')
 
-const fs = require('fs')
 const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
@@ -11,6 +10,8 @@ const glob = require('glob')
 const rimraf = require('rimraf')
 const webpackStream = require('webpack-stream')
 const mergeStream = require('merge-stream')
+const GulpUglify = require('gulp-uglify')
+const sourcemaps = require('gulp-sourcemaps')
 
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
@@ -57,7 +58,9 @@ const webpackEnabledFiles = [
 
 function stylusTask () {    
     return resolveSrcGlob('**/*.styl')
+        .pipe(sourcemaps.init())
         .pipe(stylus())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
@@ -85,6 +88,9 @@ function copy () {
 function bundleNonWebpackJS () {
     return resolveSrcGlob('**/*.js')
     .pipe(getGulpIncludeStream())
+    .pipe(sourcemaps.init())
+    .pipe(GulpUglify())
+    .pipe(sourcemaps.write())
     .pipe(bufferGulpIncludeContents())
     .pipe(gulp.dest(BUILD_DIRECTORY, { overwrite: true }))
 }
@@ -142,7 +148,6 @@ function bundleWebpackJS () {
                       
                       optimization: {
                           sideEffects: false,
-                          minimize: false
                       }
                 }))
                 .pipe(gulp.dest(finalParsedPath.dir))
