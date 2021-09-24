@@ -60,7 +60,7 @@ function stylusTask () {
     return resolveSrcGlob('**/*.styl')
         .pipe(sourcemaps.init())
         .pipe(stylus())
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
@@ -90,7 +90,7 @@ function bundleNonWebpackJS () {
     .pipe(getGulpIncludeStream())
     .pipe(sourcemaps.init())
     .pipe(GulpUglify())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write('.'))
     .pipe(bufferGulpIncludeContents())
     .pipe(gulp.dest(BUILD_DIRECTORY, { overwrite: true }))
 }
