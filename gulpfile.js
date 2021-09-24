@@ -1,37 +1,53 @@
 const { Transform } = require('stream')
 const path = require('path')
 
+const fs = require('fs')
 const gulp = require('gulp')
 const stylus = require('gulp-stylus')
 const postcss = require('gulp-postcss')
 const autoprefixer = require('autoprefixer')
-const include = require('gulp-codekit')
+const include = require('gulp-include')
 const glob = require('glob')
 const rimraf = require('rimraf')
 const webpackStream = require('webpack-stream')
 const mergeStream = require('merge-stream')
-const GulpUglify = require('gulp-uglify')
 
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
 const SOURCE_DIRECTORY = path.join(__dirname, 'source')
 
 function clean (cb) {
-    rimraf.sync(BUILD_DIRECTORY)
-    cb()
+    rimraf(BUILD_DIRECTORY, function () {
+        cb()
+    })
+}
+
+function bufferGulpIncludeContents () {
+    return new Transform({
+        readableObjectMode: true,
+        writableObjectMode: true,
+        transform: (chunk, enc, callback) => {
+            callback(null, chunk)
+        }
+    })
 }
 
 function getGulpIncludeStream () {
     return include({ 
         includePaths: [
             path.join(__dirname, 'node_modules'),
+            path.join(__dirname, 'node_modules', '@vaadin'),
+            path.join(__dirname, 'node_modules', '@polymer'),
             path.join(SOURCE_DIRECTORY, 'javascripts')
         ],
         extensions: 'js',
         hardFail: true,
         separateInputs: true,
     })
+}
 
+function resolveSrcGlob (...globs) {
+    return gulp.src(globs, { cwd: SOURCE_DIRECTORY, base: SOURCE_DIRECTORY })
 }
 
 
@@ -40,13 +56,13 @@ const webpackEnabledFiles = [
 ]
 
 function stylusTask () {    
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.styl'), { base: '.' })
+    return resolveSrcGlob('**/*.styl')
         .pipe(stylus())
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 function postCssTask () {
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.css'), { base: '.' })
+    return resolveSrcGlob('**/*.css')
         .pipe(postcss([autoprefixer()]))
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
@@ -55,35 +71,21 @@ function postCssTask () {
 async function images () {
     const imagemin = await import('gulp-imagemin')
     
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.png'), {base: '.'})
+    return resolveSrcGlob('**/*.+(png|jpeg|jpg|svg)')
         .pipe(imagemin.default())
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 
 function copy () {
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*'))
-        .pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
+    return resolveSrcGlob("**/*").pipe(gulp.dest(path.join(BUILD_DIRECTORY)))
 }
 
 
 function bundleNonWebpackJS () {
-    return gulp.src(path.join(SOURCE_DIRECTORY, `**/biwa*widgets*control*.js`), { base: '.', dirMode: false })
+    return resolveSrcGlob('**/*.js')
     .pipe(getGulpIncludeStream())
-    .pipe(new Transform({
-        readableObjectMode: true,
-        writableObjectMode: true,
-        transform: (chunk, enc, callback) => {
-            chunk.contents = chunk.contents.toString()
-            callback(null, {})
-
-        }
-    }))
-    .pipe(GulpUglify({
-        compress: {
-            dead_code: false
-        },
-    }))
+    .pipe(bufferGulpIncludeContents())
     .pipe(gulp.dest(BUILD_DIRECTORY, { overwrite: true }))
 }
 
@@ -112,11 +114,8 @@ function bundleWebpackJS () {
 
             const wbp = gulp.src(input)
                 .pipe(getGulpIncludeStream())
-                .pipe(new Transform({
-                    readableObjectMode: true,
-                    writableObjectMode: false, 
-                    transform: (chunk, enc, callback) => callback(null, chunk.contents)
-                }))
+                .pipe(bufferGulpIncludeContents())
+                .pipe(gulp.dest(finalParsedPath.dir))
                 .pipe(webpackStream({
                     target: 'web',
                     mode: 'production',
@@ -157,7 +156,7 @@ function bundleWebpackJS () {
 
 const bundleJS = gulp.series(
     bundleNonWebpackJS,
-    // bundleWebpackJS,
+    bundleWebpackJS,
 )
 
 const styles = gulp.parallel(
@@ -165,6 +164,7 @@ const styles = gulp.parallel(
     postCssTask
 )
 
+exports.clean = clean
 exports.bundleJS = bundleJS
 exports.images = images
 exports.copy = copy
