@@ -13,6 +13,7 @@ const mergeStream = require('merge-stream')
 const GulpUglify = require('gulp-uglify')
 const sourcemaps = require('gulp-sourcemaps')
 const fs = require('fs')
+const GulpCleanCss = require('gulp-clean-css')
 
 
 
@@ -62,13 +63,15 @@ function stylusTask () {
     return resolveSrcGlob('**/*.styl')
         .pipe(sourcemaps.init())
         .pipe(stylus())
+        .pipe(GulpCleanCss())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
 function postCssTask () {
     return resolveSrcGlob('**/*.css')
-        .pipe(postcss([autoprefixer()]))
+        .pipe(postcss([autoprefixer()], { }))
+        .pipe(GulpCleanCss())
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
 
