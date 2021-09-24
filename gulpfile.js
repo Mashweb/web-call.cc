@@ -21,7 +21,7 @@ function clean (cb) {
 }
 
 function stylusTask () {    
-    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.styl'))
+    return gulp.src(path.join(SOURCE_DIRECTORY, '**/*.styl'), { base: '.' })
         .pipe(stylus())
         .pipe(gulp.dest(BUILD_DIRECTORY))
 }
@@ -80,6 +80,7 @@ function bundleJS () {
             }
 
             const wbp = gulp.src(input)
+                .pipe(codekit())
                 .pipe(webpackStream({
                     target: 'web',
                     mode: 'development',
