@@ -12,6 +12,8 @@ const webpackStream = require('webpack-stream')
 const mergeStream = require('merge-stream')
 const GulpUglify = require('gulp-uglify')
 const sourcemaps = require('gulp-sourcemaps')
+const fs = require('fs')
+
 
 
 const BUILD_DIRECTORY = path.join(__dirname, 'build')
@@ -108,8 +110,6 @@ function bundleWebpackJS () {
             const inputFileName = inputParsedPath.name + inputParsedPath.ext
             const finalPath = path.join(BUILD_DIRECTORY, 'javascripts', inputFileName)
             const finalParsedPath = path.parse(finalPath)
-
-            const fs = require('fs')
 
             try {
                 if (fs.existsSync(finalPath)) {
