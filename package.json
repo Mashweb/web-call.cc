@@ -39,7 +39,7 @@
     "@zaoqi/biwascheme": "^0.6.9-4-ecbc0c5c4fd8b90aa64bfbf0214483220e71eea1",
     "jquery-mousewheel": "^3.1.13",
     "jquery.cookie": "^1.4.1",
-    "jquery.terminal": "^2.20.1",
+    "jquery.terminal": "^2.31.1",
     "prismjs": "^1.22.0",
     "rollup": "^2.34.0",
     "terminal-prism": "^0.2.0"
